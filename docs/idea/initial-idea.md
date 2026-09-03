@@ -1,4 +1,5 @@
 # Initial Idea
 
-(User-authored: describe the project idea here in your own words — rough is fine.
-This is the input to the Initial Planning task, which turns it into `docs/spec/ROOT_SPEC.md`.)
+Project name: `hephaestion`
+
+a simple but beautiful portfolio/blog website, hosted in github, which showcases all the projects I have built with claude. It will be callled `madewithclaude.com` and I already have the URL
