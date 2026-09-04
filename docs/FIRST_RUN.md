@@ -25,6 +25,7 @@ The process documents are generic; tune them for this kind of project:
 - [ ] Set up build/test scaffolding for the chosen toolchain, if the user wants it now.
 - [ ] Create a `Makefile` per the "Makefile conventions" section of `AGENTS.md`, with the reserved verbs that apply to this kind of project. If a Makefile doesn't fit (not a software project), skip it; if uncertain, ask the user.
 - [ ] Verify the shared `rm` safety hook is enabled in the coding agent being used. Claude Code loads it from `.claude/settings.json`; in Codex, review and trust the project hook with `/hooks` if prompted.
+- [ ] Trust this repository in Codex: the user runs `codex` once in the project root, accepts the trust prompt, then accepts the project hook when `/hooks` offers it. Until then Codex ignores this repository's `.codex/` configuration and hooks, so Codex workers dispatched through hanuman run without the `rm` guard, and hanuman's `status` shows a `configWarning`. Trust of the repository covers the worker worktrees under it.
 
 ## 4. Repository
 

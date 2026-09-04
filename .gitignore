@@ -35,7 +35,7 @@ node_modules/
 # --- Coding agents: client-specific personal overrides stay local ---
 .claude/settings.local.json
 
-# --- Worker worktrees and run logs created by dispatch-codex.sh ---
+# --- Worker worktrees and run logs (hanuman Codex workers) ---
 .agent-worktrees/
 
 # --- Elefant offline-memory cache is transient and personal ---

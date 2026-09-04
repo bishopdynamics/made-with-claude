@@ -20,8 +20,9 @@ One paragraph: what this slice delivers when it's done.
 
 - Spec: `docs/spec/<spec-file>.md`, section(s) — read before starting.
 - Other files to read first: contracts to implement against, existing code to imitate.
-- Agent platform / exact model / reasoning effort: ...
-- Working directory / branch: ...
+- Agent platform / exact model / reasoning effort: ... (Codex via hanuman by default; see AGENTS.md)
+- Working directory / branch: ... (for hanuman workers write "see the runtime preamble above"; hanuman fills them in)
+- Dispatch options (hanuman workers): sandbox, whether the slice needs network and why, approvals policy. State "no network" explicitly when true.
 - Isolation: dedicated worktree for a write task, or `shared checkout (read-only)`.
 - Per-checkout setup: commands the worker must run first in a fresh worktree (dependency install, gitignored build artifacts the tests depend on, codegen). "None" is a valid answer — but say so explicitly.
 
@@ -61,4 +62,7 @@ What this slice must NOT do: adjacent work owned by other slices, deferred items
 
 The final report must include: what was done, the verification output (verbatim),
 every decision made where the brief was ambiguous, and anything surprising found
-along the way.
+along the way. Workers dispatched through hanuman return this as the structured report
+its runtime preamble prescribes (status, summary, verification, files changed, commits,
+follow-ups, questions); do not restate that schema here, but do say what the verification
+entries must cover.
