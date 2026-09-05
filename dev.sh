@@ -64,7 +64,7 @@ if [ "$AGENT" = claude ]; then
 fi
 
 exec codex \
-    --model gpt-5.6-sol \
+    --model gpt-6-astra \
     --config model_context_window=1000000 \
     --config model_auto_compact_token_limit=900000 \
     "${CODEX_ARGS[@]}" \
