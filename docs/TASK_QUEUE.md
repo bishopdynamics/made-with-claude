@@ -9,6 +9,7 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 ## Queue
 
 1. Initial Planning
+   - Ready for next session at the user's request (2026-09-07); begin the discussion after session startup. Foundation choices are approved; site design/spec remains to be developed.
    1. Read `docs/idea/initial-idea.md`.
    2. Discuss, help the user flesh out the idea, research, discuss again, then write `docs/spec/ROOT_SPEC.md` (start from `docs/spec/SPEC_TEMPLATE.md`).
 2. ROOT_SPEC.md
