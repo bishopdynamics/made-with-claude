@@ -1,8 +1,8 @@
 # SPEC: madewithclaude.com portfolio launch
 
-- **Status:** draft
+- **Status:** in-progress
 - **Addenda:** none
-- **Approval record:** The foundation was approved on 2026-09-07. On the same date, the user approved the visual direction and page compositions described in `docs/idea/design-discussion.md`, including Inter/JetBrains Mono, muted amber, the initial single-project landing treatment, and reviewed development dates. The detailed behavior and implementation plan below are newly drafted for review; implementation has not started.
+- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07, then explicitly authorized starting slice 1. Slice 1 is implemented and independently verified, awaiting the user's slice review; later slices remain pending.
 
 ## Summary
 
@@ -185,7 +185,7 @@ Configure GitHub Pages to use Actions, set canonical domain `madewithclaude.com`
 All slices are **[serial]**. Each gets a self-contained worker brief from `TASK_BRIEF_TEMPLATE.md`, an implementation commit, parent verification, and diff review. A lone serial worker can use the main checkout; otherwise use an isolated worktree. Follow the worker model/platform rules in `AGENTS.md`; Hanuman was absent during planning, so recheck availability at dispatch. The orchestrator owns all task-queue, handoff, memory, deferred, and shared documentation updates. Owned-files lists below distinguish that work from worker code ownership.
 
 1. **Content contracts and tooling — (M), [serial].** Establish collection schema, taxonomy, normalized project metadata, public/draft selection, date formatting, search/filter contracts, and unit-test fixtures. Install/pin the code renderer, supply framed-code metadata defaults, and wire tests/checks without changing the page design.
-   - **Worker-owned files:** `src/content.config.ts`, `src/types/projects.ts`, `src/data/project-taxonomy.ts`, `src/lib/project-schema.ts`, `src/lib/project-metadata.ts`, `src/lib/project-search.ts`, `src/lib/projects.ts`, `scripts/markdown-code.mjs`, `scripts/check-site.mjs`, `scripts/format.mjs`, `tests/project-schema.test.ts`, `tests/project-metadata.test.ts`, `tests/project-search.test.ts`, `tests/fixtures/projects/**`, `package.json`, `package-lock.json`, `astro.config.mjs`, `tsconfig.json`, `Makefile`.
+   - **Worker-owned files:** `src/content.config.ts`, `src/types/projects.ts`, `src/data/project-taxonomy.ts`, `src/lib/project-schema.ts`, `src/lib/project-metadata.ts`, `src/lib/project-search.ts`, `src/lib/projects.ts`, `scripts/markdown-code.mjs`, `scripts/check-site.mjs`, `scripts/format.mjs`, `scripts/astro.mjs`, `scripts/serve.mjs`, `tests/project-schema.test.ts`, `tests/project-metadata.test.ts`, `tests/project-search.test.ts`, `tests/fixtures/projects/**`, `package.json`, `package-lock.json`, `astro.config.mjs`, `tsconfig.json`, `Makefile`.
    - **Orchestrator-owned files:** `docs/development.md`, this spec's progress/change log, queue/handoff/memory records.
    - **Verification:** `make check`; published-without-image rejection; invalid dates/taxonomy; deterministic search and date tests; dependency compatibility; original safeguards remain passing.
 
@@ -216,7 +216,7 @@ All slices are **[serial]**. Each gets a self-contained worker brief from `TASK_
 
 ## Open Questions
 
-No unresolved architectural questions block review of this draft. Newly specified defaults needing review as part of the spec are portfolio-publication recency, completion-year filtering, literal token search, and the single integrated project/article model. Final Half-Life media, article, taxonomy, and dates are explicitly assigned to slice 5; final DNS values are verified against live settings in slice 6.
+None. The user approved portfolio-publication recency, completion-year filtering, literal token search, and the integrated project/article model with the full spec. Final Half-Life media, article, taxonomy, and dates are explicitly assigned to slice 5; final DNS values are verified against live settings in slice 6.
 
 ## Deferred / Follow-ups
 
@@ -228,6 +228,9 @@ No unresolved architectural questions block review of this draft. Newly specifie
 
 ## Change Log
 
+- 2026-09-07 — Slice 1 implemented and independently verified: strict route-independent content validation, public/dev query contracts, UTC metadata and local search helpers, framed Markdown code, and built-output checks. Parent review added malformed-URL/HTML-link regressions and live dev checks; runtime-mode and watcher fixes preserve the approved local-preview behavior. Final parent `make check`: 38 tests passed, zero Astro diagnostics, zero privacy findings, static build/output checks passed. Live content/image edits, invalid-edit recovery, deletions, and server shutdown passed. Shared design starts in slice 2 after user review.
+- 2026-09-07 — Slice 1 ownership extended to the existing Astro/serve wrappers: parent live verification found inherited `NODE_ENV=production` disables draft preview. Explicit command-appropriate modes are a tooling correction within the approved dev/production behavior, not a design change.
+- 2026-09-07 — User approved the full spec and authorized slice 1. Initial Planning is accepted; implementation begins with content contracts and tooling.
 - 2026-09-07 — Created draft from the initial idea, approved foundation, approved design discussion, and initial Continuum research. Added content/search/date contracts, serial owned-files plan, onboarding, and launch verification. Full spec awaits user review.
 
 ### Research references

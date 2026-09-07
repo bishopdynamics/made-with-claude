@@ -4,6 +4,9 @@ process.env.ASTRO_TELEMETRY_DISABLED = '1';
 const mode = process.argv[2];
 if (!['dev', 'preview'].includes(mode))
   throw new Error('Expected dev or preview.');
+// Astro's programmatic dev API preserves an inherited NODE_ENV. Select the
+// command's mode explicitly so host settings cannot hide drafts or expose them.
+process.env.NODE_ENV = mode === 'dev' ? 'development' : 'production';
 const { values } = parseArgs({
   args: process.argv.slice(3),
   options: {

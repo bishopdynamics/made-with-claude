@@ -8,10 +8,7 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 ## Queue
 
-1. [in-progress] Initial Planning
-   - 2026-09-07: user approved the visual direction and layouts. Draft `docs/spec/ROOT_SPEC.md` and reusable maintainer prompt in `docs/project-onboarding.md` are ready for review. First project: Half-Life: Continuum Edition. Full-spec approval and the user's assessment of planning completion remain pending; do not reopen the approved foundation or design.
-   1. Read `docs/idea/initial-idea.md`.
-   2. Discuss, help the user flesh out the idea, research, discuss again, then write `docs/spec/ROOT_SPEC.md` (start from `docs/spec/SPEC_TEMPLATE.md`).
-2. ROOT_SPEC.md
-   - Pending review of the drafted specification and the normal explain/confirm step for this queue task. No implementation slice has started.
-   1. Begin with slice 1: content contracts and tooling. Follow the spec's six serial slices and stop for user review between slices.
+1. [in-progress] ROOT_SPEC.md
+   - 2026-09-07: user approved the full specification and authorized slice 1. Initial Planning is accepted and removed from the active queue.
+   - Slice 1 — content contracts and tooling: implemented and independently verified (38 tests, clean diagnostics/privacy/build, live-edit review); saved in the local slice commit and awaiting user review.
+   - Next is slice 2 — shared design and typography. Slices 2–6 remain pending; stop for user review between slices.

@@ -1,6 +1,6 @@
 # Initial Design Discussion
 
-2026-09-07. Discussion record for Initial Planning. The user approved the proposed visual direction and layouts (“that sounds right to me”); these are incorporated into the draft `docs/spec/ROOT_SPEC.md`. The full implementation spec has not yet been approved. Preserve the user-authored `initial-idea.md` as the original input.
+2026-09-07. Discussion record for Initial Planning. The user approved the proposed visual direction and layouts (“that sounds right to me”); these are incorporated into `docs/spec/ROOT_SPEC.md`. The user subsequently approved the full implementation spec and authorized slice 1. Preserve the user-authored `initial-idea.md` as the original input.
 
 ## User requirements
 
@@ -34,7 +34,7 @@
 
 ## Design recommendations and review
 
-The user accepted the palette, fonts, compositions, editor presentation, single-project treatment, and reviewed development-date approach below. Homepage recency and detailed search behavior are newly specified defaults for review in the draft root spec.
+The user accepted the palette, fonts, compositions, editor presentation, single-project treatment, and reviewed development-date approach below. Homepage recency and detailed search behavior were approved with the full root spec.
 
 - Palette: near-black `#080808` background, charcoal `#141414` surfaces, warm light-gray `#D2D0CB` body text, pale-gray `#E5E3DE` headings, and muted-gray `#A09F9A` metadata. Use thin borders, modest corner rounding, and generous spacing.
 - Accent application: muted amber `#D4A15A` for links, selected filters, and keyboard focus. Keep project imagery prominent.
@@ -44,7 +44,7 @@ The user accepted the palette, fonts, compositions, editor presentation, single-
 - Project-page composition: a manually scrolled thumbnail carousel with arrows and touch scrolling, opening a full-image viewer with previous/next controls, captions, keyboard navigation, Escape to close, and focus restoration. Long-form text uses a narrower reading column than the gallery. Avoid automatic slide changes.
 - Code presentation: a charcoal editor panel with a slim filename/language bar, Copy control, syntax highlighting, preserved indentation, and horizontal scrolling for long lines. Line numbers can be optional for walkthroughs. Astro supports Markdown syntax highlighting through Shiki; see [Astro documentation](https://docs.astro.build/en/guides/syntax-highlighting/). Final editor-frame integration remains an implementation choice.
 - Development duration: use Git history as evidence, review the first project-specific commit and a completion/release endpoint with the user, then store those dates. Existing upstream history or later maintenance commits may make raw first/last repository commits misleading. Label the measure as a development span, not hours worked; track later updates separately.
-- Define homepage recency by publication on this portfolio so the homepage introduces newly added projects. Confirm this definition before approval.
+- Define homepage recency by publication on this portfolio so the homepage introduces newly added projects; approved with the full spec.
 - Suggested intro: “Projects made by Claude and/or Codex, under the guidance of BishopDynamics.”
 
 ## Continuum research
@@ -57,6 +57,5 @@ The user accepted the palette, fonts, compositions, editor presentation, single-
 
 ## Pending discussion
 
-- Review the detailed root spec, including the new search/filter and recency defaults. Visual direction and typography are approved.
 - Half-Life: Continuum Edition media selection and any higher-resolution captures needed.
 - Select the actual project-specific start and completion dates during onboarding; the reviewed-date approach and initial single-project homepage treatment are approved.

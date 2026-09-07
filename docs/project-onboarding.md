@@ -1,6 +1,6 @@
 # Project Onboarding
 
-Working authoring guide for `docs/spec/ROOT_SPEC.md`. Add projects one at a time with the user. Half-Life: Continuum Edition is first: <https://github.com/bishopdynamics/Continuum>.
+Authoring guide for the approved `docs/spec/ROOT_SPEC.md`. Add projects one at a time with the user. Half-Life: Continuum Edition is first: <https://github.com/bishopdynamics/Continuum>.
 
 ## Maintainer prompt
 

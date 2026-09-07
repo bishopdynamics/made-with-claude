@@ -41,6 +41,40 @@ Node is pinned in `.nvmrc`; direct npm dependencies are pinned and `package-lock
 
 The Astro wrappers disable telemetry. Dev and preview use Astro's documented experimental programmatic API to remain in the foreground, including in an agent environment where the Astro CLI would detach them. Keep Astro pinned and recheck startup/shutdown behavior when upgrading. Secretlint scanner rules are registered directly without its comment-suppression filter; the tests verify that suppression comments cannot hide credentials.
 
+The wrappers also select the runtime mode explicitly: dev uses `NODE_ENV=development`, and build/production preview use `production`. This matters on hosts with a global `NODE_ENV`: an inherited production value otherwise disables draft preview and live reload, while an inherited development value must not enable draft queries during a production build. Check/sync preserve the inherited environment because they do not publish or serve content.
+
+## Project content and authoring contracts
+
+The approved content model is in `docs/spec/ROOT_SPEC.md`; the onboarding process and copy/paste maintainer prompt are in `docs/project-onboarding.md`. Project entries will live in `src/content/projects/<slug>.md`, with their image assets under `src/assets/projects/<slug>/`. The first entry is prepared separately from the content-tooling slice.
+
+Content defaults to a draft. Incomplete draft metadata is allowed, but publication requires a title, description, article, valid publication/development dates, repository URL, known language/tag values, at least one gallery image with alt text, and a cover pointing to that gallery. Filenames are canonical lowercase kebab-case slugs. Dates are date-only `YYYY-MM-DD` strings, and development duration is elapsed calendar time calculated in UTC.
+
+The collection uses a custom loader built on Astro's loader API. It validates raw filenames, frontmatter, article bodies, and local images during content synchronization, before routes can consume them. It revalidates entries instead of allowing an unchanged-content digest to bypass updated validation rules. This is deliberate: validation must still fail a build when project routes have not yet been implemented. Live development watches content and referenced image directories.
+
+Public consumers use the shared public-selection/query contract; development author previews explicitly opt into draft queries. Public search records contain only the metadata needed by the catalog, excluding drafts, article bodies, and image objects. Search combines literal normalized tokens with tag/language/completion-year filters. Filter choices come from the complete public catalog, not the current result subset. The portfolio publication date controls default ordering independently of development completion and later updates.
+
+The taxonomy registry starts empty until a real entry's metadata is reviewed. Unit/build fixtures supply a separate synthetic taxonomy and never become published projects. Do not add made-up production metadata to exercise a test.
+
+| Module | Contract for later slices |
+| --- | --- |
+| `src/lib/projects.ts` | `getPublicProjects()` is the production query; `getProjectsForDevelopment()` explicitly permits drafts only during development. |
+| `src/lib/project-metadata.ts` | Public selection/order, UTC calendar validation and duration formatting, project links, and cover lookup. |
+| `src/lib/project-search.ts` | Public search records, normalized literal matching, filter options, combined filtering, and URL parsing/serialization. No runtime schema or collection imports enter the browser search graph. |
+| `src/lib/project-schema.ts` | Injectable schema, local-image path rules, raw filename/duplicate checks, and published article validation. |
+| `src/types/projects.ts` | Shared project, image, taxonomy, and search types; resolved gallery sources are Astro image metadata. |
+
+Search records are plain serializable data, not pre-escaped HTML. If embedding JSON in an HTML script element, escape `<` as `\u003c` before using `set:html`, or use another safe transport. Browser code should use text APIs to display labels and query text.
+
+## Code blocks and checks
+
+`scripts/markdown-code.mjs` configures `astro-expressive-code` and its line-number plugin, both pinned to 0.44.2. Fenced code gets a dark editor frame with a filename/title or language label, a Plain text fallback for unknown languages, and optional `showLineNumbers` metadata. Copy data preserves original tabs, indentation, and filename comments. JetBrains Mono is the configured code family; font files arrive in the typography slice.
+
+Direct dependencies include Shiki 4.4.3 for the supported-language registry, parse5 8.0.1 for actual HTML parsing in output checks, and Node 22 types. These imports are explicitly declared rather than relying on incidental transitive dependencies. The existing Astro and TypeScript pins remain unchanged.
+
+`make test` now runs the original safeguards and TypeScript contract tests using Node 22 type stripping. It includes isolated temporary Astro builds for publication validation, caching, image resolution, draft exclusion, and real Markdown rendering. Temporary fixtures never enter the site's source collection or final build. `npm run build` also runs `scripts/check-site.mjs`, which checks actual HTML references (including responsive image candidates) and directory index files. Only `/` is required in slice 1; later slices extend required-route/project expectations as those pages are implemented.
+
+Parent live verification also exercised creating a collection after dev startup, draft edits, publication, changed image dimensions, invalid-edit recovery, deletions, and server shutdown. Watcher roots are normalized and file/directory listeners registered individually so Astro can track listener cleanup.
+
 ## Before committing
 
 Run `make check`, review the diff, then stage the intended files. The pre-commit hook reads Git's index, which is the content that the commit will contain. Editing a secret out of the working copy alone does not remove it from the staged version; stage the corrected file too.

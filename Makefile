@@ -15,7 +15,7 @@ run: ## Start the local development server on loopback
 build: ## Build the static site into dist
 	npm run build
 
-test: ## Run safeguard tests
+test: ## Run content, search, build-contract, and safeguard tests
 	npm test
 
 check: ## Run all CI gates
