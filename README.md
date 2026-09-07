@@ -26,7 +26,7 @@ make help          # List development commands
 
 ## Project status
 
-The approved foundation is Astro with TypeScript and Markdown. First-run setup establishes the development tools and a minimal homepage; final design and individual project entries follow in Initial Planning.
+The approved foundation is Astro with TypeScript and Markdown. First-run setup is complete, with development tools and a minimal homepage; final design and individual project entries follow in Initial Planning.
 
 The private GitHub repository is `bishopdynamics/made-with-claude`, using the remote named `github`. The current Actions workflow checks changes without deploying a website. GitHub Pages publication and the Route 53 domain connection will be configured for launch; pushing to the publishing branch will then publish the site.
 

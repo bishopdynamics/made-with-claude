@@ -16,4 +16,4 @@ This file is **project-owned**: template migrations never touch it. It holds eve
 - Prioritize polished, simple visual design. Featured software primarily targets Linux and macOS.
 - Approved foundation: a static Astro site, TypeScript for site code, Markdown content, and GitHub Pages published through GitHub Actions. Use npm with a committed lockfile.
 - Repository layout: `src/pages/` for routes, `src/layouts/` and `src/components/` for presentation, `src/content/` for Markdown, `src/assets/` for source images, `public/` for files copied as-is, and `scripts/` for development checks.
-- First run is in progress. Prepare the local scaffold and checks before connecting the GitHub publishing workflow. Final visual design and project entries belong to Initial Planning.
+- First run is complete. The current GitHub workflow checks changes; deployment will be added as part of the launch implementation. Final visual design and project entries belong to Initial Planning.

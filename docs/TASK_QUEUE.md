@@ -2,9 +2,9 @@
 
 Agent-worked, ordered queue that drives session-by-session work. Processing rules live in `AGENTS.md` ("Task queue"). This file is project-owned.
 
-## Prerequisite
+## Setup
 
-- [in-progress] First-run initialization (`docs/FIRST_RUN.md`). Approved Astro/Markdown/TypeScript scaffold and Git pre-commit checks are implemented and independently verified. Initial commit/push to the private `github` remote is the remaining setup step; remove the first-run marker after push verification.
+- First-run setup completed 2026-09-07. Astro/Markdown/TypeScript scaffold, local commands, and pre-commit checks verified; initial push to the private `github` remote succeeded. `main` tracks `github/main`.
 
 ## Queue
 
