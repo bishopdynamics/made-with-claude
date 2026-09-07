@@ -1,70 +1,63 @@
 ---
-interface Props {
-  frontmatter: { title: string; description: string };
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Seo from '../components/Seo.astro';
+import '../styles/global.css';
+import '../styles/prose.css';
+import '../styles/code.css';
+
+interface PageOptions {
+  title?: string;
+  description?: string;
+  canonical?: string | URL;
+  noindex?: boolean;
+  image?: { src: string | URL; alt: string };
+  prose?: boolean;
+  variant?: 'standard' | 'home';
 }
 
-const { title, description } = Astro.props.frontmatter;
+interface Props extends PageOptions {
+  frontmatter?: PageOptions;
+}
+
+// Markdown supplies frontmatter; direct Astro props take precedence.
+const options = { ...Astro.props.frontmatter, ...Astro.props };
+const { prose = Boolean(Astro.props.frontmatter), variant = 'standard' } =
+  options;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <title>{title}</title>
+    <Seo
+      title={options.title}
+      description={options.description}
+      canonical={options.canonical}
+      noindex={options.noindex}
+      image={options.image}
+    />
+    <link
+      rel="preload"
+      href="/fonts/InterVariable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </head>
   <body>
-    <main><slot /></main>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader />
+    <main
+      id="main-content"
+      class:list={[
+        'site-main',
+        'container',
+        { 'page-home': variant === 'home' },
+      ]}
+      tabindex="-1"
+    >
+      <div class:list={['page-content', { prose }]}><slot /></div>
+    </main>
+    <SiteFooter />
   </body>
 </html>
-
-<style>
-  :global(html) {
-    color-scheme: light dark;
-    font-family: system-ui, sans-serif;
-    background: #f7f5ef;
-    color: #242723;
-  }
-  :global(body) {
-    margin: 0;
-  }
-  main {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(5rem, 18vh, 12rem) 1.5rem 4rem;
-  }
-  main::before {
-    content: '';
-    display: block;
-    width: 3rem;
-    height: 0.3rem;
-    margin-bottom: 2rem;
-    background: #886243;
-  }
-  :global(h1) {
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-weight: 600;
-    letter-spacing: -0.055em;
-    line-height: 1.05;
-    margin: 0 0 2rem;
-  }
-  :global(p) {
-    max-width: 36rem;
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: #555b51;
-  }
-  @media (prefers-color-scheme: dark) {
-    :global(html) {
-      background: #20221f;
-      color: #f7f5ef;
-    }
-    :global(p) {
-      color: #c3c8be;
-    }
-    main::before {
-      background: #d6ad88;
-    }
-  }
-</style>

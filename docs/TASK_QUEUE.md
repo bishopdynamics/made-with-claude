@@ -10,5 +10,6 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 1. [in-progress] ROOT_SPEC.md
    - 2026-09-07: user approved the full specification and authorized slice 1. Initial Planning is accepted and removed from the active queue.
-   - Slice 1 — content contracts and tooling: implemented and independently verified (38 tests, clean diagnostics/privacy/build, live-edit review); saved in the local slice commit and awaiting user review.
-   - Next is slice 2 — shared design and typography. Slices 2–6 remain pending; stop for user review between slices.
+   - Slice 1 — content contracts and tooling: accepted by the user; implemented and independently verified in `b1d60c4`.
+   - Slice 2 — shared design and typography: implemented and independently verified (38 tests, clean diagnostics/privacy/build, desktop/mobile/browser review); saved in the local slice commit and awaiting user review.
+   - Next is slice 3 — project page and image gallery. Slices 3–6 remain pending; stop for user review between slices.

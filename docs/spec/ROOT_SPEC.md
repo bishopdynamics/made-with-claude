@@ -2,7 +2,7 @@
 
 - **Status:** in-progress
 - **Addenda:** none
-- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07, then explicitly authorized starting slice 1. Slice 1 is implemented and independently verified, awaiting the user's slice review; later slices remain pending.
+- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slice 1 was accepted and the user authorized slice 2. Slice 2 is implemented and independently verified, awaiting the user's slice review; slices 3–6 remain pending.
 
 ## Summary
 
@@ -190,7 +190,7 @@ All slices are **[serial]**. Each gets a self-contained worker brief from `TASK_
    - **Verification:** `make check`; published-without-image rejection; invalid dates/taxonomy; deterministic search and date tests; dependency compatibility; original safeguards remain passing.
 
 2. **Shared design and typography — (M), [serial].** Build the responsive visual shell, header/footer, metadata wrapper, prose styles, code styling, fonts, and 404 page. The homepage may remain structurally minimal until slice 4.
-   - **Worker-owned files:** `src/layouts/Page.astro`, `src/components/SiteHeader.astro`, `src/components/SiteFooter.astro`, `src/components/Seo.astro`, `src/styles/global.css`, `src/styles/prose.css`, `src/styles/code.css`, `src/pages/404.astro`, `public/fonts/**`, `public/favicon.svg`, `src/pages/index.md` (temporary layout/frontmatter adjustment only).
+   - **Worker-owned files:** `src/layouts/Page.astro`, `src/components/SiteHeader.astro`, `src/components/SiteFooter.astro`, `src/components/Seo.astro`, `src/styles/global.css`, `src/styles/prose.css`, `src/styles/code.css`, `src/pages/404.astro`, `src/pages/projects/index.astro` (minimal empty catalog route so shared navigation works; full catalog belongs to slice 4), `public/fonts/**`, `public/favicon.svg`, `src/pages/index.md` (temporary layout/frontmatter and approved title/introduction; final composition belongs to slice 4).
    - **Orchestrator-owned files:** `docs/development.md`, spec/queue/handoff/memory records.
    - **Verification:** `make check`; parent desktop/mobile typography, contrast, font loading, code-frame, and keyboard review using local fixtures.
 
@@ -228,6 +228,8 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Change Log
 
+- 2026-09-07 — Slice 2 implemented and independently verified: shared dark shell, self-hosted Inter/JetBrains Mono, metadata, prose/code styling, and useful navigation/404. Parent browser review refined Copy into the title bar with a smaller glyph and preserved target size. Final parent checks passed 38 tests, zero Astro diagnostics/privacy findings, and all three routes. Desktop/tablet/mobile, 200% content zoom, local font loading, keyboard/Copy, and overflow checks passed. Page/Seo APIs and font provenance are documented in the development guide.
+- 2026-09-07 — User accepted slice 1 and authorized slice 2. Slice 2 includes the approved homepage title/introduction and a minimal empty Projects route to keep shared navigation functional before slice 4; no new product behavior or project content is introduced.
 - 2026-09-07 — Slice 1 implemented and independently verified: strict route-independent content validation, public/dev query contracts, UTC metadata and local search helpers, framed Markdown code, and built-output checks. Parent review added malformed-URL/HTML-link regressions and live dev checks; runtime-mode and watcher fixes preserve the approved local-preview behavior. Final parent `make check`: 38 tests passed, zero Astro diagnostics, zero privacy findings, static build/output checks passed. Live content/image edits, invalid-edit recovery, deletions, and server shutdown passed. Shared design starts in slice 2 after user review.
 - 2026-09-07 — Slice 1 ownership extended to the existing Astro/serve wrappers: parent live verification found inherited `NODE_ENV=production` disables draft preview. Explicit command-appropriate modes are a tooling correction within the approved dev/production behavior, not a design change.
 - 2026-09-07 — User approved the full spec and authorized slice 1. Initial Planning is accepted; implementation begins with content contracts and tooling.

@@ -1,11 +1,11 @@
 ---
 layout: ../layouts/Page.astro
-title: Made with Claude
-description: Software projects and the stories behind them, built with Claude.
+title: What Claude/Codex Made
+description: Projects made by Claude and/or Codex, under the guidance of BishopDynamics.
+variant: home
+prose: false
 ---
 
-# Made with Claude
+# What Claude/Codex Made
 
-Software projects and the stories behind them.
-
-A collection of things built with Claude. Project notes are on their way.
+Projects made by Claude and/or Codex, under the guidance of BishopDynamics.

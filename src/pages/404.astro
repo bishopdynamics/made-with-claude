@@ -1,0 +1,36 @@
+---
+import Page from '../layouts/Page.astro';
+---
+
+<Page
+  title="Page not found"
+  description="This page could not be found. Explore the projects or return home."
+  canonical="/404.html"
+  noindex
+>
+  <p class="error-code">404</p>
+  <h1>Page not found</h1>
+  <p class="page-intro">
+    This page may have moved, or the address may be incorrect.
+  </p>
+  <div class="error-links">
+    <a class="button-link button-link-primary" href="/">Home</a>
+    <a class="button-link" href="/projects/">All Projects</a>
+  </div>
+</Page>
+
+<style>
+  .error-code {
+    margin: 0 0 1.5rem;
+    color: var(--color-accent);
+    font-size: 0.875rem;
+    font-weight: 550;
+    letter-spacing: 0.12em;
+  }
+  .error-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+</style>

@@ -67,13 +67,27 @@ Search records are plain serializable data, not pre-escaped HTML. If embedding J
 
 ## Code blocks and checks
 
-`scripts/markdown-code.mjs` configures `astro-expressive-code` and its line-number plugin, both pinned to 0.44.2. Fenced code gets a dark editor frame with a filename/title or language label, a Plain text fallback for unknown languages, and optional `showLineNumbers` metadata. Copy data preserves original tabs, indentation, and filename comments. JetBrains Mono is the configured code family; font files arrive in the typography slice.
+`scripts/markdown-code.mjs` configures `astro-expressive-code` and its line-number plugin, both pinned to 0.44.2. Fenced code gets a dark editor frame with a filename/title or language label, a Plain text fallback for unknown languages, and optional `showLineNumbers` metadata. Copy data preserves original tabs, indentation, and filename comments. JetBrains Mono is loaded from the local font assets. `src/styles/code.css` places the Copy control and feedback in the title bar, preserving a 44px target and 20px glyph without covering source text; long filenames wrap within reserved space.
 
 Direct dependencies include Shiki 4.4.3 for the supported-language registry, parse5 8.0.1 for actual HTML parsing in output checks, and Node 22 types. These imports are explicitly declared rather than relying on incidental transitive dependencies. The existing Astro and TypeScript pins remain unchanged.
 
 `make test` now runs the original safeguards and TypeScript contract tests using Node 22 type stripping. It includes isolated temporary Astro builds for publication validation, caching, image resolution, draft exclusion, and real Markdown rendering. Temporary fixtures never enter the site's source collection or final build. `npm run build` also runs `scripts/check-site.mjs`, which checks actual HTML references (including responsive image candidates) and directory index files. Only `/` is required in slice 1; later slices extend required-route/project expectations as those pages are implemented.
 
 Parent live verification also exercised creating a collection after dev startup, draft edits, publication, changed image dimensions, invalid-edit recovery, deletions, and server shutdown. Watcher roots are normalized and file/directory listeners registered individually so Astro can track listener cleanup.
+
+## Shared layout and fonts
+
+`src/layouts/Page.astro` supplies the head, header/footer, skip link, and single `main#main-content`. Authors supply the H1. It accepts these optional direct props, or the same values through Markdown frontmatter: `title`, `description`, `canonical` (string/URL), `noindex` (boolean), `image` (`{ src: string | URL, alt: string }`), `prose` (boolean), and `variant` (`standard` or `home`). Direct props take precedence. Prose defaults on for Markdown callers and off for direct Astro callers so gallery/catalog layouts can use the wider container.
+
+`Seo.astro` accepts the metadata subset of those options. It supplies one escaped title/description, canonical and social metadata, theme color, and favicon. Canonicals default to the pathname on the configured site and omit query strings/fragments. The 404 sets `noindex`. The initial homepage, empty Projects route, and 404 use no client scripts; the full homepage and searchable catalog remain in slice 4.
+
+`src/styles/global.css` owns palette/font/spacing tokens and shared `.container`, `.page-intro`, `.button-link`, and `.button-link-primary` classes. `.prose` in `prose.css` constrains article width, styles semantic Markdown elements, and contains wide tables/long inline code. Code-renderer markup is excluded from generic prose rules. The single dark theme persists under light system preferences; reduced-motion rules disable decorative transitions/animations.
+
+Font assets are original Inter v4.1 variable upright/italic and JetBrains Mono v2.304 regular/italic WOFF2 files. Only upright Inter is preloaded; the other three faces load when used. The full unmodified binaries total 928,244 bytes. Exact source URLs, sizes, checksums, and original licenses are in `public/fonts/README.md`. No dependency or privacy-policy exception was needed. The small favicon is original SVG using the site palette.
+
+The upstream `JetBrainsMono-OFL.txt` has a trailing space on line 21. It is intentionally preserved so the imported license remains byte-for-byte identical to its recorded source. A staged `git diff --check` reports that one vendor line; authored files must still pass the normal whitespace check. Do not run a blanket formatter over the original font licenses.
+
+Slice 2 parent browser review used an isolated temporary Markdown fixture, covering real font loading (all four faces), semantic headings/lists/tables, keyboard skip/focus and table scrolling, code/long-title overflow, and exact keyboard-triggered Copy. Layouts were inspected at 375/768/1440px and 200% content zoom. Reduced-motion declarations were activated through the CSSOM for cascade verification because the browser connector's separate CDP calls do not retain emulation state. The fixture is not source content; only review screenshots/logs are retained under the ignored slice run directory.
 
 ## Before committing
 
