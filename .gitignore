@@ -46,3 +46,16 @@ Elefant-Offline.md
 # <<< project-template-a managed block <<<
 
 # --- Project-specific ignore rules go below this line ---
+
+# Astro and local tooling output
+.astro/
+coverage/
+*.log
+
+# Local credentials; sanitized examples may be versioned
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# .bishop/ is intentionally version-controlled.

@@ -1,5 +1,132 @@
 {
   "version": 1,
-  "tasks": [],
-  "derivedAtMs": 1786577148627
+  "tasks": [
+    {
+      "id": "make:help",
+      "name": "help",
+      "source": "make",
+      "command": "make help",
+      "description": "List development commands"
+    },
+    {
+      "id": "make:setup",
+      "name": "setup",
+      "source": "make",
+      "command": "make setup",
+      "description": "Install locked dependencies and the pre-commit hook"
+    },
+    {
+      "id": "make:run",
+      "name": "run",
+      "source": "make",
+      "command": "make run",
+      "description": "Start the local development server on loopback"
+    },
+    {
+      "id": "make:build",
+      "name": "build",
+      "source": "make",
+      "command": "make build",
+      "description": "Build the static site into dist"
+    },
+    {
+      "id": "make:test",
+      "name": "test",
+      "source": "make",
+      "command": "make test",
+      "description": "Run safeguard tests"
+    },
+    {
+      "id": "make:check",
+      "name": "check",
+      "source": "make",
+      "command": "make check",
+      "description": "Run all CI gates"
+    },
+    {
+      "id": "make:format",
+      "name": "format",
+      "source": "make",
+      "command": "make format",
+      "description": "Format project code and tooling"
+    },
+    {
+      "id": "make:lint",
+      "name": "lint",
+      "source": "make",
+      "command": "make lint",
+      "description": "Check formatting, types, and privacy"
+    },
+    {
+      "id": "npm:dev",
+      "name": "dev",
+      "source": "npm",
+      "command": "npm run dev",
+      "description": "astro dev --host 127.0.0.1"
+    },
+    {
+      "id": "npm:build",
+      "name": "build",
+      "source": "npm",
+      "command": "npm run build",
+      "description": "astro build"
+    },
+    {
+      "id": "npm:preview",
+      "name": "preview",
+      "source": "npm",
+      "command": "npm run preview",
+      "description": "astro preview --host 127.0.0.1"
+    },
+    {
+      "id": "npm:typecheck",
+      "name": "typecheck",
+      "source": "npm",
+      "command": "npm run typecheck",
+      "description": "astro check"
+    },
+    {
+      "id": "npm:format",
+      "name": "format",
+      "source": "npm",
+      "command": "npm run format",
+      "description": "node scripts/format.mjs --write"
+    },
+    {
+      "id": "npm:format:check",
+      "name": "format:check",
+      "source": "npm",
+      "command": "npm run format:check",
+      "description": "node scripts/format.mjs --check"
+    },
+    {
+      "id": "npm:test",
+      "name": "test",
+      "source": "npm",
+      "command": "npm run test",
+      "description": "node --test scripts/*.test.mjs"
+    },
+    {
+      "id": "npm:privacy:check",
+      "name": "privacy:check",
+      "source": "npm",
+      "command": "npm run privacy:check",
+      "description": "node scripts/privacy-check.mjs --all"
+    },
+    {
+      "id": "npm:privacy:staged",
+      "name": "privacy:staged",
+      "source": "npm",
+      "command": "npm run privacy:staged",
+      "description": "node scripts/privacy-check.mjs --staged"
+    },
+    {
+      "id": "npm:check",
+      "name": "check",
+      "source": "npm",
+      "command": "npm run check",
+      "description": "npm run format:check && npm run typecheck && npm test && npm run privacy:check && npm run build"
+    }
+  ],
+  "derivedAtMs": 1788809737454
 }
