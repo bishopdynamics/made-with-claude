@@ -28,6 +28,7 @@ import {
   publishedFixture,
 } from './fixtures/projects/fixtures.ts';
 import { checkSite } from '../scripts/check-site.mjs';
+import { isolateFixtureCaches } from './fixtures/projects/build-cache.ts';
 
 const schema = createProjectSchema(localImagePath, fixtureTaxonomy);
 const valid = () => ({
@@ -322,6 +323,7 @@ test(
       mkdirSync(dirname(join(root, file)), { recursive: true });
       cpSync(join(project, file), join(root, file), { recursive: true });
     }
+    isolateFixtureCaches(root);
     put(
       root,
       'src/data/project-taxonomy.ts',

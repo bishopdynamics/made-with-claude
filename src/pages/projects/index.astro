@@ -1,11 +1,96 @@
 ---
 import Page from '../../layouts/Page.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import ProjectFilters from '../../components/ProjectFilters.astro';
+import {
+  getPublicProjects,
+  getProjectsForDevelopment,
+} from '../../lib/projects.ts';
+import {
+  createProjectSearchRecords,
+  projectFilterOptions,
+} from '../../lib/project-search.ts';
+import '../../styles/project-index.css';
+
+const projects = await getPublicProjects();
+const records = createProjectSearchRecords(projects);
+const options = projectFilterOptions(records);
+const drafts = import.meta.env.DEV
+  ? (await getProjectsForDevelopment()).filter(({ data }) => data.draft)
+  : [];
+const total = projects.length;
 ---
 
 <Page
   title="All Projects"
   description="Explore projects made by Claude and/or Codex, under the guidance of BishopDynamics."
 >
-  <h1>All Projects</h1>
-  <p class="page-intro">No projects have been published yet.</p>
+  <div class="project-catalog" data-project-catalog>
+    <h1>All Projects</h1>
+    {
+      total > 0 ? (
+        <project-index class="project-index">
+          <ProjectFilters options={options} />
+          <p class="project-result-count" data-project-count>
+            {total} {total === 1 ? 'project' : 'projects'}
+          </p>
+          <p
+            class="project-announcement"
+            data-project-announcement
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          />
+          <ul id="project-results" class="project-results" data-project-results>
+            {projects.map((project, index) => (
+              <li data-project-result data-project-slug={project.id}>
+                <ProjectCard
+                  project={project}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              </li>
+            ))}
+          </ul>
+          <div class="project-no-results" data-project-no-results hidden>
+            <p>No projects match these filters.</p>
+            <button class="button-link" type="button" data-project-clear>
+              Clear filters
+            </button>
+          </div>
+          <script
+            is:inline
+            type="application/json"
+            data-project-records
+            set:html={JSON.stringify(records).replaceAll('<', '\\u003c')}
+          />
+        </project-index>
+      ) : (
+        <p class="page-intro" data-catalog-empty>
+          No projects have been published yet.
+        </p>
+      )
+    }
+    {
+      drafts.length > 0 && (
+        <section
+          class="project-drafts"
+          aria-labelledby="project-drafts-heading"
+          data-project-drafts
+        >
+          <h2 id="project-drafts-heading">Draft previews</h2>
+          <p>Unpublished projects available in this local preview.</p>
+          <ul class="project-results">
+            {drafts.map((project) => (
+              <li>
+                <ProjectCard project={project} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+  <script>
+    import '../../scripts/project-index.ts';
+  </script>
 </Page>

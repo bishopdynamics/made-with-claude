@@ -13,6 +13,121 @@ function* elements(node) {
 
 const attribute = (element, name) =>
   element.attrs.find((attr) => attr.name === name)?.value;
+const nodeText = (node) =>
+  node.value ?? (node.childNodes ?? []).map(nodeText).join('');
+
+function checkProjectLinks(cards, file) {
+  for (const card of cards) {
+    const children = [...elements(card)];
+    assert.equal(card.tagName, 'a', `${file}: project card must be a link`);
+    assert.equal(
+      children.filter((node) => node.tagName === 'a').length,
+      1,
+      `${file}: nested project links`,
+    );
+    assert.ok(
+      children.some(
+        (node) =>
+          attribute(node, 'id') === attribute(card, 'aria-labelledby') &&
+          nodeText(node).trim(),
+      ),
+      `${file}: unlabeled project link`,
+    );
+    const image = children.find((node) => node.tagName === 'img');
+    assert.ok(
+      image &&
+        attribute(image, 'src') &&
+        attribute(image, 'alt') &&
+        Number(attribute(image, 'width')) > 0 &&
+        Number(attribute(image, 'height')) > 0,
+      `${file}: incomplete project cover`,
+    );
+    assert.notEqual(
+      attribute(card, 'data-project-draft'),
+      'true',
+      `${file}: draft card leaked`,
+    );
+  }
+}
+
+function checkCatalog(nodes, file, builtSlugs) {
+  const marked = (name) =>
+    nodes.filter((node) => attribute(node, name) !== undefined);
+  assert.equal(
+    marked('data-project-drafts').length,
+    0,
+    `${file}: draft previews leaked`,
+  );
+  const cards = marked('data-project-card');
+  checkProjectLinks(cards, file);
+  assert.deepEqual(
+    new Set(cards.map((node) => attribute(node, 'data-project-slug'))),
+    new Set(builtSlugs),
+    `${file}: catalog and built projects differ`,
+  );
+  const sources = marked('data-project-records');
+  const filters = marked('data-project-filters');
+  if (!cards.length) {
+    assert.equal(
+      sources.length,
+      0,
+      `${file}: empty catalog has a search index`,
+    );
+    assert.equal(
+      filters.length,
+      0,
+      `${file}: empty catalog has ineffective controls`,
+    );
+    assert.equal(
+      marked('data-catalog-empty').length,
+      1,
+      `${file}: missing empty state`,
+    );
+    return;
+  }
+  assert.equal(sources.length, 1, `${file}: missing public search index`);
+  const raw = nodeText(sources[0]);
+  assert.ok(!raw.includes('<'), `${file}: unsafe search serialization`);
+  const records = JSON.parse(raw);
+  assert.deepEqual(
+    records.map(({ slug }) => slug),
+    cards.map((node) => attribute(node, 'data-project-slug')),
+    `${file}: search and static card order differ`,
+  );
+  assert.ok(
+    records.every((record) => !('images' in record) && !('body' in record)),
+    `${file}: oversized search payload`,
+  );
+  assert.equal(filters.length, 1, `${file}: missing filters`);
+  assert.notEqual(
+    attribute(filters[0], 'hidden'),
+    undefined,
+    `${file}: inactive filters exposed`,
+  );
+  assert.equal(
+    marked('data-project-count').length,
+    1,
+    `${file}: missing result count`,
+  );
+  for (const result of marked('data-project-result'))
+    assert.equal(
+      attribute(result, 'hidden'),
+      undefined,
+      `${file}: static result starts hidden`,
+    );
+  for (const control of [...elements(filters[0])].filter((node) =>
+    ['input', 'select'].includes(node.tagName),
+  ))
+    assert.ok(
+      nodes.some(
+        (node) =>
+          node.tagName === 'label' &&
+          attribute(node, 'for') === attribute(control, 'id') &&
+          nodeText(node).trim(),
+      ),
+      `${file}: unlabeled filter`,
+    );
+}
 
 function checkProjectPage(nodes, file) {
   const marked = (name) =>
@@ -129,6 +244,13 @@ export async function checkSite({
   const root = resolve(directory);
   const files = await readdir(root, { recursive: true });
   const htmlFiles = files.filter((file) => file.endsWith('.html'));
+  const builtSlugs = htmlFiles.flatMap((file) => {
+    const slug = file
+      .split(sep)
+      .join('/')
+      .match(/^projects\/([^/]+)\/index\.html$/)?.[1];
+    return slug ? [slug] : [];
+  });
   const hasFile = async (path) => {
     try {
       return (await stat(path)).isFile();
@@ -169,6 +291,23 @@ export async function checkSite({
       site,
     );
     const nodes = [...elements(parse(html))];
+    if (
+      nodes.some(
+        (node) => attribute(node, 'data-project-catalog') !== undefined,
+      )
+    )
+      checkCatalog(nodes, file, builtSlugs);
+    if (nodes.some((node) => attribute(node, 'data-home-page') !== undefined)) {
+      const tiles = nodes.filter(
+        (node) => attribute(node, 'data-project-tile') !== undefined,
+      );
+      assert.equal(
+        tiles.length,
+        Math.min(4, builtSlugs.length),
+        `${file}: incorrect recent project count`,
+      );
+      checkProjectLinks(tiles, file);
+    }
     if (/^\/projects\/[^/]+\/$/.test(url.pathname))
       checkProjectPage(nodes, file);
     const references = nodes.flatMap((element) =>
@@ -209,4 +348,4 @@ if (
   process.argv[1] &&
   import.meta.url === pathToFileURL(resolve(process.argv[1])).href
 )
-  await checkSite();
+  await checkSite({ requiredRoutes: ['/', '/projects/', '/404.html'] });

@@ -105,6 +105,22 @@ Two browser-found edge cases are deliberately handled: focused Previous/Next con
 
 Slice 3 parent verification included persistent Playwright contexts for real touch swipes, reduced-motion preferences, and JavaScript-disabled navigation, plus keyboard boundaries, image-load failure/recovery, mobile/desktop/portrait/long-caption layout, and an effective 200% viewport. The existing browser tool's installed runtime was used; Playwright was not added as a project dependency. Review scripts, logs, and screenshots are retained only in the ignored slice run directory.
 
+## Homepage and searchable catalog
+
+`src/pages/index.astro` renders the first four entries from `getPublicProjects()` in publication order. `ProjectTile.astro` accepts `{ project: PublishedProjectEntry<ProjectEntry>, single?, loading? }`; covers retain their authored focal position and titles sit over a dark gradient. `.recent-projects-single` gives a lone project the full row. Zero/two/three/four states use the same layout without fabricated entries; All Projects remains a working route link.
+
+`ProjectCard.astro` accepts `{ project: ProjectEntry, loading? }` and renders one full-card link containing the cover, title/description, language labels, development span, and tags. Published cards require a cover. Incomplete draft cards can omit unavailable metadata and show a draft-only cover placeholder. `ProjectFilters.astro` accepts `{ options: ProjectFilterOptions, id?, resultsId? }`; its form is initially hidden and has fields named `q`, `tag`, `language`, and `year`.
+
+The `<project-index>` element uses the existing pure search/URL helpers. Public cards arrive in the HTML, and a small escaped JSON index supplies only public search metadata. Controls become visible after initialization succeeds. Filtering toggles the existing result items rather than replacing their HTML. Raw query text and caret are preserved while typing; normalized matching and URL serialization happen separately. The visible count updates immediately, while a separate polite live region waits 200ms after changes.
+
+Filter changes replace the current URL entry, preserving other query parameters, hash, and existing history state. Popstate and persisted pageshow restore form/results from the URL. Enter does not reload the page. Both Clear actions reset the known search fields and return focus to the query. Disconnect cleanup removes listeners/timers and restores a usable static listing; malformed metadata leaves that fallback intact.
+
+Development draft cards are a separate labeled section outside the enhanced public list. They never contribute to homepage tiles, public JSON, filter choices, or counts, even in development. The real collection is still empty before the first project onboarding, so its production empty states and Astro's empty-collection notices are expected.
+
+All actual fixture-build tests use `isolateFixtureCaches(root)` from `tests/fixtures/projects/build-cache.ts` after copying configuration. Sharing node_modules through a symlink also shares Astro's default content cache; concurrent builds exposed cross-fixture contamination. The helper composes per-fixture Astro/Vite cache directories without changing the production configuration. Browser-review copies need the same isolation if they build alongside checks.
+
+Slice 4 parent browser checks covered five sample projects, every homepage count from zero through four, long titles, mobile/effective200% layouts, caret/multi-word/punctuation input, combined filters, Clear/empty results, deep and invalid URLs, Back/Forward/detail return, persisted pageshow, script-disabled listing, malformed-index fallback, reconnecting, native touch on cards, and development-only draft separation. Review artifacts stay in the ignored slice run directory; no sample projects were added to production content.
+
 ## Before committing
 
 Run `make check`, review the diff, then stage the intended files. The pre-commit hook reads Git's index, which is the content that the commit will contain. Editing a secret out of the working copy alone does not remove it from the staged version; stage the corrected file too.

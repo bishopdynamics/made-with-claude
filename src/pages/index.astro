@@ -1,0 +1,47 @@
+---
+import Page from '../layouts/Page.astro';
+import ProjectTile from '../components/ProjectTile.astro';
+import { getPublicProjects } from '../lib/projects.ts';
+import '../styles/landing.css';
+
+const projects = (await getPublicProjects()).slice(0, 4);
+const title = 'What Claude/Codex Made';
+const description =
+  'Projects made by Claude and/or Codex, under the guidance of BishopDynamics.';
+---
+
+<Page title={title} description={description} variant="home">
+  <div class="landing-page" data-home-page>
+    <header class="landing-heading">
+      <h1>{title}</h1>
+      <p class="page-intro">{description}</p>
+    </header>
+    {
+      projects.length > 0 ? (
+        <ul
+          class:list={[
+            'recent-projects',
+            { 'recent-projects-single': projects.length === 1 },
+          ]}
+          aria-label="Recent projects"
+          data-home-projects
+        >
+          {projects.map((project, index) => (
+            <li>
+              <ProjectTile
+                project={project}
+                single={projects.length === 1}
+                loading={index < 2 ? 'eager' : 'lazy'}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="landing-empty">No projects have been published yet.</p>
+      )
+    }
+    <a class="button-link button-link-primary landing-all" href="/projects/"
+      >All Projects <span aria-hidden="true">→</span></a
+    >
+  </div>
+</Page>

@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import { projectTaxonomy } from '../data/project-taxonomy.ts';
+import {
+  formatDevelopmentSpan,
+  projectCover,
+  projectHref,
+} from '../lib/project-metadata.ts';
+import type { ProjectEntry } from '../types/projects.ts';
+
+interface Props {
+  project: ProjectEntry;
+  loading?: 'eager' | 'lazy';
+}
+const { project, loading = 'lazy' } = Astro.props;
+const { data } = project;
+const cover = projectCover(project);
+if (!data.draft && !cover)
+  throw new Error(`${project.id}: published card requires a cover image`);
+const title = data.title ?? project.id;
+---
+
+<a
+  class="project-card"
+  href={projectHref(project.id)}
+  aria-labelledby={`card-title-${project.id}`}
+  data-project-card
+  data-project-slug={project.id}
+  data-project-draft={String(data.draft)}
+>
+  <div class="project-card-media">
+    {
+      cover ? (
+        <Image
+          src={cover.src}
+          alt={cover.alt}
+          width={Math.min(640, cover.src.width)}
+          widths={[
+            ...new Set(
+              [360, 640, 960, 1280].map((width) =>
+                Math.min(width, cover.src.width),
+              ),
+            ),
+          ]}
+          sizes="(min-width: 1216px) 340px, (min-width: 720px) 30vw, calc(100vw - 80px)"
+          loading={loading}
+          decoding="async"
+          style={`object-position: ${data.coverPosition.x}% ${data.coverPosition.y}%`}
+        />
+      ) : (
+        <span class="project-card-placeholder">Draft image pending</span>
+      )
+    }
+  </div>
+  <div class="project-card-content">
+    {data.draft && <p class="project-card-draft">Draft</p>}
+    <h2 id={`card-title-${project.id}`}>{title}</h2>
+    {
+      data.description && (
+        <p class="project-card-description">{data.description}</p>
+      )
+    }
+    {
+      data.languages.length > 0 && (
+        <ul class="project-card-languages" aria-label="Languages">
+          {data.languages.map((id) => (
+            <li>
+              {projectTaxonomy.languages.find((language) => language.id === id)
+                ?.label ?? id}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    {
+      data.startedOn && data.completedOn && (
+        <p class="project-card-development">
+          Development:{' '}
+          <span>{formatDevelopmentSpan(data.startedOn, data.completedOn)}</span>
+        </p>
+      )
+    }
+    {
+      data.tags.length > 0 && (
+        <ul class="project-card-tags" aria-label="Tags">
+          {data.tags.map((id) => (
+            <li>
+              {projectTaxonomy.tags.find((tag) => tag.id === id)?.label ?? id}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</a>

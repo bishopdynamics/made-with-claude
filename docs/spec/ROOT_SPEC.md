@@ -2,7 +2,7 @@
 
 - **Status:** in-progress
 - **Addenda:** none
-- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1 and 2 are accepted; the user authorized slice 3 after reviewing screenshots. Slice 3 is implemented and independently verified, awaiting the user's slice review; slices 4–6 remain pending.
+- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–3 are accepted; the user authorized slice 4. Slice 4 is implemented and independently verified, awaiting the user's slice review; slices 5–6 remain pending.
 
 ## Summary
 
@@ -200,7 +200,7 @@ All slices are **[serial]**. Each gets a self-contained worker brief from `TASK_
    - **Verification:** `make check`; parent one/multiple-image dialog review, complete images/captions, keyboard/focus, mobile scrolling, script-disabled fallback, and article/code rendering. Use temporary fixture content, not invented public entries.
 
 4. **Landing page and searchable catalog — (M), [serial].** Replace the scaffold homepage with the approved composition; implement cards, filters, URL state, result counts, and responsive catalog layout.
-   - **Worker-owned files:** `src/pages/index.astro`, `src/pages/index.md` (remove after replacement), `src/pages/projects/index.astro`, `src/components/ProjectTile.astro`, `src/components/ProjectCard.astro`, `src/components/ProjectFilters.astro`, `src/scripts/project-index.ts`, `src/styles/landing.css`, `src/styles/project-index.css`, `scripts/check-site.mjs`, `tests/fixtures/projects/**`.
+   - **Worker-owned files:** `src/pages/index.astro`, `src/pages/index.md` (remove after replacement), `src/pages/projects/index.astro`, `src/components/ProjectTile.astro`, `src/components/ProjectCard.astro`, `src/components/ProjectFilters.astro`, `src/scripts/project-index.ts`, `src/styles/landing.css`, `src/styles/project-index.css`, `scripts/check-site.mjs`, `tests/project-catalog.test.ts`, `tests/project-schema.test.ts` and `tests/project-pages.test.ts` (temporary cache isolation only), `tests/fixtures/projects/**`.
    - **Orchestrator-owned files:** spec/queue/handoff/memory records.
    - **Verification:** `make check`; parent zero/one/two/three/four-project layouts, long labels, combined and empty-result filters, URL restoration, mobile cards, keyboard access, and no-script listing.
 
@@ -228,6 +228,9 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Change Log
 
+- 2026-09-07 — Slice 4 implemented and independently verified: recent homepage tiles, rich catalog cards, progressive search/filters/URL state, and separate dev draft previews. Parent checks passed 43 tests, zero type diagnostics/privacy findings, layouts for every zero-to-four homepage count, native browser/history/no-script/touch behavior, fallback/reconnection, and draft separation. All temporary build caches are isolated; no real project content or publication was added.
+- 2026-09-07 — Slice 4 concurrent fixture builds exposed shared Astro caches through symlinked dependencies. Extended ownership to isolate caches in the two existing build-fixture tests as well as the new catalog test; production configuration and product behavior are unchanged.
+- 2026-09-07 — User accepted slice 3 and authorized slice 4. Added an owned catalog fixture-build test file. Development draft cards will appear in a separate labeled preview section, excluded from the public search index/counts; this implements the approved local-authoring/publication boundary.
 - 2026-09-07 — Slice 3 implemented and independently verified: public/dev project routes, metadata/article layout, optimized thumbnail carousel, and accessible original-image viewer. Parent browser review compacted metadata and corrected disabled-button focus and reachable scroll-snap edges. Final checks passed 39 tests, zero Astro type diagnostics/privacy findings, actual route fixtures, live draft updates, and native keyboard/touch/reduced-motion/no-script behavior. No real project content was added.
 - 2026-09-07 — User accepted slice 2 preview images and authorized slice 3. Added an owned project-page fixture-build test file to cover route publication/draft separation and actual gallery markup; no design change.
 - 2026-09-07 — Slice 2 implemented and independently verified: shared dark shell, self-hosted Inter/JetBrains Mono, metadata, prose/code styling, and useful navigation/404. Parent browser review refined Copy into the title bar with a smaller glyph and preserved target size. Final parent checks passed 38 tests, zero Astro diagnostics/privacy findings, and all three routes. Desktop/tablet/mobile, 200% content zoom, local font loading, keyboard/Copy, and overflow checks passed. Page/Seo APIs and font provenance are documented in the development guide.

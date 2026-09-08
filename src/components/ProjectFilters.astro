@@ -1,0 +1,65 @@
+---
+import type { ProjectFilterOptions } from '../types/projects.ts';
+interface Props {
+  options: ProjectFilterOptions;
+  id?: string;
+  resultsId?: string;
+}
+const {
+  options,
+  id = 'project-search',
+  resultsId = 'project-results',
+} = Astro.props;
+---
+
+<form
+  class="project-filters"
+  role="search"
+  aria-label="Find projects"
+  data-project-filters
+  hidden
+>
+  <div class="project-filter-query">
+    <label for={`${id}-query`}>Search projects</label>
+    <input
+      id={`${id}-query`}
+      name="q"
+      type="search"
+      autocomplete="off"
+      placeholder="Search titles, descriptions, tags, languages"
+      aria-controls={resultsId}
+    />
+  </div>
+  <div class="project-filter-choices">
+    <div>
+      <label for={`${id}-tag`}>Tag</label>
+      <select id={`${id}-tag`} name="tag" aria-controls={resultsId}>
+        <option value="">All tags</option>
+        {
+          options.tags.map(({ id, label }) => (
+            <option value={id}>{label}</option>
+          ))
+        }
+      </select>
+    </div>
+    <div>
+      <label for={`${id}-language`}>Language</label>
+      <select id={`${id}-language`} name="language" aria-controls={resultsId}>
+        <option value="">All languages</option>
+        {
+          options.languages.map(({ id, label }) => (
+            <option value={id}>{label}</option>
+          ))
+        }
+      </select>
+    </div>
+    <div>
+      <label for={`${id}-year`}>Completion year</label>
+      <select id={`${id}-year`} name="year" aria-controls={resultsId}>
+        <option value="">All years</option>
+        {options.years.map((year) => <option value={year}>{year}</option>)}
+      </select>
+    </div>
+    <button class="button-link project-clear" type="reset">Clear</button>
+  </div>
+</form>

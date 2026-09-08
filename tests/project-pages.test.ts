@@ -16,6 +16,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse, type DefaultTreeAdapterMap } from 'parse5';
 import { checkSite } from '../scripts/check-site.mjs';
+import { isolateFixtureCaches } from './fixtures/projects/build-cache.ts';
 import {
   literalCaption,
   literalTitle,
@@ -63,6 +64,7 @@ test(
       mkdirSync(dirname(join(root, file)), { recursive: true });
       cpSync(join(project, file), join(root, file), { recursive: true });
     }
+    isolateFixtureCaches(root);
     const content = join(root, 'src/content/projects');
     if (existsSync(content)) rmSync(content, { recursive: true });
     writePageFixtures(root);

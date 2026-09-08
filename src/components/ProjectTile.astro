@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import { projectCover, projectHref } from '../lib/project-metadata.ts';
+import type { ProjectEntry, PublishedProjectEntry } from '../types/projects.ts';
+
+interface Props {
+  project: PublishedProjectEntry<ProjectEntry>;
+  single?: boolean;
+  loading?: 'eager' | 'lazy';
+}
+const { project, single = false, loading = 'lazy' } = Astro.props;
+const cover = projectCover(project);
+if (!cover)
+  throw new Error(`${project.id}: published tile requires a cover image`);
+const sizes = single
+  ? '(min-width: 1216px) 1120px, (min-width: 720px) 92vw, calc(100vw - 40px)'
+  : '(min-width: 1216px) 548px, (min-width: 720px) calc(46vw - 12px), calc(100vw - 40px)';
+---
+
+<a
+  class="project-tile"
+  href={projectHref(project.id)}
+  aria-labelledby={`tile-title-${project.id}`}
+  data-project-tile
+  data-project-slug={project.id}
+>
+  <Image
+    src={cover.src}
+    alt={cover.alt}
+    width={Math.min(1120, cover.src.width)}
+    widths={[
+      ...new Set(
+        [360, 720, 1120, 1600, 2240].map((width) =>
+          Math.min(width, cover.src.width),
+        ),
+      ),
+    ]}
+    sizes={sizes}
+    loading={loading}
+    decoding="async"
+    style={`object-position: ${project.data.coverPosition.x}% ${project.data.coverPosition.y}%`}
+  />
+  <div class="project-tile-caption">
+    <h2 id={`tile-title-${project.id}`}>{project.data.title}</h2>
+  </div>
+</a>
