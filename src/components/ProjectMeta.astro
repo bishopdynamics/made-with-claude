@@ -1,0 +1,81 @@
+---
+import type { ProjectEntry } from '../types/projects.ts';
+import { projectTaxonomy } from '../data/project-taxonomy.ts';
+import {
+  formatDevelopmentSpan,
+  formatProjectDate,
+} from '../lib/project-metadata.ts';
+
+interface Props {
+  project: ProjectEntry<unknown>;
+}
+const { data } = Astro.props.project;
+const dates = [
+  ['Started', data.startedOn],
+  ['Completed', data.completedOn],
+  ['Published', data.publishedOn],
+  ['Updated', data.updatedOn],
+].filter((pair): pair is [string, string] => Boolean(pair[1]));
+const taxonomy = [
+  {
+    label: 'Languages',
+    ids: data.languages,
+    options: projectTaxonomy.languages,
+  },
+  { label: 'Tags', ids: data.tags, options: projectTaxonomy.tags },
+].filter(({ ids }) => ids.length);
+const links = [
+  ['Source', data.repositoryUrl],
+  ['Download', data.releaseUrl],
+  ['Video', data.videoUrl],
+].filter((pair): pair is [string, string] => Boolean(pair[1]));
+---
+
+{
+  (taxonomy.length > 0 || dates.length > 0) && (
+    <dl class="project-meta">
+      {taxonomy.map(({ label, ids, options }) => (
+        <div class="project-meta-group">
+          <dt>{label}</dt>
+          <dd>
+            <ul class="project-labels">
+              {ids.map((id) => (
+                <li>
+                  {options.find((option) => option.id === id)?.label ?? id}
+                </li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      ))}
+      {dates.map(([label, date]) => (
+        <div>
+          <dt>{label}</dt>
+          <dd>
+            <time datetime={date}>{formatProjectDate(date)}</time>
+          </dd>
+        </div>
+      ))}
+      {data.startedOn && data.completedOn && (
+        <div>
+          <dt>Development span</dt>
+          <dd>
+            {formatDevelopmentSpan(data.startedOn, data.completedOn)}{' '}
+            <span class="project-calendar-note">(calendar time)</span>
+          </dd>
+        </div>
+      )}
+    </dl>
+  )
+}
+{
+  links.length > 0 && (
+    <nav aria-label="Project links" class="project-links">
+      {links.map(([label, href]) => (
+        <a class="button-link" href={href}>
+          {label} <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </nav>
+  )
+}

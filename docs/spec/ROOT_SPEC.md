@@ -2,7 +2,7 @@
 
 - **Status:** in-progress
 - **Addenda:** none
-- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slice 1 was accepted and the user authorized slice 2. Slice 2 is implemented and independently verified, awaiting the user's slice review; slices 3–6 remain pending.
+- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1 and 2 are accepted; the user authorized slice 3 after reviewing screenshots. Slice 3 is implemented and independently verified, awaiting the user's slice review; slices 4–6 remain pending.
 
 ## Summary
 
@@ -195,7 +195,7 @@ All slices are **[serial]**. Each gets a self-contained worker brief from `TASK_
    - **Verification:** `make check`; parent desktop/mobile typography, contrast, font loading, code-frame, and keyboard review using local fixtures.
 
 3. **Project page and image gallery — (M), [serial].** Render the detail route, metadata, article, thumbnail carousel, and progressively enhanced dialog against the frozen content contracts.
-   - **Worker-owned files:** `src/pages/projects/[slug].astro`, `src/layouts/Project.astro`, `src/components/ProjectMeta.astro`, `src/components/ProjectGallery.astro`, `src/scripts/project-gallery.ts`, `src/styles/project.css`, `scripts/check-site.mjs`, `tests/fixtures/projects/**`.
+   - **Worker-owned files:** `src/pages/projects/[slug].astro`, `src/layouts/Project.astro`, `src/components/ProjectMeta.astro`, `src/components/ProjectGallery.astro`, `src/scripts/project-gallery.ts`, `src/styles/project.css`, `scripts/check-site.mjs`, `tests/project-pages.test.ts`, `tests/fixtures/projects/**`.
    - **Orchestrator-owned files:** spec/queue/handoff/memory records.
    - **Verification:** `make check`; parent one/multiple-image dialog review, complete images/captions, keyboard/focus, mobile scrolling, script-disabled fallback, and article/code rendering. Use temporary fixture content, not invented public entries.
 
@@ -228,6 +228,8 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Change Log
 
+- 2026-09-07 — Slice 3 implemented and independently verified: public/dev project routes, metadata/article layout, optimized thumbnail carousel, and accessible original-image viewer. Parent browser review compacted metadata and corrected disabled-button focus and reachable scroll-snap edges. Final checks passed 39 tests, zero Astro type diagnostics/privacy findings, actual route fixtures, live draft updates, and native keyboard/touch/reduced-motion/no-script behavior. No real project content was added.
+- 2026-09-07 — User accepted slice 2 preview images and authorized slice 3. Added an owned project-page fixture-build test file to cover route publication/draft separation and actual gallery markup; no design change.
 - 2026-09-07 — Slice 2 implemented and independently verified: shared dark shell, self-hosted Inter/JetBrains Mono, metadata, prose/code styling, and useful navigation/404. Parent browser review refined Copy into the title bar with a smaller glyph and preserved target size. Final parent checks passed 38 tests, zero Astro diagnostics/privacy findings, and all three routes. Desktop/tablet/mobile, 200% content zoom, local font loading, keyboard/Copy, and overflow checks passed. Page/Seo APIs and font provenance are documented in the development guide.
 - 2026-09-07 — User accepted slice 1 and authorized slice 2. Slice 2 includes the approved homepage title/introduction and a minimal empty Projects route to keep shared navigation functional before slice 4; no new product behavior or project content is introduced.
 - 2026-09-07 — Slice 1 implemented and independently verified: strict route-independent content validation, public/dev query contracts, UTC metadata and local search helpers, framed Markdown code, and built-output checks. Parent review added malformed-URL/HTML-link regressions and live dev checks; runtime-mode and watcher fixes preserve the approved local-preview behavior. Final parent `make check`: 38 tests passed, zero Astro diagnostics, zero privacy findings, static build/output checks passed. Live content/image edits, invalid-edit recovery, deletions, and server shutdown passed. Shared design starts in slice 2 after user review.

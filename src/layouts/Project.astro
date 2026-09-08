@@ -1,0 +1,51 @@
+---
+import Page from './Page.astro';
+import ProjectMeta from '../components/ProjectMeta.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
+import { projectCover, projectHref } from '../lib/project-metadata.ts';
+import type { ProjectEntry } from '../types/projects.ts';
+import '../styles/project.css';
+
+interface Props {
+  project: ProjectEntry;
+}
+const { project } = Astro.props;
+const { data } = project;
+const title = data.title ?? project.id;
+const cover = projectCover(project);
+---
+
+<Page
+  title={data.draft ? `Draft: ${title}` : title}
+  description={data.description}
+  canonical={projectHref(project.id)}
+  noindex={data.draft}
+  image={cover ? { src: cover.src.src, alt: cover.alt } : undefined}
+>
+  <div
+    class="project-page"
+    data-project-page
+    data-project-draft={String(data.draft)}
+  >
+    <header class="project-heading">
+      {data.draft && <p class="project-draft">Draft preview</p>}
+      <h1>{title}</h1>
+      {data.description && <p class="page-intro">{data.description}</p>}
+      <ProjectMeta project={project} />
+    </header>
+    {
+      data.images.length > 0 && (
+        <ProjectGallery
+          images={data.images}
+          id={`gallery-${project.id}`}
+          coverId={data.coverId}
+          coverPosition={data.coverPosition}
+        />
+      )
+    }
+    <article class="project-article prose" aria-label="Project story">
+      <slot />
+    </article>
+    <a class="project-back" href="/projects/">← Back to Projects</a>
+  </div>
+</Page>

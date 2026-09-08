@@ -89,6 +89,22 @@ The upstream `JetBrainsMono-OFL.txt` has a trailing space on line 21. It is inte
 
 Slice 2 parent browser review used an isolated temporary Markdown fixture, covering real font loading (all four faces), semantic headings/lists/tables, keyboard skip/focus and table scrolling, code/long-title overflow, and exact keyboard-triggered Copy. Layouts were inspected at 375/768/1440px and 200% content zoom. Reduced-motion declarations were activated through the CSSOM for cascade verification because the browser connector's separate CDP calls do not retain emulation state. The fixture is not source content; only review screenshots/logs are retained under the ignored slice run directory.
 
+## Project pages and gallery
+
+`src/pages/projects/[slug].astro` builds paths from the public query in production and explicitly includes drafts in development. It renders the collection Markdown through `Project.astro`, which accepts `{ project: ProjectEntry }` and article content through its default slot. Incomplete drafts omit unavailable metadata/images, retain a visible Draft preview label, and use noindex. New and edited draft routes were verified in a running dev server; they remain absent from production output.
+
+`ProjectMeta.astro` accepts `{ project: ProjectEntry<unknown> }` and renders semantic language/tag/date metadata plus available Source, Download, and Video links. Metadata groups wrap compactly; date values and the calendar-duration distinction remain visible. `ProjectGallery.astro` accepts `{ images, id, coverId?, coverPosition? }`; its ID must be unique on the page. The article uses `.project-article.prose`, while the gallery uses the wider shared container.
+
+Thumbnails use Astro derivatives at widths up to 240/480/720px, capped to their source size. They may crop inside a 16:10 thumbnail frame; full images preserve their original resolution and aspect ratio. Each thumbnail's native link is the fallback when scripts or dialog support are absent. Full images are requested one at a time when opened/navigated, not preloaded into hidden image elements. Caption/dimension data travels through escaped attributes; captions are displayed with `textContent`.
+
+The `project-gallery` custom element supplies manual strip controls and a native modal viewer. Long captions have a bounded keyboard-scrollable region; images use contain sizing so controls stay available even for portraits or shallow viewports. Loading failure keeps Close, navigation, and a full-image link usable. Close restores the original thumbnail focus, page scroll, and prior inline scroll-lock styles. The component aborts listeners, disconnects observers, and releases scroll locking when removed; reconnection was checked.
+
+Two browser-found edge cases are deliberately handled: focused Previous/Next controls move focus to an enabled viewer control before becoming disabled, and Tab/Shift+Tab wrap at modal boundaries. Strip controls compare the first/last thumbnail's visible bounds rather than assuming reachable snap positions equal scrollLeft zero/maximum. Keep scroll padding aligned with strip padding when changing styles.
+
+`tests/project-pages.test.ts` builds the actual routes in temporary storage with synthetic raster fixtures, checks public/draft separation, safe text, metadata/article order, native full-image links, and generated thumbnails. `scripts/check-site.mjs` additionally inspects generated project-page/gallery markup. A build of the still-empty real collection can emit Astro's expected empty-collection notice until onboarding adds the first project.
+
+Slice 3 parent verification included persistent Playwright contexts for real touch swipes, reduced-motion preferences, and JavaScript-disabled navigation, plus keyboard boundaries, image-load failure/recovery, mobile/desktop/portrait/long-caption layout, and an effective 200% viewport. The existing browser tool's installed runtime was used; Playwright was not added as a project dependency. Review scripts, logs, and screenshots are retained only in the ignored slice run directory.
+
 ## Before committing
 
 Run `make check`, review the diff, then stage the intended files. The pre-commit hook reads Git's index, which is the content that the commit will contain. Editing a secret out of the working copy alone does not remove it from the staged version; stage the corrected file too.

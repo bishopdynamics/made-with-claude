@@ -11,6 +11,94 @@ function* elements(node) {
   if (node.content) yield* elements(node.content);
 }
 
+const attribute = (element, name) =>
+  element.attrs.find((attr) => attr.name === name)?.value;
+
+function checkProjectPage(nodes, file) {
+  const marked = (name) =>
+    nodes.filter((node) => attribute(node, name) !== undefined);
+  assert.equal(
+    marked('data-project-page').length,
+    1,
+    `${file}: missing project page`,
+  );
+  assert.equal(
+    attribute(marked('data-project-page')[0], 'data-project-draft'),
+    'false',
+    `${file}: draft page leaked`,
+  );
+  for (const tag of ['h1', 'main', 'article'])
+    assert.equal(
+      nodes.filter((node) => node.tagName === tag).length,
+      1,
+      `${file}: expected one ${tag}`,
+    );
+  assert.ok(
+    !nodes.some(
+      (node) =>
+        attribute(node, 'name') === 'robots' &&
+        /noindex/.test(attribute(node, 'content') ?? ''),
+    ),
+    `${file}: public project is noindex`,
+  );
+  const images = marked('data-gallery-image');
+  assert.ok(images.length > 0, `${file}: missing project gallery images`);
+  for (const link of images) {
+    assert.equal(link.tagName, 'a', `${file}: gallery fallback must be a link`);
+    assert.ok(attribute(link, 'href'), `${file}: missing full image link`);
+    const image = [...elements(link)].find((node) => node.tagName === 'img');
+    assert.ok(
+      image &&
+        attribute(image, 'src') &&
+        attribute(image, 'alt') &&
+        Number(attribute(image, 'width')) > 0 &&
+        Number(attribute(image, 'height')) > 0,
+      `${file}: incomplete thumbnail`,
+    );
+  }
+  const dialogs = marked('data-gallery-dialog');
+  assert.equal(dialogs.length, 1, `${file}: missing gallery dialog`);
+  assert.equal(dialogs[0].tagName, 'dialog');
+  assert.equal(
+    attribute(dialogs[0], 'open'),
+    undefined,
+    `${file}: dialog starts open`,
+  );
+  assert.ok(
+    nodes.some(
+      (node) =>
+        attribute(node, 'id') === attribute(dialogs[0], 'aria-labelledby'),
+    ),
+    `${file}: dialog has no label`,
+  );
+  assert.ok(
+    ![...elements(dialogs[0])].some((node) => node.tagName === 'img'),
+    `${file}: full images must load on demand`,
+  );
+  assert.equal(
+    marked('data-gallery-close').length,
+    1,
+    `${file}: missing close control`,
+  );
+  for (const name of [
+    'data-gallery-previous',
+    'data-gallery-next',
+    'data-strip-previous',
+    'data-strip-next',
+  ])
+    assert.equal(
+      marked(name).length,
+      images.length > 1 ? 1 : 0,
+      `${file}: redundant or missing navigation`,
+    );
+  for (const controls of marked('data-strip-controls'))
+    assert.notEqual(
+      attribute(controls, 'hidden'),
+      undefined,
+      `${file}: inactive strip controls exposed`,
+    );
+}
+
 // URL tokens end at whitespace; a comma inside a data URL is part of its URL.
 function srcsetUrls(value) {
   const urls = [];
@@ -27,7 +115,10 @@ function srcsetUrls(value) {
   return urls;
 }
 
-/** Later slices extend requiredRoutes and pass project slugs/media expectations. */
+/**
+ * Later slices extend requiredRoutes and pass project slugs/media expectations.
+ * @param {{ directory?: string, requiredRoutes?: string[], publicProjectSlugs?: string[], draftProjectSlugs?: string[], requireProjectMedia?: boolean }} [options]
+ */
 export async function checkSite({
   directory = fileURLToPath(new URL('../dist/', import.meta.url)),
   requiredRoutes = ['/'],
@@ -77,7 +168,10 @@ export async function checkSite({
           .replace(/index\.html$/, ''),
       site,
     );
-    const references = [...elements(parse(html))].flatMap((element) =>
+    const nodes = [...elements(parse(html))];
+    if (/^\/projects\/[^/]+\/$/.test(url.pathname))
+      checkProjectPage(nodes, file);
+    const references = nodes.flatMap((element) =>
       element.attrs.flatMap(({ name, value }) =>
         name === 'href' || name === 'src'
           ? [value]

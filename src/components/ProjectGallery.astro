@@ -1,0 +1,144 @@
+---
+import { Image } from 'astro:assets';
+import type { ProjectImage } from '../types/projects.ts';
+
+interface Props {
+  images: ProjectImage[];
+  /** Unique on the page; used to label the strip and dialog. */
+  id: string;
+  coverId?: string;
+  coverPosition?: { x: number; y: number };
+}
+const { images, id, coverId, coverPosition = { x: 50, y: 50 } } = Astro.props;
+---
+
+<project-gallery
+  class="project-gallery"
+  role="region"
+  aria-labelledby={`${id}-heading`}
+>
+  <div class="gallery-heading">
+    <h2 id={`${id}-heading`}>Gallery</h2>
+    {
+      images.length > 1 && (
+        <div class="gallery-strip-controls" data-strip-controls hidden>
+          <button
+            type="button"
+            class="gallery-button"
+            data-strip-previous
+            aria-label="Scroll to previous images"
+            aria-controls={`${id}-strip`}
+            disabled
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            class="gallery-button"
+            data-strip-next
+            aria-label="Scroll to next images"
+            aria-controls={`${id}-strip`}
+            disabled
+          >
+            →
+          </button>
+        </div>
+      )
+    }
+  </div>
+  <ul class="gallery-strip" id={`${id}-strip`} data-gallery-strip>
+    {
+      images.map((image, index) => (
+        <li>
+          <a
+            class="gallery-thumbnail"
+            href={image.src.src}
+            data-gallery-image
+            data-caption={image.caption ?? ''}
+            data-image-width={image.src.width}
+            data-image-height={image.src.height}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={Math.min(480, image.src.width)}
+              widths={[
+                ...new Set(
+                  [240, 480, 720].map((width) =>
+                    Math.min(width, image.src.width),
+                  ),
+                ),
+              ]}
+              sizes="(max-width: 719px) 72vw, 288px"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              style={
+                image.id === coverId
+                  ? `object-position: ${coverPosition.x}% ${coverPosition.y}%`
+                  : undefined
+              }
+            />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <dialog
+    class="gallery-dialog"
+    aria-labelledby={`${id}-viewer-title`}
+    data-gallery-dialog
+  >
+    <div class="gallery-viewer">
+      <div class="gallery-viewer-heading">
+        <h2 id={`${id}-viewer-title`}>Image viewer</h2>
+        <button
+          class="gallery-button"
+          type="button"
+          data-gallery-close
+          autofocus>Close</button
+        >
+      </div>
+      <div class="gallery-stage" data-gallery-stage></div>
+      <div class="gallery-details">
+        <p class="gallery-status" data-gallery-status role="status"></p>
+        <p class="gallery-caption" data-gallery-caption tabindex="0" hidden></p>
+      </div>
+      <div class="gallery-viewer-footer">
+        <span
+          class="gallery-position"
+          data-gallery-position
+          aria-live="polite"
+          aria-atomic="true"></span>
+        {
+          images.length > 1 && (
+            <div class="gallery-image-controls">
+              <button
+                class="gallery-button"
+                type="button"
+                data-gallery-previous
+                aria-label="Previous image"
+                disabled
+              >
+                ← Previous
+              </button>
+              <button
+                class="gallery-button"
+                type="button"
+                data-gallery-next
+                aria-label="Next image"
+                disabled
+              >
+                Next →
+              </button>
+            </div>
+          )
+        }
+        <a class="gallery-original" data-gallery-original>Open full image</a>
+      </div>
+    </div>
+  </dialog>
+</project-gallery>
+
+<script>
+  import '../scripts/project-gallery.ts';
+</script>
