@@ -8,6 +8,12 @@ export const projectTaxonomy: ProjectTaxonomy = {
     { id: 'desktop', label: 'Desktop' },
     { id: 'emulation', label: 'Emulation' },
     { id: 'developer-tools', label: 'Developer tools' },
+    { id: 'home-assistant', label: 'Home Assistant' },
+    { id: 'kiosks', label: 'Kiosks' },
+    { id: 'compatibility', label: 'Compatibility' },
+    { id: 'self-hosted', label: 'Self-hosted' },
+    { id: 'cameras', label: 'Cameras' },
+    { id: 'dashboards', label: 'Dashboards' },
   ],
   languages: [
     { id: 'c', label: 'C' },
@@ -17,5 +23,10 @@ export const projectTaxonomy: ProjectTaxonomy = {
     { id: 'rust', label: 'Rust' },
     { id: 'wgsl', label: 'WGSL' },
     { id: 'beamvm-dsl', label: 'BeamVM DSL' },
+    { id: 'go', label: 'Go' },
+    { id: 'typescript', label: 'TypeScript' },
+    { id: 'javascript', label: 'JavaScript' },
+    { id: 'html', label: 'HTML' },
+    { id: 'css', label: 'CSS' },
   ],
 };

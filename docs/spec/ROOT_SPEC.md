@@ -1,7 +1,7 @@
 # SPEC: whatclaudemade.com portfolio launch
 
 - **Status:** in-progress
-- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md)
+- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md)
 - **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. Slice 6 launch remains pending after the BeamVM addendum.
 
 ## Summary
@@ -230,6 +230,7 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Change Log
 
+- 2026-09-08 — User authorized six additional drafts through parallel Astra agents, including discretionary reuse of existing images and a media-gap report. The batch addendum governs isolation and scheduling; existing entries remain unchanged.
 - 2026-09-08 — User requested languages, development time, and tags in draft previews and supplied BeamVM's screenshot guide. Populate source-backed draft metadata and pending labels for genuinely unknown fields; resume BeamVM media integration using the supplied captures. User confirmed August 25–September 8 as BeamVM's development dates.
 - 2026-09-08 — User approved BeamVM's write-up and paused it until their images are ready, then selected FantasyBoy as the next project. FantasyBoy onboarding is active under its addendum; website launch remains pending.
 - 2026-09-08 — User corrected the public domain to `whatclaudemade.com`. Updated runtime identity, canonical/social URLs, output checks, current docs, and project metadata; the original idea remains a historical input. No DNS or deployment change is part of this correction.
