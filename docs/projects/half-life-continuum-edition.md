@@ -1,6 +1,6 @@
 # Half-Life: Continuum Edition onboarding
 
-Status: article draft refined and checked, 2026-09-08. The user accepted ROOT_SPEC slice 4 and authorized slice 5. Motivation, June 9 start date, feature emphasis, extensive human direction, and Claude's sole research/implementation role using Fable and Opus are confirmed; final copy, completion date, taxonomy, cover, and gallery are awaiting review.
+Status: first-pass media integrated and independently verified, 2026-09-08. The user approved the rendered style/theme/colors/fonts and current write-up. Motivation, June 9 start date, feature emphasis, and human/Claude roles are confirmed. The requested cover thumbnail and README GIF are ready in the local draft; completion date, taxonomy, and final assembled-media review remain pending.
 
 ## Identity and source
 
@@ -39,23 +39,36 @@ The user subsequently clarified the development process:
 
 This is the user's firsthand account. Use first-person prose and Fable/Opus names without invented version numbers or a Codex role. Attribute research and tooling implementation to Claude, with the user directing and reviewing. Exact MCP commands, connection architecture, and runtime details have not been independently inspected and are not needed for this prose account. Do not invent obstacles, performance figures, hours worked, or a feature-specific debugging anecdote.
 
-The article is at `src/content/projects/half-life-continuum-edition.md` with `draft: true` and confirmed `startedOn: '2026-06-09'`. Unreviewed completion/publication dates, taxonomy, and missing images remain unset. Copy can be reviewed before all assets are available; it is not approved for publication.
+The article is at `src/content/projects/half-life-continuum-edition.md` with `draft: true` and confirmed `startedOn: '2026-06-09'`. The user has approved its current prose; preserve it while adding media. Unreviewed completion/publication dates and taxonomy remain unset, and final entry publication is still pending.
+
+## First-pass media
+
+The user explicitly requested a cover image for thumbnails and the GIF linked in the README inside the article. This supersedes the earlier proposal to require fresh still captures before integrating media. The current README was fetched directly on 2026-09-08 and verified to reference `doc/media/menu-tour.gif`.
+
+| Asset | Local source path | Provenance and dimensions | SHA-256 |
+| --- | --- | --- | --- |
+| Cover | `src/assets/projects/half-life-continuum-edition/cover.png` | Byte-for-byte copy of [Continuum's menu artwork](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/redist/continuum/gfx/shell/continuum/games_override/valve.png), 2204×1240, 4,319,147 bytes. The orchestrator inspected the full image: Gordon Freeman at right beside a large lambda on an orange textured background, without menu/debug overlays. Existing project artwork, not a new capture or generated image. | `350700d4c85e419457daa55f06a1bd41595079118f488525ea4c8824cd03c3c4` |
+| Inline animation | `src/assets/projects/half-life-continuum-edition/menu-tour.gif` | Byte-for-byte copy of the [README GIF](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/doc/media/menu-tour.gif), 640×360, 154 frames, 2,601,418 bytes. Reuse requested by the user. | `7f4e8c3f3d36a0dd1d163e7b3fbf3475a2f72fca7b9a80fc0accdb11e112d121` |
+
+The cover is frontmatter image `cover`, also selected by `coverId`, so the existing thumbnail/gallery contract applies. The GIF belongs in the Markdown article after the introduction/authorship paragraphs and before the first feature section, with descriptive alt text and a short caption. Keep the existing source animation and aspect ratio intact; no upscaling, retouching, or new capture is part of this pass. Astro may generate delivery derivatives, which must retain the animation. Neither source is placed in `public/`.
+
+Verified delivery: Astro emits an animated WebP at 640×360, 871,750 bytes. It coalesces the original GIF's 154 frames into 57 frames while preserving the **19,260 ms** duration and indefinite looping. Two browser screenshots taken 5.5 seconds apart while the image was visible confirmed playback advances. Desktop display is native 640×360; at 375px viewport the image scales to 335×188 without overflow. Cover derivatives serve the thumbnail sizes, while the existing gallery viewer loads the original 2204×1240 image with `object-fit: contain`.
 
 ## Media inventory
 
 | Input | Evidence and inspection | Proposed use |
 | --- | --- | --- |
-| [Menu-tour GIF](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/doc/media/menu-tour.gif) | Downloaded for local research; 640×360, 154 frames, 2,601,418 bytes. Opening frame inspected: orange Half-Life background, root menu, controller hints, and visible lower-right version watermark. Other frames have not been visually reviewed this session. | Composition reference; request a higher-resolution still for the cover. No upscaling or synthetic reconstruction proposed. |
+| [Menu-tour GIF](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/doc/media/menu-tour.gif) | 640×360, 154 frames, 2,601,418 bytes. Opening frame inspected: orange Half-Life background, root menu, controller hints, and visible lower-right version watermark. | User-selected inline article animation for this first pass. Preserve original source; fresh captures are optional follow-up work. |
 | [Scripted menu tour](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/menu-tours/menu-tour.txt) | Text inspected. Describes root-menu, game-picker, load-game, gameplay, and configuration steps; references `tools/capture-menu-tour.sh`. Its overlay-suppression intent must be checked against the actual output. | Starting point for a repeatable maintainer capture plan. Capture tooling has not been executed or verified here. |
 | [Gameplay demos](https://github.com/bishopdynamics/Continuum/tree/00ba9c640625a0663df3470910419db132969c9b/demos) | Tree listing includes tram ride, cascade, control room, houndeye, and unforeseen demos. Contents have not been played. | Maintainer can evaluate a suitable gameplay frame and reproducible camera position. |
 | [Linked gameplay video](https://youtu.be/DVSHgFvknj0) | Linked from the public README; not watched in this session. | Candidate external link for demonstrating transitions; review contents and link before integration. |
 | Internal chapter thumbnails | Prior planning inspected a 512×288 example with a diagnostic overlay. | Reference only; do not automatically reuse as portfolio imagery. |
 
-Research downloads remain in ignored `.agent-worktrees/_runs/root-slice-5/research/`. Nothing has been copied into `src/assets/` or `public/`.
+Research downloads remain in ignored `.agent-worktrees/_runs/root-slice-5/research/`; the two selected sources are copied into the article's `src/assets/` directory. Other research media remains outside site content.
 
-## Proposed capture set
+## Optional later captures
 
-These are candidates for discussion, not approved images. Caption/alt text must be revised against the actual captures.
+These earlier capture ideas remain available for a later pass, not prerequisites for the user-selected cover/GIF. Caption/alt text must be revised against any actual future captures.
 
 | Image | What it should demonstrate | Capture requirements | Candidate caption / alt text |
 | --- | --- | --- | --- |
@@ -81,9 +94,11 @@ Preserve uncropped original files and record each capture's author, game/version
 - 2026-09-08: user supplied motivation, broad Claude Fable contribution, and contact-shadow/level-transition emphasis. Prepared the first incomplete article from those notes; shifted media planning toward those features.
 - 2026-09-08: user clarified extensive project management/direction and that Claude did all research and implementation using Fable and Opus. Added this distinction near the article opening and a development-process section covering repeated reviews, engine MCP debugging, simulated input, and gameplay/demo tools.
 - 2026-09-08: user corrected the project start to June 9, 2026 and explained choosing it as a challenge for the advance they saw in Fable. Set the draft start date and added that motivation; the June 11 public-history candidate is superseded.
-- Pending user input: completion endpoint, media source preference, and any newer captures. Motivation, start date, feature emphasis, and human/Claude roles have already been answered; do not ask again. Languages/tags also remain proposed rather than approved.
+- 2026-09-08: user approved the site's style/theme/colors/fonts and the write-up, then selected a cover plus the README GIF inside the article for first-pass media. Selected the full-resolution menu artwork as the cover candidate and preserved the original GIF source.
+- Pending review: completion endpoint, languages/tags, and the assembled first-pass media. Motivation, start date, feature emphasis, human/Claude roles, prose, and the GIF choice are already answered; do not ask again.
 - Public history evidence has been gathered and the decisive commits/release independently verified. Review the proposed dates/languages and capture set with the user.
-- Use the [tailored maintainer brief](half-life-continuum-edition-maintainer-brief.md) if captures/history will be prepared in the Continuum project. This brief has not been sent to another maintainer or external service.
+- The [tailored maintainer brief](half-life-continuum-edition-maintainer-brief.md) remains available for later captures/history follow-up. It has not been sent to another maintainer or external service and is not required for the selected first-pass media.
 - Continue the draft as reviewed dates/taxonomy and assets become available. Final desktop/mobile copy/gallery review precedes publication status changes.
 - Initial draft verification: parent `make check` passed 43 tests, zero Astro diagnostics and privacy findings, and a three-page production build. Browser review at 1440px and 375px confirmed readable article sections, one H1, the draft label, and no horizontal overflow. A direct scan of all seven text output files confirmed the production artifact contains neither this draft route nor its content. Saved review images and check log are under ignored `.agent-worktrees/_runs/root-slice-5/`; temporary browser/server were stopped.
 - Workflow/start-date refinement verification: parent `make check` passed again, including 43 tests, zero Astro diagnostics, zero privacy findings across 202 file snapshots, and the three-page production build. Log: `.agent-worktrees/_runs/root-slice-5/parent-workflow-check.log`. The earlier screenshots show the initial prose; no new browser session was needed for these paragraph and date edits.
+- First-pass media verification: parent `make check` passed 43 tests, zero Astro diagnostics, and zero privacy findings across 204 snapshots. A separate temporary copy using test-only completion/publication/taxonomy metadata built all four public routes and actual media derivatives; its source was never published or copied back. Parent reviewed homepage/catalog crops, desktop/mobile article layout, visible animation, and the original cover viewer. The real production build still excludes the draft route/content; the existing preview on port 4321 includes the new assets. Logs/screenshots are under `.agent-worktrees/_runs/root-slice-5/`. Temporary public-copy server and directory were removed, review browsers closed, and the pre-existing port 4321 preview was left running.

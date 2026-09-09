@@ -1,5 +1,7 @@
 # Continuum portfolio capture and story brief
 
+The user selected existing menu artwork plus the README GIF for the first media pass on 2026-09-08 and approved the current write-up. This brief is now an optional follow-up for fresh captures; it does not block that first pass. See the [active onboarding record](half-life-continuum-edition.md).
+
 Copy the following prompt into the Half-Life: Continuum Edition maintainer session. It requests a plan and factual notes first. Review the scenes together before making captures.
 
 ---
