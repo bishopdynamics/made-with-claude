@@ -1,6 +1,6 @@
 # SPEC: FantasyBoy portfolio onboarding
 
-- **Status:** in-progress (intake)
+- **Status:** in-progress (draft article and media)
 - **Approval record:** On 2026-09-08 the user selected FantasyBoy as the next project, described it as their oldest, and directed discovery under `/mnt/Fast/projects/`. BeamVM is paused awaiting the user's images. Continue the established onboarding workflow; do not reopen the approved site design.
 
 ## Summary
@@ -19,7 +19,7 @@ Prepare a FantasyBoy entry for whatclaudemade.com using the existing project pag
 - Modifying, initializing, rebuilding, or cleaning FantasyBoy's independently active source checkout.
 - Resuming BeamVM while its user-prepared images are pending.
 - Changing the site's design/schema or deploying the domain.
-- Assuming this was the user's first-ever AI project, or importing the other projects' development dates and model attribution.
+- Inventing precise model versions, treating uncertain Opus involvement as confirmed, or importing the other projects' development dates and model attribution.
 
 ## Key Decisions
 
@@ -28,7 +28,7 @@ Prepare a FantasyBoy entry for whatclaudemade.com using the existing project pag
 | Queue order | FantasyBoy active; BeamVM paused; launch pending | Explicit user direction. |
 | Site contracts | Existing Astro/Markdown project schema and media presentation | The visual design and prior write-ups are approved. |
 | Source | Read-only sibling `FantasyBoy` checkout plus verified public sources | The user supplied the location; template setup is occurring independently there. |
-| Story | User's oldest-project statement plus project-specific intake | Do not infer motivation or exact model versions from a contribution policy. |
+| Story | User-confirmed first project with Claude; original work mainly Sonnet, possible Opus uncertain | Keep later Fable/Astra review and template migration separate from initial creation. |
 | Media | Review existing Breakout/Keen/Tetris screenshots first | Three 1424×968 images already exist; preserve originals and review crops/captions. |
 | Dates and publication | Reviewed project-specific dates; draft until acceptance | Git history and later repository cleanup may not equal development endpoints. |
 
@@ -63,4 +63,6 @@ No new site architecture decisions are required. Exact story/attribution, dates,
 
 ## Change Log
 
+- 2026-09-08 — First article/gallery draft prepared; copied screenshots match the pinned source exactly. Parent `make check` passed 43 tests and zero diagnostics/privacy findings, with responsive/full-image gallery review and production draft exclusion. Original date and content review remain pending.
+- 2026-09-08 — User supplied FantasyBoy's first-Claude-project history and motivation, uncertain original model mix, and later Fable/Astra review/migration. First draft uses the three existing screenshots for review, retains model uncertainty, and describes a 6502-inspired fictional console without the mistaken real-Game-Boy CPU lineage. Original date question remains pending.
 - 2026-09-08 — User paused the approved BeamVM write-up for images and selected FantasyBoy next. Located the source and existing screenshots; started read-only evidence and story intake.

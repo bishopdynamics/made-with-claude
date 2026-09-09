@@ -16,3 +16,4 @@ One line per item: `- <what> — from docs/spec/<file>.md (YYYY-MM-DD)`
 - Embedded video or richer comparison media after the still-image gallery and external video link are established — from docs/spec/ROOT_SPEC.md (2026-09-07).
 - Full-article/fuzzy search, multiple selections per filter, extra filters, and pagination if the catalog grows enough to need them — from docs/spec/ROOT_SPEC.md (2026-09-07).
 - A light theme or theme switcher if requested later — from docs/spec/ROOT_SPEC.md (2026-09-07).
+- Investigate long-running development previews missing new project routes after edits/checks; a fresh dev-server content sync restored the current preview, but root cause remains unconfirmed — from docs/spec/ROOT_SPEC.md (2026-09-08).

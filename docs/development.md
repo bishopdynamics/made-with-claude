@@ -21,6 +21,8 @@ Install the Node.js version in `.nvmrc`, with npm, Git, and Make available. Run 
 
 Use the development server for rapid editing and the production preview to inspect build output before publishing. Neither operation requires a push.
 
+If a long-running development server returns 404 for a newly added draft, restart `make run` to resynchronize content. This was observed during onboarding after edits/checks; a fresh development sync restored the new route in the existing preview too. Root-cause investigation is tracked in `docs/DEFERRED.md`.
+
 ## Layout
 
 - `src/pages/`: routes, including Markdown pages.

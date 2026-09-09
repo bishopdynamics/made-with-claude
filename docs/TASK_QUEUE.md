@@ -10,7 +10,7 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 1. [in-progress] FEATURE_SPEC_fantasyboy_onboarding.md
    - 2026-09-08: user selected FantasyBoy next, describing it as their oldest project and directing source discovery under `/mnt/Fast/projects/`.
-   - Located the sibling `FantasyBoy` checkout. Read-only evidence completed for the Python fantasy console, C-subset compiler, debugger, and Breakout/Keen/Tetris samples. Public GitHub source verified; no release exists. Three existing screenshots inspected. User motivation, attribution, actual dates, and media selection remain for discussion; no site entry is integrated yet.
+   - Source/public-link evidence completed. User confirmed this was their first Claude project, mainly Sonnet with possible Opus uncertain, followed much later by Fable/Astra review/template migration. First article with Keen/Tetris/Breakout gallery is prepared and verified (43 tests, desktop/mobile gallery review, public draft exclusion). Original dates and assembled-content review remain pending.
 
 2. [paused] FEATURE_SPEC_beamvm_onboarding.md — awaiting user-prepared images
    - 2026-09-08: user selected BeamVM as the next ready project after accepting Continuum v1. Onboarding is authorized before website launch; existing site design/content contracts are retained.
