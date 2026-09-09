@@ -8,9 +8,10 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 ## Queue
 
-1. [in-progress] FEATURE_SPEC_batch_project_drafts.md
+1. [in-review] FEATURE_SPEC_batch_project_drafts.md — six drafts ready
    - User authorized wallflower, vintage, vintage-vault, simpler-camera-card, slowframe, and mezuril drafts using parallel Astra agents, with existing images selected at agent discretion and missing media reported.
-   - Shared taxonomy/brief contract prepared; isolated workers run in waves of up to three. Existing entries remain unchanged and no publication is authorized.
+   - All six drafts integrated from two Astra/high workers reused in parallel waves; the thread limit prevented a third. Parent checks passed 43 tests plus desktop/mobile draft/card/gallery review and production exclusion. Existing entries remain unchanged; all worktrees/branches cleaned up.
+   - Vintage Vault has three selected screenshots. Wallflower, Vintage, Simpler Camera Card, Slowframe, and Mezuril need usable cover/product images. Capture suggestions and metadata gaps are in `docs/projects/batch-draft-review.md`. User assessment/publication remain pending.
 
 2. [in-review] FEATURE_SPEC_beamvm_onboarding.md — metadata/media ready
    - User supplied `docs/SCREENSHOTS.md` and its image set, requested languages/development/tags in drafts, and confirmed BeamVM dates August 25–September 8, 2026 (2 calendar weeks).

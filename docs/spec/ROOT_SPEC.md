@@ -221,7 +221,7 @@ None. The user approved portfolio-publication recency, completion-year filtering
 ## Deferred / Follow-ups
 
 - Investigate long-running development previews missing newly added project routes after edits/checks. A fresh dev-server content sync restored the current preview; root cause remains unconfirmed. This is a tooling follow-up, not a blocker for the verified current draft.
-- Onboard Vintage, matrix-screensaver, capture-view, and VintageVault individually after the selected projects; no readiness or publication is assumed. BeamVM was promoted to its onboarding addendum by the user on 2026-09-08.
+- Onboard matrix-screensaver and capture-view individually when selected; no readiness or publication is assumed. Vintage and Vintage Vault now have drafts in the six-project batch addendum; BeamVM and FantasyBoy have their own onboarding addenda.
 - Add more gallery images to the Half-Life: Continuum Edition portfolio entry in v2; the user accepted its current cover/GIF presentation as v1 ready for release on 2026-09-08.
 - Independent blog posts/index and an RSS feed, if writing expands beyond project stories.
 - Embedded video or richer comparison media after the still-image gallery and external video link are established.

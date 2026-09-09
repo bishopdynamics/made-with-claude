@@ -26,7 +26,7 @@ make help          # List development commands
 
 ## Project status
 
-The site uses Astro with TypeScript and Markdown. Its design, homepage, searchable catalog, and project pages are implemented. Half-Life: Continuum Edition portfolio v1 is accepted for release. BeamVM and FantasyBoy have local drafts under review, including metadata and screenshot galleries.
+The site uses Astro with TypeScript and Markdown. Its design, homepage, searchable catalog, and project pages are implemented. Half-Life: Continuum Edition portfolio v1 is accepted for release. Eight other projects have local drafts under review; the [six-project batch report](docs/projects/batch-draft-review.md) lists the latest entries and their media needs.
 
 The GitHub repository is `bishopdynamics/made-with-claude`, using the remote named `github`. The current Actions workflow checks changes without deploying a website. GitHub Pages publication and the Route 53 connection for `whatclaudemade.com` will be configured for launch; pushing to the publishing branch will then publish the site.
 

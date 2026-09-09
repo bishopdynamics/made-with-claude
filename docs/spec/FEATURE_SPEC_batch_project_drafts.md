@@ -1,6 +1,6 @@
 # SPEC: Six additional portfolio drafts
 
-- **Status:** in-progress
+- **Status:** in-review — all six requested drafts prepared and verified
 - **Approval record:** On 2026-09-08 the user requested drafts for wallflower, vintage, vintage-vault, simpler-camera-card, slowframe, and mezuril using parallel agents, explicitly requiring Astra for every agent. Existing-image selection is delegated to agent judgment; missing usable images must be reported. This batch overrides the usual single-project scheduling for these drafts, without authorizing publication.
 
 ## Summary
@@ -27,7 +27,7 @@ Prepare six accurate, locally reviewable project drafts for whatclaudemade.com u
 | Decision | Choice | Rationale |
 | --- | --- | --- |
 | Models | Native Codex `gpt-6-astra`, high reasoning, for every worker | Explicit user request; Hanuman is unavailable. |
-| Concurrency | Three workers at a time across six independent slices | Available concurrency includes the orchestrator; keep write workers isolated. |
+| Concurrency | Two Astra workers reused across six independent slices | The session's existing agent-thread limit allowed two new Astra threads; both remain Astra/high and use separate worktrees for each project. |
 | Isolation | Dedicated `.agent-worktrees/draft-<slug>` worktree and branch per project | Workers own disjoint draft/assets and cannot edit shared taxonomy or continuity. |
 | Contracts | Existing schema/components plus a serial taxonomy update | Freeze shared identifiers before dispatch; later missing IDs are resolved by orchestrator, not concurrent edits. |
 | Writing | Product-led drafts grounded in implementation and source rationale | Batch request does not provide personal stories; do not invent first-person experiences. |
@@ -47,7 +47,7 @@ Only safe, representative media belongs in the draft. Use original project artwo
 1. **Shared taxonomy and dispatch contract — (S), [serial].** Add needed identifiers, prepare self-contained briefs, and commit the base before creating worktrees.
    - **Orchestrator-owned:** taxonomy list (trivial metadata), this spec, queue and worker briefs.
    - **Verification:** formatting, diff review, pre-commit screening.
-2. **Per-project drafts — (M), [parallel-1].** All six slices share one dependency group; scheduling uses up to three concurrent isolated workers.
+2. **Per-project drafts — (M), [parallel-1].** All six slices share one dependency group; scheduling uses two concurrent isolated Astra workers, reused for successive projects because of the session thread limit.
 
 | Slice | Source checkout | Worker-owned files |
 | --- | --- | --- |
@@ -70,8 +70,11 @@ No additional design approval is needed for the requested drafts. Media gaps, am
 
 ## Deferred / Follow-ups
 
-- User-provided images and final personal/date/publication review follow the completed draft batch; record the exact missing media in each project note.
+- Supply cover/product screenshots for Wallflower, Vintage, Simpler Camera Card, Slowframe, and Mezuril; current suitable media exists only for Vintage Vault in this batch. Specific capture suggestions are in `docs/projects/batch-draft-review.md`.
+- Review source-derived date candidates, supply missing public source/download URLs and any personal history/model attribution, then assess each entry before publication.
 
 ## Change Log
 
+- 2026-09-08 — All six Astra/high drafts integrated and independently reviewed. Parent `make check` passed 43 tests, zero Astro diagnostics/privacy findings, and a four-page production build. Desktop/mobile review covered all six pages/cards and Vintage Vault's full-image gallery; all drafts remain excluded from public output. All six isolated worktrees/branches were safely removed. Media gaps are recorded in the batch review report.
+- 2026-09-08 — Session thread limit prevented a third Astra worker. Two Astra/high workers are reused in parallel, retaining one isolated worktree/branch per project. No model downgrade or shared-checkout writing occurred.
 - 2026-09-08 — User authorized all six drafts, parallel Astra workers, discretionary existing-image selection, and a missing-image report. Prepared serial taxonomy and isolated worker contracts.
