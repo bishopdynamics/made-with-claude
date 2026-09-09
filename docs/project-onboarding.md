@@ -1,6 +1,6 @@
 # Project Onboarding
 
-Authoring guide for the approved `docs/spec/ROOT_SPEC.md`. Add projects one at a time with the user. Half-Life: Continuum Edition is first: <https://github.com/bishopdynamics/Continuum>.
+Authoring guide for the approved `docs/spec/ROOT_SPEC.md` and its onboarding addenda. Add projects one at a time with the user. Half-Life: Continuum Edition v1 was accepted as release-ready on 2026-09-08; [BeamVM](projects/beamvm.md) is the user's next selected project.
 
 ## Maintainer prompt
 

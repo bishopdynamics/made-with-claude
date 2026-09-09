@@ -1,8 +1,8 @@
 # SPEC: madewithclaude.com portfolio launch
 
 - **Status:** in-progress
-- **Addenda:** none
-- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–4 are accepted; the user accepted slice 4 and authorized slice 5 on 2026-09-08. Slice 5 onboarding is in progress; slice 6 remains pending.
+- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md)
+- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. Slice 6 launch remains pending after the BeamVM addendum.
 
 ## Summary
 
@@ -220,7 +220,8 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Deferred / Follow-ups
 
-- Onboard Vintage, matrix-screensaver, capture-view, BeamVM, and VintageVault individually after the first project; no readiness or publication is assumed.
+- Onboard Vintage, matrix-screensaver, capture-view, and VintageVault individually after the selected projects; no readiness or publication is assumed. BeamVM was promoted to its onboarding addendum by the user on 2026-09-08.
+- Add more gallery images to the Half-Life: Continuum Edition portfolio entry in v2; the user accepted its current cover/GIF presentation as v1 ready for release on 2026-09-08.
 - Independent blog posts/index and an RSS feed, if writing expands beyond project stories.
 - Embedded video or richer comparison media after the still-image gallery and external video link are established.
 - Full-article/fuzzy search, multiple selections per filter, extra filters, and pagination if the catalog grows enough to need them.
@@ -228,6 +229,7 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Change Log
 
+- 2026-09-08 — User accepted the assembled Continuum portfolio entry as v1 ready for release and moved extra gallery images to v2. Completed the entry's source-backed metadata and public-build selection; website deployment is still pending. User selected BeamVM as the next ready project, ahead of launch, under its onboarding addendum.
 - 2026-09-08 — First-pass Continuum cover/GIF integrated with approved prose preserved. Parent checks passed 43 tests, zero diagnostics/privacy findings, a temporary public media build, desktop/mobile crop/layout review, cover viewer, and real draft exclusion. Optimized animation retains the original 19.26-second loop; entry remains a draft pending remaining metadata and assembled-content review.
 - 2026-09-08 — User approved the rendered style/theme/colors/fonts and Continuum write-up, then requested a first-pass cover thumbnail and the README GIF within the article. Inline local GIF use is authorized; preserve approved prose and verify animation. Selected existing full-resolution Continuum menu artwork as the cover candidate for review.
 - 2026-09-08 — User supplied the actual Continuum start date, June 9, 2026, superseding the June 11 public-commit candidate, and explained choosing the project as a challenge for Fable's perceived advance. The draft records the confirmed start; June 22 remains the proposed completion endpoint (13 calendar days).

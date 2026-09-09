@@ -45,7 +45,7 @@ The wrappers also select the runtime mode explicitly: dev uses `NODE_ENV=develop
 
 ## Project content and authoring contracts
 
-The approved content model is in `docs/spec/ROOT_SPEC.md`; the onboarding process and copy/paste maintainer prompt are in `docs/project-onboarding.md`. Project entries will live in `src/content/projects/<slug>.md`, with their image assets under `src/assets/projects/<slug>/`. The first entry is prepared separately from the content-tooling slice.
+The approved content model is in `docs/spec/ROOT_SPEC.md`; the onboarding process and copy/paste maintainer prompt are in `docs/project-onboarding.md`. Project entries live in `src/content/projects/<slug>.md`, with image assets under `src/assets/projects/<slug>/`. Continuum portfolio v1 is accepted and selected for public builds; BeamVM is being onboarded next.
 
 Content defaults to a draft. Incomplete draft metadata is allowed, but publication requires a title, description, article, valid publication/development dates, repository URL, known language/tag values, at least one gallery image with alt text, and a cover pointing to that gallery. Filenames are canonical lowercase kebab-case slugs. Dates are date-only `YYYY-MM-DD` strings, and development duration is elapsed calendar time calculated in UTC.
 
@@ -55,7 +55,7 @@ The collection uses a custom loader built on Astro's loader API. It validates ra
 
 Public consumers use the shared public-selection/query contract; development author previews explicitly opt into draft queries. Public search records contain only the metadata needed by the catalog, excluding drafts, article bodies, and image objects. Search combines literal normalized tokens with tag/language/completion-year filters. Filter choices come from the complete public catalog, not the current result subset. The portfolio publication date controls default ordering independently of development completion and later updates.
 
-The taxonomy registry starts empty until a real entry's metadata is reviewed. Unit/build fixtures supply a separate synthetic taxonomy and never become published projects. Do not add made-up production metadata to exercise a test.
+The taxonomy registry contains the reviewed identifiers needed by portfolio entries. Add new identifiers only as justified by onboarding. Unit/build fixtures supply a separate synthetic taxonomy and never become published projects. Do not add made-up production metadata to exercise a test.
 
 | Module | Contract for later slices |
 | --- | --- |
@@ -103,7 +103,7 @@ The `project-gallery` custom element supplies manual strip controls and a native
 
 Two browser-found edge cases are deliberately handled: focused Previous/Next controls move focus to an enabled viewer control before becoming disabled, and Tab/Shift+Tab wrap at modal boundaries. Strip controls compare the first/last thumbnail's visible bounds rather than assuming reachable snap positions equal scrollLeft zero/maximum. Keep scroll padding aligned with strip padding when changing styles.
 
-`tests/project-pages.test.ts` builds the actual routes in temporary storage with synthetic raster fixtures, checks public/draft separation, safe text, metadata/article order, native full-image links, and generated thumbnails. `scripts/check-site.mjs` additionally inspects generated project-page/gallery markup. A build of the still-empty real collection can emit Astro's expected empty-collection notice until onboarding adds the first project.
+`tests/project-pages.test.ts` builds the actual routes in temporary storage with synthetic raster fixtures, checks public/draft separation, safe text, metadata/article order, native full-image links, and generated thumbnails. `scripts/check-site.mjs` additionally inspects generated project-page/gallery markup. The accepted Continuum entry now exercises these routes and media in the actual site build too.
 
 Slice 3 parent verification included persistent Playwright contexts for real touch swipes, reduced-motion preferences, and JavaScript-disabled navigation, plus keyboard boundaries, image-load failure/recovery, mobile/desktop/portrait/long-caption layout, and an effective 200% viewport. The existing browser tool's installed runtime was used; Playwright was not added as a project dependency. Review scripts, logs, and screenshots are retained only in the ignored slice run directory.
 
@@ -117,7 +117,7 @@ The `<project-index>` element uses the existing pure search/URL helpers. Public 
 
 Filter changes replace the current URL entry, preserving other query parameters, hash, and existing history state. Popstate and persisted pageshow restore form/results from the URL. Enter does not reload the page. Both Clear actions reset the known search fields and return focus to the query. Disconnect cleanup removes listeners/timers and restores a usable static listing; malformed metadata leaves that fallback intact.
 
-Development draft cards are a separate labeled section outside the enhanced public list. They never contribute to homepage tiles, public JSON, filter choices, or counts, even in development. The real collection is still empty before the first project onboarding, so its production empty states and Astro's empty-collection notices are expected.
+Development draft cards are a separate labeled section outside the enhanced public list. They never contribute to homepage tiles, public JSON, filter choices, or counts, even in development. Accepted entries appear in the homepage/catalog/public build; incomplete onboarding entries stay in the development draft section.
 
 All actual fixture-build tests use `isolateFixtureCaches(root)` from `tests/fixtures/projects/build-cache.ts` after copying configuration. Sharing node_modules through a symlink also shares Astro's default content cache; concurrent builds exposed cross-fixture contamination. The helper composes per-fixture Astro/Vite cache directories without changing the production configuration. Browser-review copies need the same isolation if they build alongside checks.
 
@@ -140,3 +140,5 @@ Automated checks cannot prove that a screenshot or paragraph is safe to publish.
 The remote is named `github`. Initial repository synchronization uses `git push -u github main`; subsequent pushes use that upstream. The bootstrap Actions workflow performs checks only, so the initial repository push does not launch a website.
 
 The launch implementation will build only intended site content and deploy `dist/` through GitHub Pages after successful checks. Configure `madewithclaude.com` in Pages and then connect the Route 53 DNS records. The user made the source repository public on 2026-09-07, resolving the private-repository Pages plan requirement. See [GitHub's Pages prerequisites](https://docs.github.com/en/pages/getting-started-with-github-pages) and [Astro's Pages deployment guide](https://docs.astro.build/en/guides/deploy/github/).
+
+Accepted entries may be selected for public builds before the first domain launch. Their prepared `publishedOn` dates should be reconciled with the actual first-publication date at that launch; the local content flag does not itself deploy the website.

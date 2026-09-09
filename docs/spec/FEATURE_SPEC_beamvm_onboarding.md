@@ -1,0 +1,68 @@
+# SPEC: BeamVM portfolio onboarding
+
+- **Status:** in-progress (intake)
+- **Approval record:** On 2026-09-08 the user accepted Continuum portfolio v1 as release-ready, said BeamVM is the next ready project, and explicitly requested moving on to it. This authorizes onboarding using the existing portfolio design and content contracts; it does not approve invented copy or unreviewed assets.
+
+## Summary
+
+Prepare BeamVM as the next portfolio entry before the website launch task. Gather the current project facts, the user's story, representative media, and reviewed development dates, then create and review its article using the existing page, catalog, and gallery components. Continue adding projects individually.
+
+## Goals
+
+- Present BeamVM accurately using implemented behavior and the user's account.
+- Identify the canonical public repository/release links and supported platforms.
+- Prepare one representative cover plus supporting article/gallery media selected with the user.
+- Review motivation, Claude/Codex attribution, development dates, languages, and tags.
+- Verify the draft locally and the selected public build before accepting the entry.
+
+## Non-Goals
+
+- Building or changing BeamVM itself, deploying the website, or publishing other projects in bulk.
+- Redesigning the approved site or adding new content/schema/UI mechanisms without a concrete need.
+- Treating an early README, historical spec, or Git first/last commit as authoritative proof of current behavior or dates.
+- Automatically reusing Continuum's authorship, development workflow, media choices, or metadata for BeamVM.
+
+## Key Decisions
+
+| Decision | Choice | Rationale / alternatives considered |
+| --- | --- | --- |
+| Queue order | BeamVM onboarding before ROOT_SPEC's remaining launch slice | User explicitly selected this next project. Continuum v1 is accepted; its extra gallery images are v2. |
+| Design and contracts | Reuse ROOT_SPEC's Astro/Markdown project schema, taxonomy, cards, gallery, and prose | The user approved the site design and article presentation. |
+| Starting source | Read-only local `beamvm` checkout plus verified public sources | Local README covers early M0/M1; inspect current source/history to avoid stale claims. |
+| Authorship and motivation | Gather BeamVM-specific input from the user | Do not infer a personal story or model attribution from another project. |
+| Media | Discuss a representative cover and supporting captures with the user | Existing assets and tooling are evidence to evaluate, not automatically publishable captures. Inline animated assets may use the established local Markdown image path. |
+| Dates | Reviewed project-specific start and completion endpoint; keep portfolio publication separate | Public history may start after local work, as it did for Continuum. |
+| Publication | Draft until user content review; website deployment remains a separate task | Draft authoring and local review need no push. |
+
+## Design
+
+Use `src/content/projects/beamvm.md` with local images under `src/assets/projects/beamvm/`. Follow the reusable onboarding process and record provenance/review decisions in `docs/projects/beamvm.md`. The title starts as the user's “BeamVM”; resolve any branding difference while reviewing sources. Initial source context describes a Rust programming game with a Python-flavored DSL controlling a simulated vector CRT and a time-travel debugger; confirm its current scope before drafting.
+
+The final story should explain what visitors can do, why the user wanted it, the distinctive results and design choices, and the human/agent roles. Prefer a few concrete examples with truthful images over a list of every internal subsystem. Source availability, release links, exact dates, current features, authorship, and chosen media are intake outputs, not assumptions.
+
+## Implementation Plan
+
+1. **Evidence and intake — (M), [serial].** Inspect current project/source/release/media evidence and discuss story/capture choices with the user.
+   - **Worker-owned files:** none; read-only evidence report from the local BeamVM checkout and public sources.
+   - **Orchestrator-owned files:** `docs/projects/beamvm.md`, optional `docs/projects/beamvm-maintainer-brief.md`, this spec, queue/handoff/memory, and reusable onboarding notes.
+   - **Verification:** cite actual source paths/revisions and public URLs; distinguish observed implementation from historical plans and confirm the user's account.
+2. **Article and media draft — (M), [serial].** Integrate factual copy and selected assets using the existing contracts.
+   - **Worker-owned files:** `src/content/projects/beamvm.md`, `src/assets/projects/beamvm/**`, `src/data/project-taxonomy.ts` (identifiers justified by reviewed content only).
+   - **Orchestrator-owned files:** evidence/provenance and shared documentation above.
+   - **Verification:** worker formatting and source-asset verification; parent `make check`, link checks, desktop/mobile article/cover/gallery review, draft exclusion, and animation checks where relevant.
+3. **Content acceptance — (L), [serial].** Resolve remaining reviewed metadata/media and obtain the user's assessment, then mark the entry eligible for public builds.
+   - **Worker-owned files:** `src/content/projects/beamvm.md`, `src/assets/projects/beamvm/**`, `src/data/project-taxonomy.ts` for accepted refinements only.
+   - **Orchestrator-owned files:** this spec, evidence/review record, queue/handoff/memory and `docs/DEFERRED.md` mirroring.
+   - **Verification:** parent complete checks and actual public-output review after acceptance. No site deployment is implied.
+
+## Open Questions
+
+No new site architecture decisions are required. BeamVM's story, exact public links/dates, and selected media are explicitly gathered and reviewed during intake; the entry remains a draft while those inputs are unresolved.
+
+## Deferred / Follow-ups
+
+- None yet. Record only deliberate follow-ups arising from BeamVM onboarding.
+
+## Change Log
+
+- 2026-09-08 — User selected BeamVM as the next ready project and authorized onboarding before website launch. Reused the approved content/design workflow with serial file ownership.
