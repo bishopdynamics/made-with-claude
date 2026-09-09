@@ -2,13 +2,18 @@
 title: 'Half-Life: Continuum Edition'
 description: 'Half-Life on Xash3D, with seamless level transitions, entity contact shadows, and a controller-first menu.'
 draft: true
+startedOn: '2026-06-09'
 repositoryUrl: 'https://github.com/bishopdynamics/Continuum'
 releaseUrl: 'https://github.com/bishopdynamics/Continuum/releases/tag/v1.0.0.0'
 ---
 
 I'm a big fan of the Half-Life series and of game engines, but I had never really dug into GoldSrc. Xash3D gave me a place to explore that interest, and Claude Fable helped me jump straight into adding the features I wanted.
 
+I started on June 9, 2026, choosing Continuum as a demanding test of the leap forward I saw in Fable.
+
 The result is **Half-Life: Continuum Edition**, a fork of Xash3D-FWGS that plays the original game with changes to the engine and interface. The two pieces I'm proudest of are the entity contact shadows and seamless level transitions.
+
+I directed the project extensively, from the initial plans through repeated reviews of each feature. Claude carried out all of the research and implementation, using a mixture of Fable and Opus.
 
 ## Entity contact shadows
 
@@ -27,6 +32,14 @@ The [level-streaming notes](https://github.com/bishopdynamics/Continuum/blob/00b
 ## A controller-first front end
 
 The unified menu brings game selection and configuration into one interface designed for a gamepad, with mouse and keyboard support as well. Installed expansions and mods appear in the game picker, and the settings pages expose Continuum's additions alongside existing engine options.
+
+## How we built it
+
+My role was project manager. I crafted the initial plans and iterated on them with Fable. Claude then researched and implemented the work, presented the results, and we went through many rounds of refinement until I was happy with the feature. We repeated that process for each addition to Continuum.
+
+The development tools improved as we went. Claude implemented a debugging connection through MCP that exposed the live engine state, captured screenshots directly, and simulated input without taking over my real mouse. That gave Claude direct access to the running engine for testing, verification, and troubleshooting.
+
+Gameplay capture and demo-playback tools served two purposes: returning to specific trouble spots during testing, and recording footage to demonstrate the finished features. The work included building the tools that made those repeated checks and refinements more efficient.
 
 ## Try Continuum
 

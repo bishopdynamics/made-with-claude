@@ -1,6 +1,6 @@
 # Half-Life: Continuum Edition onboarding
 
-Status: first article draft prepared and locally verified, 2026-09-08. The user accepted ROOT_SPEC slice 4 and authorized slice 5. Motivation, Claude Fable attribution, and the two proudest features are confirmed; final copy, development dates, taxonomy, cover, and gallery are awaiting review.
+Status: article draft refined and checked, 2026-09-08. The user accepted ROOT_SPEC slice 4 and authorized slice 5. Motivation, June 9 start date, feature emphasis, extensive human direction, and Claude's sole research/implementation role using Fable and Opus are confirmed; final copy, completion date, taxonomy, cover, and gallery are awaiting review.
 
 ## Identity and source
 
@@ -27,10 +27,19 @@ Confirmed by the user on 2026-09-08:
 - They are a big fan of the Half-Life series and game engines, but had never really dug into GoldSrc.
 - They admire Xash3D, and Claude Fable allowed them to jump straight into adding the features they wanted.
 - The entity contact shadows and seamless level transitions are the pieces they are proudest of.
+- They began on **June 9, 2026** and chose Continuum as a demanding challenge for the substantial leap forward they saw in Fable. The user identifies this as the day Fable first became available; the article presents their motivation and project start without independently asserting a vendor release chronology.
 
-Use first-person prose based on these notes and the attribution **Claude Fable**, without adding a model version or a Codex role. The user has been asked how they divided direction, testing, and iteration with Claude; that process detail is still pending. Do not invent obstacles, performance numbers, agent autonomy, hours worked, or a development anecdote.
+The user subsequently clarified the development process:
 
-The first incomplete article is at `src/content/projects/half-life-continuum-edition.md` with `draft: true`. Unreviewed dates/taxonomy and missing images remain unset. Copy can be reviewed before all assets are available; it is not approved for publication.
+- **Human role:** project manager who directed Continuum extensively, crafted the initial plans, iterated on plans with Fable, and reviewed repeated feature results until satisfied.
+- **Claude role:** all research and implementation, using a mixture of **Fable and Opus**. Claude presented results for the user's review. Repeat this distinction explicitly in the article; do not imply user-written code or autonomous project direction.
+- **Iteration:** repeated planning, implementation, presentation, and fine-tuning for each feature, while improving the development toolset.
+- **Engine debugging:** an MCP connection provided direct access to actual engine state, screenshot capture, and simulated input without taking over the user's real mouse, making testing, verification, and troubleshooting more efficient.
+- **Gameplay tools:** capture and demo playback supported repeatable testing of trouble spots and recording demonstration footage.
+
+This is the user's firsthand account. Use first-person prose and Fable/Opus names without invented version numbers or a Codex role. Attribute research and tooling implementation to Claude, with the user directing and reviewing. Exact MCP commands, connection architecture, and runtime details have not been independently inspected and are not needed for this prose account. Do not invent obstacles, performance figures, hours worked, or a feature-specific debugging anecdote.
+
+The article is at `src/content/projects/half-life-continuum-edition.md` with `draft: true` and confirmed `startedOn: '2026-06-09'`. Unreviewed completion/publication dates, taxonomy, and missing images remain unset. Copy can be reviewed before all assets are available; it is not approved for publication.
 
 ## Media inventory
 
@@ -59,9 +68,9 @@ Preserve uncropped original files and record each capture's author, game/version
 
 ## Development dates and taxonomy
 
-- Candidate start: **2026-06-11**. The read-only history worker found the first clearly project-specific engine change at [`42e54c9`](https://github.com/bishopdynamics/xash3d-fwgs/commit/42e54c9106e4843caa0c64d2800a2ac6d20ff909), which introduces in-memory level-transition state. The orchestrator independently verified its author/committer timestamp, `2026-06-11T20:58:24Z`, and modified C files. The initial [umbrella commit](https://github.com/bishopdynamics/Continuum/commit/06a798360d357ca2719eb5a8a09abf22fbef40f0) follows at `2026-06-11T20:59:31Z` with research and tooling through early streaming milestones. These establish visible work, not the absence of earlier local/private work. Repository creation dates and inherited upstream commits are unsuitable proxies.
+- Confirmed start: **2026-06-09**, supplied by the user from their firsthand account. This supersedes the June 11 candidate inferred from public Git history. The first visible project-specific engine change, [`42e54c9`](https://github.com/bishopdynamics/xash3d-fwgs/commit/42e54c9106e4843caa0c64d2800a2ac6d20ff909), introduces in-memory level-transition state at the independently verified timestamp `2026-06-11T20:58:24Z`. The initial [umbrella commit](https://github.com/bishopdynamics/Continuum/commit/06a798360d357ca2719eb5a8a09abf22fbef40f0) follows at `2026-06-11T20:59:31Z` with research and tooling through early milestones. These commits record work already underway; do not replace the user's June 9 start with the earliest visible commit date.
 - Candidate completion: **2026-06-22**, using [v1.0.0.0](https://github.com/bishopdynamics/Continuum/releases/tag/v1.0.0.0). The orchestrator independently verified the release name, initial-release description, `published_at: 2026-06-22T19:10:26Z`, and Linux/macOS ARM64/Windows/Flatpak asset names. Later stabilization and maintenance do not automatically move this endpoint. The user still needs to choose the development endpoint.
-- Both proposed endpoint dates are the same in UTC and Pacific time. The site's UTC calendar subtraction gives **11 days**; this is elapsed calendar time, not effort hours.
+- With the confirmed June 9 start and candidate June 22 release endpoint, the site's UTC calendar subtraction gives **13 days**. This is elapsed calendar time, not effort hours; the completion endpoint still awaits review.
 - Candidate languages: **C, C++, Python, Shell**. The independently inspected engine commit above modifies C sources; the [Continuum menu commit](https://github.com/bishopdynamics/mainui_cpp/commit/7d38e9ad13aa644108c525acb78a4e0da3ba2e8d), dated `2026-06-12T09:43:59Z`, adds the C++ menu files. The initial umbrella commit adds `tools/hlstream_preprocess.py` and `tools/build-engine.sh`. C/C++ describe product implementation; Python/Shell describe project tooling. No language-byte percentages are proposed because the forks include substantial upstream code. If the user wants only runtime languages in cards, use C/C++ and explain the tooling in the article.
 - Candidate tags for discussion: Games, Graphics, Desktop. No taxonomy identifiers have been added.
 - Portfolio publication date remains unset until content is reviewed for publication; later maintenance must remain distinct from the development endpoint.
@@ -70,8 +79,11 @@ Preserve uncropped original files and record each capture's author, game/version
 
 - 2026-09-08: user approved slice 4 and authorized onboarding.
 - 2026-09-08: user supplied motivation, broad Claude Fable contribution, and contact-shadow/level-transition emphasis. Prepared the first incomplete article from those notes; shifted media planning toward those features.
-- Pending user input: details of the human/Claude workflow, media source preference, and any newer captures. Motivation and feature emphasis have already been answered; do not ask again.
+- 2026-09-08: user clarified extensive project management/direction and that Claude did all research and implementation using Fable and Opus. Added this distinction near the article opening and a development-process section covering repeated reviews, engine MCP debugging, simulated input, and gameplay/demo tools.
+- 2026-09-08: user corrected the project start to June 9, 2026 and explained choosing it as a challenge for the advance they saw in Fable. Set the draft start date and added that motivation; the June 11 public-history candidate is superseded.
+- Pending user input: completion endpoint, media source preference, and any newer captures. Motivation, start date, feature emphasis, and human/Claude roles have already been answered; do not ask again. Languages/tags also remain proposed rather than approved.
 - Public history evidence has been gathered and the decisive commits/release independently verified. Review the proposed dates/languages and capture set with the user.
 - Use the [tailored maintainer brief](half-life-continuum-edition-maintainer-brief.md) if captures/history will be prepared in the Continuum project. This brief has not been sent to another maintainer or external service.
-- Continue the draft as workflow details and reviewed assets become available. Final desktop/mobile copy/gallery review precedes publication status changes.
+- Continue the draft as reviewed dates/taxonomy and assets become available. Final desktop/mobile copy/gallery review precedes publication status changes.
 - Initial draft verification: parent `make check` passed 43 tests, zero Astro diagnostics and privacy findings, and a three-page production build. Browser review at 1440px and 375px confirmed readable article sections, one H1, the draft label, and no horizontal overflow. A direct scan of all seven text output files confirmed the production artifact contains neither this draft route nor its content. Saved review images and check log are under ignored `.agent-worktrees/_runs/root-slice-5/`; temporary browser/server were stopped.
+- Workflow/start-date refinement verification: parent `make check` passed again, including 43 tests, zero Astro diagnostics, zero privacy findings across 202 file snapshots, and the three-page production build. Log: `.agent-worktrees/_runs/root-slice-5/parent-workflow-check.log`. The earlier screenshots show the initial prose; no new browser session was needed for these paragraph and date edits.
