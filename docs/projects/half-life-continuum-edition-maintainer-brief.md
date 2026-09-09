@@ -6,7 +6,7 @@ Copy the following prompt into the Half-Life: Continuum Edition maintainer sessi
 
 ---
 
-We are preparing **Half-Life: Continuum Edition** as the first project on **madewithclaude.com**, a portfolio of projects made with Claude and/or Codex under the guidance of BishopDynamics. The canonical source is <https://github.com/bishopdynamics/Continuum>.
+We are preparing **Half-Life: Continuum Edition** as the first project on **whatclaudemade.com**, a portfolio of projects made with Claude and/or Codex under the guidance of BishopDynamics. The canonical source is <https://github.com/bishopdynamics/Continuum>.
 
 Inspect the current public release, existing media, and the engine/menu/SDK forks, then propose a small, reproducible screenshot set for discussion with me. The website needs a 16:9 cover and a few supporting still images, with uncropped high-resolution originals available in its full-image gallery. Prefer native 1920×1080 or higher where the output stays representative and readable.
 

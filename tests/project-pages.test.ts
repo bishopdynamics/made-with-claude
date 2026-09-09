@@ -131,7 +131,7 @@ test(
           nodes.find((node) => attr(node, 'rel') === 'canonical')!,
           'href',
         ),
-        `https://madewithclaude.com/projects/${slug}/`,
+        `https://whatclaudemade.com/projects/${slug}/`,
       );
       const article = nodes.find((node) => node.tagName === 'article')!;
       assert.match(attr(article, 'class')!, /\bprose\b/);

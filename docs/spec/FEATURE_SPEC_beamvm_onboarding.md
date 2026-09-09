@@ -65,4 +65,5 @@ No new site architecture decisions are required. BeamVM's story, exact public li
 
 ## Change Log
 
+- 2026-09-08 — User supplied the BeamVM story: constrained game-making on a vector CRT, repair exercises, launcher/shell growth, and fictional Pro graphics hardware enabling a compromised DOOM-derived game. Draft keeps tested scope limited to the first two shareware maps; full-campaign conversion remains theoretical. Site domain corrected to `whatclaudemade.com`.
 - 2026-09-08 — User selected BeamVM as the next ready project and authorized onboarding before website launch. Reused the approved content/design workflow with serial file ownership.

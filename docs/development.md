@@ -1,6 +1,6 @@
 # Development
 
-Hephaestion builds a static portfolio and blog for `madewithclaude.com`. The site is developed locally and will be published by GitHub Actions to GitHub Pages.
+Hephaestion builds a static portfolio and blog for `whatclaudemade.com`. The site is developed locally and will be published by GitHub Actions to GitHub Pages.
 
 ## Setup and commands
 
@@ -139,6 +139,6 @@ Automated checks cannot prove that a screenshot or paragraph is safe to publish.
 
 The remote is named `github`. Initial repository synchronization uses `git push -u github main`; subsequent pushes use that upstream. The bootstrap Actions workflow performs checks only, so the initial repository push does not launch a website.
 
-The launch implementation will build only intended site content and deploy `dist/` through GitHub Pages after successful checks. Configure `madewithclaude.com` in Pages and then connect the Route 53 DNS records. The user made the source repository public on 2026-09-07, resolving the private-repository Pages plan requirement. See [GitHub's Pages prerequisites](https://docs.github.com/en/pages/getting-started-with-github-pages) and [Astro's Pages deployment guide](https://docs.astro.build/en/guides/deploy/github/).
+The launch implementation will build only intended site content and deploy `dist/` through GitHub Pages after successful checks. Configure `whatclaudemade.com` in Pages and then connect the Route 53 DNS records. The user made the source repository public on 2026-09-07, resolving the private-repository Pages plan requirement. See [GitHub's Pages prerequisites](https://docs.github.com/en/pages/getting-started-with-github-pages) and [Astro's Pages deployment guide](https://docs.astro.build/en/guides/deploy/github/).
 
 Accepted entries may be selected for public builds before the first domain launch. Their prepared `publishedOn` dates should be reconciled with the actual first-publication date at that launch; the local content flag does not itself deploy the website.

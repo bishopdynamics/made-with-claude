@@ -1,6 +1,6 @@
 # Hephaestion
 
-A polished portfolio and blog for **madewithclaude.com**, showcasing software projects built with Claude.
+A polished portfolio and blog for **whatclaudemade.com**, showcasing software projects built with Claude.
 
 Projects will be added individually, with carefully prepared screenshots and a blog entry explaining each project. The site should emphasize beautiful, simple visual design.
 
@@ -26,8 +26,8 @@ make help          # List development commands
 
 ## Project status
 
-The approved foundation is Astro with TypeScript and Markdown. First-run setup is complete, with development tools and a minimal homepage; final design and individual project entries follow in Initial Planning.
+The site uses Astro with TypeScript and Markdown. Its design, homepage, searchable catalog, and project pages are implemented. Half-Life: Continuum Edition portfolio v1 is accepted for release; BeamVM is being onboarded next.
 
-The private GitHub repository is `bishopdynamics/made-with-claude`, using the remote named `github`. The current Actions workflow checks changes without deploying a website. GitHub Pages publication and the Route 53 domain connection will be configured for launch; pushing to the publishing branch will then publish the site.
+The GitHub repository is `bishopdynamics/made-with-claude`, using the remote named `github`. The current Actions workflow checks changes without deploying a website. GitHub Pages publication and the Route 53 connection for `whatclaudemade.com` will be configured for launch; pushing to the publishing branch will then publish the site.
 
 See [the initial idea](docs/idea/initial-idea.md), [project rules](PROJECT.md), and [task queue](docs/TASK_QUEUE.md).

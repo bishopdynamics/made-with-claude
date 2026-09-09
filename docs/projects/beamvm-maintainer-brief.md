@@ -4,7 +4,9 @@ Copy this prompt to the BeamVM maintainer session when ready. It requests factua
 
 ---
 
-We are preparing **BeamVM** as the next project on madewithclaude.com. The website's design and project/article/gallery presentation are already established. Help us prepare an accurate story, a landscape cover, and a few images or short animations demonstrating the current product.
+We are preparing **BeamVM** as the next project on whatclaudemade.com. The website's design and project/article/gallery presentation are already established. Help us prepare an accurate story, a landscape cover, and a few images or short animations demonstrating the current product.
+
+My motivation and the project's progression are now established: a game about making games for a VM under shared CRT-drawing/logic time constraints; deliberately flawed games to fix as learning/test cases; then a launcher and minimal Unix-like shell. The DOOM challenge led me to invent the Pro hardware's asynchronous graphics coprocessor. The first two shareware maps were reduced to the needed data and sprites converted to outlines, producing a playable adaptation with substantial compromises. **Only those first two shareware maps were tested.** Full DOOM/DOOM II campaign conversion remains theoretical. Preserve that distinction and do not repeat the motivation intake questions.
 
 First establish the exact version/revision that should represent BeamVM. The portfolio session inspected the accepted debugger/IDE/shell/DOOM work around `3927dda`, and the checkout advanced to `c48ddab` during intake. Coordinate with the current work rather than capturing an accidental mixture of unfinished changes.
 
@@ -21,6 +23,6 @@ The existing 1024×1024 phosphor-rendered Lissajous icon is a useful visual refe
 
 For each proposed capture, return its purpose, exact revision/build/platform, program/trace/save state, resolution, reproduction steps, caption, and meaningful alt text. Explain what must remain visible in a thumbnail crop. Identify existing capture capabilities and any preparation needed; the portfolio session did not find a general tracked capture exporter. If proposing animation, show actual execution/debugger behavior and preserve the original timing.
 
-Also help establish the actual project start before the August 25 core import, the intended completion milestone, implementation languages (Rust and any relevant DSL/WGSL contributions), and how the human and agents divided research, design, implementation, and review. Ask me for motivation and attribution where source cannot establish them. Keep upstream technologies and game assets distinct from BeamVM's own work.
+Also help establish the actual project start before the August 25 core import, the intended completion milestone, implementation languages (Rust and any relevant DSL/WGSL contributions), and how the human and agents divided research, design, implementation, and review. Ask me for attribution where source cannot establish it; the motivation is already supplied above. Keep upstream technologies and game assets distinct from BeamVM's own work.
 
 Return the evidence and capture plan for discussion first. Website copy, final images, and publication will be reviewed separately.

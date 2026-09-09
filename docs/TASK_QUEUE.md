@@ -10,8 +10,8 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 1. [in-progress] FEATURE_SPEC_beamvm_onboarding.md
    - 2026-09-08: user selected BeamVM as the next ready project after accepting Continuum v1. Onboarding is authorized before website launch; existing site design/content contracts are retained.
-   - Intake: inspecting current source/public identity/date/media evidence and gathering the user's motivation, proudest results, and agent workflow. No BeamVM entry or assets integrated yet.
-   - Next: settle story/media choices, prepare the draft, and review the assembled entry with the user.
+   - Intake: source evidence inspected and user motivation/progression supplied. First incomplete article prepared and verified (43 tests, corrected domain/canonical checks, desktop/mobile draft review), covering constrained game-making, repair challenges, launcher/shell, and Pro hardware/DOOM; tested scope is only the first two shareware maps.
+   - Next: review the draft, establish the public source/download URL, agent attribution and dates, then prepare selected media. No BeamVM images or publication metadata are approved yet.
 
 2. [pending] ROOT_SPEC.md — remaining launch slice, after BeamVM onboarding
    - 2026-09-07: user approved the full specification and authorized slice 1. Initial Planning is accepted and removed from the active queue.

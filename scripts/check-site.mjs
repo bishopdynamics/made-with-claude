@@ -4,7 +4,7 @@ import { resolve, relative, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'parse5';
 
-const site = 'https://madewithclaude.com';
+const site = 'https://whatclaudemade.com';
 function* elements(node) {
   if (node.tagName) yield node;
   for (const child of node.childNodes ?? []) yield* elements(child);

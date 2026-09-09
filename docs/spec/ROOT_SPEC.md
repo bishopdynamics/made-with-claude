@@ -1,4 +1,4 @@
-# SPEC: madewithclaude.com portfolio launch
+# SPEC: whatclaudemade.com portfolio launch
 
 - **Status:** in-progress
 - **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md)
@@ -6,7 +6,7 @@
 
 ## Summary
 
-Build a polished, static portfolio at `madewithclaude.com` showing software made by Claude and/or Codex under the guidance of BishopDynamics. A visual homepage introduces recent projects, a searchable catalog helps visitors find relevant work, and each project has an image gallery above its long-form story. Launch with Half-Life: Continuum Edition, preparing its content and media collaboratively. Retain fast local iteration, the existing pre-commit safeguards, and GitHub-only public hosting.
+Build a polished, static portfolio at `whatclaudemade.com` showing software made by Claude and/or Codex under the guidance of BishopDynamics. A visual homepage introduces recent projects, a searchable catalog helps visitors find relevant work, and each project has an image gallery above its long-form story. Launch with Half-Life: Continuum Edition, preparing its content and media collaboratively. Retain fast local iteration, the existing pre-commit safeguards, and GitHub-only public hosting.
 
 ## Goals
 
@@ -32,7 +32,7 @@ Build a polished, static portfolio at `madewithclaude.com` showing software made
 | Decision             | Choice                                                                                            | Rationale / alternatives considered                                                                                                                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Foundation           | Static Astro, TypeScript site code, Markdown content, npm lockfile                                | Already approved and scaffolded. No framework migration or backend is needed.                                                                                                                                                       |
-| Identity             | Homepage title `What Claude/Codex Made`; attribution to BishopDynamics                            | User-specified title and broader Claude/Codex scope. Domain remains `madewithclaude.com`.                                                                                                                                           |
+| Identity             | Homepage title `What Claude/Codex Made`; attribution to BishopDynamics                            | User-specified title and broader Claude/Codex scope. Domain remains `whatclaudemade.com`.                                                                                                                                           |
 | Visual system        | Black/charcoal surfaces, warm-gray text, muted amber, thin borders, generous spacing              | Approved during the design discussion; project imagery carries most of the color.                                                                                                                                                   |
 | Typography           | Inter for interface and prose; JetBrains Mono for code; self-host WOFF2 with licenses             | Free font families approved by the user. Avoid runtime font-provider requests.                                                                                                                                                      |
 | Content unit         | One Markdown project entry supplies its card, gallery, and article                                | Keeps the showcase and explanation in sync. Independent blog content is a follow-up.                                                                                                                                                |
@@ -167,7 +167,7 @@ The production preview serves the actual `dist/` artifact. Use it for final brow
 
 Keep one GitHub workflow as the source of truth: extend the existing `.github/workflows/check.yml` with a conditional deploy job rather than creating competing deployments. Pull requests run checks only. A `main` push runs `npm ci` and the complete check/build sequence, uploads only the resulting `dist/` Pages artifact, and deploys it after success. Give write/OIDC permissions only to the deployment job; keep the check job read-only and retain `persist-credentials: false`. Pin supported action releases during the launch slice and use the repo's `.nvmrc` rather than an action's unrelated default Node version. Use a Pages concurrency group to prevent overlapping deployments.
 
-Configure GitHub Pages to use Actions, set canonical domain `madewithclaude.com`, verify domain ownership, then prepare the required Route 53 records and HTTPS setting using current GitHub instructions. Since this is a custom apex domain, do not add a repository-name base path. Use a canonical URL and social metadata on public pages, a sitemap containing only public routes, a robots file, and a simple site favicon. Do not enable publication or change DNS during earlier implementation slices. At launch, present the reviewed artifact and exact settings/records before carrying out externally visible changes; a push to the publishing branch remains publication.
+Configure GitHub Pages to use Actions, set canonical domain `whatclaudemade.com`, verify domain ownership, then prepare the required Route 53 records and HTTPS setting using current GitHub instructions. Since this is a custom apex domain, do not add a repository-name base path. Use a canonical URL and social metadata on public pages, a sitemap containing only public routes, a robots file, and a simple site favicon. Do not enable publication or change DNS during earlier implementation slices. At launch, present the reviewed artifact and exact settings/records before carrying out externally visible changes; a push to the publishing branch remains publication.
 
 ### Acceptance and verification
 
@@ -229,6 +229,7 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Change Log
 
+- 2026-09-08 — User corrected the public domain to `whatclaudemade.com`. Updated runtime identity, canonical/social URLs, output checks, current docs, and project metadata; the original idea remains a historical input. No DNS or deployment change is part of this correction.
 - 2026-09-08 — User accepted the assembled Continuum portfolio entry as v1 ready for release and moved extra gallery images to v2. Completed the entry's source-backed metadata and public-build selection; website deployment is still pending. User selected BeamVM as the next ready project, ahead of launch, under its onboarding addendum.
 - 2026-09-08 — First-pass Continuum cover/GIF integrated with approved prose preserved. Parent checks passed 43 tests, zero diagnostics/privacy findings, a temporary public media build, desktop/mobile crop/layout review, cover viewer, and real draft exclusion. Optimized animation retains the original 19.26-second loop; entry remains a draft pending remaining metadata and assembled-content review.
 - 2026-09-08 — User approved the rendered style/theme/colors/fonts and Continuum write-up, then requested a first-pass cover thumbnail and the README GIF within the article. Inline local GIF use is authorized; preserve approved prose and verify animation. Selected existing full-resolution Continuum menu artwork as the cover candidate for review.

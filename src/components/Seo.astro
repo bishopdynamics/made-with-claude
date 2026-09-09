@@ -15,7 +15,7 @@ const {
   noindex = false,
   image,
 } = Astro.props;
-const site = Astro.site ?? new URL('https://madewithclaude.com');
+const site = Astro.site ?? new URL('https://whatclaudemade.com');
 const canonicalUrl = new URL(canonical, site);
 canonicalUrl.search = '';
 canonicalUrl.hash = '';

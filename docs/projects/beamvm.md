@@ -1,6 +1,6 @@
 # BeamVM onboarding
 
-Status: intake in progress, 2026-09-08. The user selected BeamVM as the next ready project after accepting Continuum portfolio v1. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
+Status: first story draft prepared and locally verified, 2026-09-08. The user selected BeamVM as the next ready project after accepting Continuum portfolio v1 and supplied its motivation and evolution. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
 
 ## Starting context
 
@@ -8,7 +8,7 @@ Status: intake in progress, 2026-09-08. The user selected BeamVM as the next rea
 - Its `PROJECT.md` describes a programming game where a Python-flavored DSL steers a simulated vector CRT, played inside a time-travel debugger.
 - The local README describes Rust core/app crates and early M0/M1 work. It has not kept pace with later source/specs, so it is an orientation aid rather than the basis for current-feature claims.
 - Evidence worker inspected commit `3927dda` (2026-09-08, acceptance of cheats). During the orchestrator's follow-up the independently active source checkout advanced to `c48ddab`, a keyboard-capture implementation commit. Treat this as an advancing development checkout, not an immutable release snapshot; choose the capture/release revision with the maintainer. This onboarding session made no changes there.
-- No BeamVM page or assets have been integrated yet.
+- The first incomplete article is at `src/content/projects/beamvm.md`, with `draft: true`. Public links, dates, taxonomy, attribution, and images remain unset while those inputs are reviewed.
 
 ## Source and release readiness
 
@@ -29,11 +29,23 @@ The orchestrator independently inspected the current program registry and confir
 
 ## User story
 
-The user has been asked what inspired BeamVM, which results they are proudest of, and how they and the agents built it. Those answers are pending. Do not reuse Continuum's first-person motivation or Fable/Opus-only attribution as BeamVM facts.
+Confirmed firsthand account from the user on 2026-09-08:
+
+- They wanted to create a video game using a virtual machine, and made it a game about creating games under specific restrictions.
+- Their interest in CRT technology and vector displays led to a machine where programs must balance time spent drawing against time spent on game logic.
+- A series of games with specific problems to solve helps players get started and provides useful test cases.
+- The scope then expanded to a launcher and a minimal Unix-like shell.
+- The user asked whether it could run DOOM; the original machine could not. They then designed a fictional **Pro** hardware variant with a graphics coprocessor that can execute dispatched drawing work asynchronously from main-CPU logic.
+- The first two shareware maps were reduced to the needed data, and sprites were preprocessed into outlines the renderer could draw. The result is playable and derived from original content, with significant compromises to fit the machine.
+- **Only the first two shareware maps were tested.** Full DOOM and DOOM II campaign conversion is a theoretical pipeline capability, not validated coverage. Preserve this qualification in prose, descriptions, and media captions.
+
+The first-person draft follows that progression, from constrained game-making to the Pro hardware challenge, with the verified editor/time-travel debugger providing context. It avoids asserting that modern displays have no possible analogue; the user's interest in vector CRTs can be expressed without an absolute technical claim.
+
+BeamVM-specific model attribution and the detailed human/agent division of work remain unconfirmed. Do not reuse Continuum's Fable/Opus attribution or sole-research/implementation statement as BeamVM facts. Public URLs, dates, and final media remain separate review inputs.
 
 ## Media and metadata
 
-Choose a cover that makes the vector CRT result legible at card size, then supporting views that explain the actual programming/debugging experience. Inspect existing assets and capture tooling before proposing specific scenes. No source images, dates, taxonomy, or final copy are approved yet.
+Choose a cover that makes the vector CRT result legible at card size, then supporting views that explain the actual programming/debugging experience. The user's story makes the repair challenges and Pro/DOOM contrast especially useful media subjects. No source images, dates, taxonomy, or final copy are approved yet.
 
 - Existing icon: `beamvm-app/assets/icon.png`, 1024×1024 RGBA. The orchestrator visually inspected the glowing green Lissajous pattern on the simulated CRT. It is rendered through the app's phosphor pipeline via the developer `render_icon` test, according to source inspection. It may help introduce the visual direction; a landscape runtime capture would show more of the product than a square icon crop.
 - No tracked screenshot/GIF/video collection or general capture exporter was found. The bundled `pilot.bvmt` recording is a candidate for repeatable debugger scenes, not a verified capture workflow yet.
@@ -47,4 +59,6 @@ An optional [maintainer brief](beamvm-maintainer-brief.md) captures these source
 ## Review record
 
 - 2026-09-08 — User explicitly selected BeamVM next and described it as ready.
-- Read-only source/evidence research completed; no files changed in BeamVM. User story and public source/download questions remain pending.
+- Read-only source/evidence research completed; no files changed in BeamVM. Public source/download question remains pending.
+- 2026-09-08 — User supplied the constrained game-making premise, repair-game learning path, launcher/shell expansion, and Pro hardware/DOOM progression. Prepared an incomplete article with explicit two-map tested scope; exact model/workflow attribution remains for review.
+- Parent verification passed `make check`: 43 tests, zero Astro diagnostics and privacy findings. The four-page production build uses `whatclaudemade.com` canonical/social URLs, retains Continuum, and excludes BeamVM. Local browser review confirmed the BeamVM draft/noindex marker, corrected header/canonical, explicit tested-scope qualification, and no horizontal overflow at desktop/mobile widths. The pre-existing preview needed a content refresh after the config change and now serves `/projects/beamvm/` on port 4321. Temporary diagnostic preview/browser were cleaned up; screenshots/log are under `.agent-worktrees/_runs/beamvm-onboarding/`.

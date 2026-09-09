@@ -1,12 +1,12 @@
 # Project: Hephaestion
 
-A polished portfolio and blog for `madewithclaude.com`, showcasing software projects built with Claude and/or Codex under the guidance of BishopDynamics.
+A polished portfolio and blog for `whatclaudemade.com`, showcasing software projects built with Claude and/or Codex under the guidance of BishopDynamics.
 
 This file is **project-owned**: template migrations never touch it. It holds everything about *this* project that agents must know beyond the shared rules in `AGENTS.md`. Where the two conflict, this file wins.
 
 ## Project-specific rules
 
-- The public site is `madewithclaude.com`; Hephaestion is the project name.
+- The public site is `whatclaudemade.com`; Hephaestion is the project name. The user corrected the domain on 2026-09-08; this supersedes the domain in the preserved original idea.
 - Use GitHub for the repository and hosting workflow, overriding the template's GitLab first-run step. The user manages the domain through Amazon Route 53 and wants no self-hosted public infrastructure.
 - The repository is `bishopdynamics/made-with-claude`, public as of 2026-09-07, on the remote named `github`.
 - `.bishop/` belongs in version control. Include its contents in secret/privacy screening, but do not ignore or reject the folder itself.
