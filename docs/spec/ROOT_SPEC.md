@@ -228,6 +228,7 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Change Log
 
+- 2026-09-08 — Prepared the first incomplete Continuum article from the user's motivation and emphasis on entity contact shadows/seamless transitions, with confirmed Claude Fable attribution. Left unreviewed dates, taxonomy, and images unset. Parent verification passed 43 tests, zero type/privacy findings, desktop/mobile draft review, and direct production-exclusion checks. Captures and final content review remain pending.
 - 2026-09-08 — User accepted slice 4 and authorized slice 5, Half-Life: Continuum Edition onboarding. Gathering project story, media selections, metadata, and project-specific development-date evidence; final content review remains pending.
 - 2026-09-07 — Slice 4 implemented and independently verified: recent homepage tiles, rich catalog cards, progressive search/filters/URL state, and separate dev draft previews. Parent checks passed 43 tests, zero type diagnostics/privacy findings, layouts for every zero-to-four homepage count, native browser/history/no-script/touch behavior, fallback/reconnection, and draft separation. All temporary build caches are isolated; no real project content or publication was added.
 - 2026-09-07 — Slice 4 concurrent fixture builds exposed shared Astro caches through symlinked dependencies. Extended ownership to isolate caches in the two existing build-fixture tests as well as the new catalog test; production configuration and product behavior are unchanged.

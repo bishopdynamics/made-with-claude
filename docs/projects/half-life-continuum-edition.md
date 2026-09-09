@@ -1,6 +1,6 @@
 # Half-Life: Continuum Edition onboarding
 
-Status: research and intake in progress, 2026-09-08. The user accepted ROOT_SPEC slice 4 and authorized slice 5. Project copy, development dates, taxonomy, cover, and gallery are awaiting review; no site entry has been created.
+Status: first article draft prepared and locally verified, 2026-09-08. The user accepted ROOT_SPEC slice 4 and authorized slice 5. Motivation, Claude Fable attribution, and the two proudest features are confirmed; final copy, development dates, taxonomy, cover, and gallery are awaiting review.
 
 ## Identity and source
 
@@ -11,17 +11,26 @@ Status: research and intake in progress, 2026-09-08. The user accepted ROOT_SPEC
 
 ## Candidate description and story
 
-Working description for discussion: “A controller-first way to play Half-Life, with continuous campaign transitions and optional visual improvements.”
+Working description for discussion: “Half-Life on Xash3D, with seamless level transitions, entity contact shadows, and a controller-first menu.”
 
 The [public README](https://github.com/bishopdynamics/Continuum) describes an Xash3D-FWGS fork, requiring the player's original game data, that adds a unified menu and removes loading screens between maps. It does not claim to replace the original game's content. Keep the portfolio focused on Continuum's additions and credit the upstream game and engine.
 
-The technical notes offer three possible article threads:
+The article leads with the user's motivation, then the two features they are proudest of. The menu supplies supporting context:
 
+- [Entity contact shadows](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/doc/ambient-occlusion.md): the documented entity contact AO grounds moving characters and props with soft shadowing that fades as they lift off the floor. Distinguish this from world AO and from the flashlight's shadow maps; do not substitute another shadow system for the user's chosen emphasis.
 - [Level transitions](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/doc/level-streaming.md): resident world models, transition state held in memory, and continued audio. The documented experience includes a brief frame hold during a map swap; avoid wording that promises literally zero pause. Timing figures in the documentation have not been independently measured for this portfolio.
 - [Controller-first menu](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/doc/menu.md): a common game picker and settings screens that also work with mouse and keyboard.
 - Optional [projected flashlight](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/doc/flashlight.md) and [ambient occlusion](https://github.com/bishopdynamics/Continuum/blob/00ba9c640625a0663df3470910419db132969c9b/doc/ambient-occlusion.md): choose a concrete example only if it serves the user's story. The documentation says the projected flashlight is off by default, while supplemental AO is on by default.
 
-The user has been asked for the motivation, proudest result, and Claude/Codex contribution. These answers are pending. The README contains AI-assistance credits, but exact model attribution and the development process need the user's account before they become article copy. No performance numbers, firsthand experience, or personal motivation have been inferred.
+Confirmed by the user on 2026-09-08:
+
+- They are a big fan of the Half-Life series and game engines, but had never really dug into GoldSrc.
+- They admire Xash3D, and Claude Fable allowed them to jump straight into adding the features they wanted.
+- The entity contact shadows and seamless level transitions are the pieces they are proudest of.
+
+Use first-person prose based on these notes and the attribution **Claude Fable**, without adding a model version or a Codex role. The user has been asked how they divided direction, testing, and iteration with Claude; that process detail is still pending. Do not invent obstacles, performance numbers, agent autonomy, hours worked, or a development anecdote.
+
+The first incomplete article is at `src/content/projects/half-life-continuum-edition.md` with `draft: true`. Unreviewed dates/taxonomy and missing images remain unset. Copy can be reviewed before all assets are available; it is not approved for publication.
 
 ## Media inventory
 
@@ -42,8 +51,9 @@ These are candidates for discussion, not approved images. Caption/alt text must 
 | Image | What it should demonstrate | Capture requirements | Candidate caption / alt text |
 | --- | --- | --- | --- |
 | Cover: root menu | Continuum's identity and controller-first interface | Clean 16:9 still, ideally 1920×1080 or higher at native output; readable controls, title and artwork intact, version/debug overlays absent. Verify the site's title overlay does not cover relevant UI. | Caption: “Half-Life: Continuum Edition's controller-first menu.” Alt: “Continuum main menu with Game, Configuration, and Quit options over orange Half-Life artwork.” |
-| Game picker | One interface for installed games and expansions | Only show games actually installed and supported in the selected capture build; keep game labels and controller hints readable. | Caption: “Choose an installed game from the unified menu.” Alt: describe the games and selected card actually visible in the final image. |
-| Gameplay | The finished play experience or one selected visual addition | Use a repeatable save/demo in a representative scene. Normal HUD is fine; remove console/diagnostic messages. Record any optional graphics settings. | Caption and alt text should name the actual scene and visible feature. A still must not be described as proof of uninterrupted transitions. |
+| Entity contact shadows: matched stills | One of the user's two proudest features: soft grounding shadows beneath characters/props | Use the same camera, entity pose, scene, and lighting for an on/off pair; change only entity contact AO, keeping world AO and other shadow settings fixed. Choose a surface where the effect reads clearly. Native resolution, ordinary HUD allowed, no diagnostic overlays. | Captions should identify contact shadows enabled/disabled. Alt text must describe the entity, surface, and visible shadow in each actual image. Use two ordinary gallery stills, not a new comparison widget. |
+| Gameplay / transition video | The campaign experience and the user's other proudest feature | Evaluate a repeatable save/demo near a level boundary; review the existing external gameplay video for an uninterrupted crossing with audio. A still must not be described as proof of uninterrupted transitions. | Caption and alt text should name the actual scene. A video link/timestamp must be checked before it appears in the article. |
+| Game picker (optional) | Supporting context: one interface for installed games and expansions | Only show games actually installed and supported in the selected capture build; keep game labels and controller hints readable. | Caption: “Choose an installed game from the unified menu.” Alt: describe the games and selected card actually visible in the final image. |
 
 Preserve uncropped original files and record each capture's author, game/version, source, and any reuse conditions. A paired comparison is optional and should only be used when both captures share the same camera, scene, and lighting apart from the stated setting.
 
@@ -59,7 +69,9 @@ Preserve uncropped original files and record each capture's author, game/version
 ## Review record and next step
 
 - 2026-09-08: user approved slice 4 and authorized onboarding.
-- Pending user input: motivation/proudest result, AI contribution, media source preference, and any newer captures.
+- 2026-09-08: user supplied motivation, broad Claude Fable contribution, and contact-shadow/level-transition emphasis. Prepared the first incomplete article from those notes; shifted media planning toward those features.
+- Pending user input: details of the human/Claude workflow, media source preference, and any newer captures. Motivation and feature emphasis have already been answered; do not ask again.
 - Public history evidence has been gathered and the decisive commits/release independently verified. Review the proposed dates/languages and capture set with the user.
 - Use the [tailored maintainer brief](half-life-continuum-edition-maintainer-brief.md) if captures/history will be prepared in the Continuum project. This brief has not been sent to another maintainer or external service.
-- After the factual story and assets are available, dispatch the content worker with a self-contained brief to create the draft Markdown and reviewed local images. Final desktop/mobile copy/gallery review precedes publication status changes.
+- Continue the draft as workflow details and reviewed assets become available. Final desktop/mobile copy/gallery review precedes publication status changes.
+- Initial draft verification: parent `make check` passed 43 tests, zero Astro diagnostics and privacy findings, and a three-page production build. Browser review at 1440px and 375px confirmed readable article sections, one H1, the draft label, and no horizontal overflow. A direct scan of all seven text output files confirmed the production artifact contains neither this draft route nor its content. Saved review images and check log are under ignored `.agent-worktrees/_runs/root-slice-5/`; temporary browser/server were stopped.

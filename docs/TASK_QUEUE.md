@@ -14,5 +14,5 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
    - Slice 2 — shared design and typography: accepted after the user reviewed preview images; committed as `9d195cd`.
    - Slice 3 — project page and image gallery: accepted by the user; committed as `215cd57`.
    - Slice 4 — landing page and searchable catalog: accepted by the user on 2026-09-08; implemented and independently verified (43 tests, layout/search/history/browser checks, draft separation), committed as `577e1ed`.
-   - Slice 5 — Half-Life: Continuum Edition onboarding: [in-progress], explicitly authorized by the user on 2026-09-08. Gather story, source/date evidence, reviewed metadata, and cover/gallery selections before content integration.
+   - Slice 5 — Half-Life: Continuum Edition onboarding: [in-progress], explicitly authorized by the user on 2026-09-08. First incomplete article drafted from the user's confirmed motivation, Claude Fable attribution, and pride in contact shadows/seamless transitions. Parent verification passed 43 tests, desktop/mobile draft review, and production exclusion. Awaiting workflow detail, date/taxonomy review, and cover/gallery assets; `draft: true` remains set.
    - Slice 6 remains pending; stop for user review between slices.
