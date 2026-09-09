@@ -1,5 +1,7 @@
 # BeamVM portfolio preparation brief
 
+BeamVM onboarding is paused at the user's request as of 2026-09-08. The write-up is approved, and the user is preparing images. This brief remains a reference for that media work; resume portfolio integration when the user returns with the images.
+
 Copy this prompt to the BeamVM maintainer session when ready. It requests factual review and a capture plan first; it has not been sent automatically.
 
 ---

@@ -1,6 +1,6 @@
 # SPEC: BeamVM portfolio onboarding
 
-- **Status:** in-progress (intake)
+- **Status:** paused — awaiting user-prepared images
 - **Approval record:** On 2026-09-08 the user accepted Continuum portfolio v1 as release-ready, said BeamVM is the next ready project, and explicitly requested moving on to it. This authorizes onboarding using the existing portfolio design and content contracts; it does not approve invented copy or unreviewed assets.
 
 ## Summary
@@ -65,5 +65,6 @@ No new site architecture decisions are required. BeamVM's story, exact public li
 
 ## Change Log
 
+- 2026-09-08 — User approved the write-up and explicitly paused BeamVM onboarding while preparing images. Resume when those images are ready; FantasyBoy is now the active onboarding task. The existing site draft remains unchanged.
 - 2026-09-08 — User supplied the BeamVM story: constrained game-making on a vector CRT, repair exercises, launcher/shell growth, and fictional Pro graphics hardware enabling a compromised DOOM-derived game. Draft keeps tested scope limited to the first two shareware maps; full-campaign conversion remains theoretical. Site domain corrected to `whatclaudemade.com`.
 - 2026-09-08 — User selected BeamVM as the next ready project and authorized onboarding before website launch. Reused the approved content/design workflow with serial file ownership.

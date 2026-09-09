@@ -45,7 +45,7 @@ The wrappers also select the runtime mode explicitly: dev uses `NODE_ENV=develop
 
 ## Project content and authoring contracts
 
-The approved content model is in `docs/spec/ROOT_SPEC.md`; the onboarding process and copy/paste maintainer prompt are in `docs/project-onboarding.md`. Project entries live in `src/content/projects/<slug>.md`, with image assets under `src/assets/projects/<slug>/`. Continuum portfolio v1 is accepted and selected for public builds; BeamVM is being onboarded next.
+The approved content model is in `docs/spec/ROOT_SPEC.md`; the onboarding process and copy/paste maintainer prompt are in `docs/project-onboarding.md`. Project entries live in `src/content/projects/<slug>.md`, with image assets under `src/assets/projects/<slug>/`. Continuum portfolio v1 is selected for public builds; BeamVM remains a draft paused for the user's images, while FantasyBoy onboarding is active.
 
 Content defaults to a draft. Incomplete draft metadata is allowed, but publication requires a title, description, article, valid publication/development dates, repository URL, known language/tag values, at least one gallery image with alt text, and a cover pointing to that gallery. Filenames are canonical lowercase kebab-case slugs. Dates are date-only `YYYY-MM-DD` strings, and development duration is elapsed calendar time calculated in UTC.
 

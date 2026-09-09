@@ -1,6 +1,6 @@
 # BeamVM onboarding
 
-Status: first story draft prepared and locally verified, 2026-09-08. The user selected BeamVM as the next ready project after accepting Continuum portfolio v1 and supplied its motivation and evolution. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
+Status: **write-up approved; onboarding paused awaiting the user's images**, 2026-09-08. The user explicitly asked to return to this draft when the images are ready and selected FantasyBoy next. Keep the existing article unchanged during the pause. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
 
 ## Starting context
 
@@ -61,4 +61,5 @@ An optional [maintainer brief](beamvm-maintainer-brief.md) captures these source
 - 2026-09-08 — User explicitly selected BeamVM next and described it as ready.
 - Read-only source/evidence research completed; no files changed in BeamVM. Public source/download question remains pending.
 - 2026-09-08 — User supplied the constrained game-making premise, repair-game learning path, launcher/shell expansion, and Pro hardware/DOOM progression. Prepared an incomplete article with explicit two-map tested scope; exact model/workflow attribution remains for review.
+- 2026-09-08 — User approved the write-up and is preparing images. Onboarding is paused at their request until those images arrive. Public links, dates, attribution, and final media/publication review remain for resumption; they are not requests to continue working on the paused draft now.
 - Parent verification passed `make check`: 43 tests, zero Astro diagnostics and privacy findings. The four-page production build uses `whatclaudemade.com` canonical/social URLs, retains Continuum, and excludes BeamVM. Local browser review confirmed the BeamVM draft/noindex marker, corrected header/canonical, explicit tested-scope qualification, and no horizontal overflow at desktop/mobile widths. The pre-existing preview needed a content refresh after the config change and now serves `/projects/beamvm/` on port 4321. Temporary diagnostic preview/browser were cleaned up; screenshots/log are under `.agent-worktrees/_runs/beamvm-onboarding/`.

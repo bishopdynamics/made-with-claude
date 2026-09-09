@@ -1,7 +1,7 @@
 # SPEC: whatclaudemade.com portfolio launch
 
 - **Status:** in-progress
-- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md)
+- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md)
 - **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. Slice 6 launch remains pending after the BeamVM addendum.
 
 ## Summary
@@ -229,6 +229,7 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Change Log
 
+- 2026-09-08 — User approved BeamVM's write-up and paused it until their images are ready, then selected FantasyBoy as the next project. FantasyBoy onboarding is active under its addendum; website launch remains pending.
 - 2026-09-08 — User corrected the public domain to `whatclaudemade.com`. Updated runtime identity, canonical/social URLs, output checks, current docs, and project metadata; the original idea remains a historical input. No DNS or deployment change is part of this correction.
 - 2026-09-08 — User accepted the assembled Continuum portfolio entry as v1 ready for release and moved extra gallery images to v2. Completed the entry's source-backed metadata and public-build selection; website deployment is still pending. User selected BeamVM as the next ready project, ahead of launch, under its onboarding addendum.
 - 2026-09-08 — First-pass Continuum cover/GIF integrated with approved prose preserved. Parent checks passed 43 tests, zero diagnostics/privacy findings, a temporary public media build, desktop/mobile crop/layout review, cover viewer, and real draft exclusion. Optimized animation retains the original 19.26-second loop; entry remains a draft pending remaining metadata and assembled-content review.
