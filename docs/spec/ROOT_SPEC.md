@@ -2,7 +2,7 @@
 
 - **Status:** in-progress
 - **Addenda:** none
-- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–3 are accepted; the user authorized slice 4. Slice 4 is implemented and independently verified, awaiting the user's slice review; slices 5–6 remain pending.
+- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–4 are accepted; the user accepted slice 4 and authorized slice 5 on 2026-09-08. Slice 5 onboarding is in progress; slice 6 remains pending.
 
 ## Summary
 
@@ -228,6 +228,7 @@ None. The user approved portfolio-publication recency, completion-year filtering
 
 ## Change Log
 
+- 2026-09-08 — User accepted slice 4 and authorized slice 5, Half-Life: Continuum Edition onboarding. Gathering project story, media selections, metadata, and project-specific development-date evidence; final content review remains pending.
 - 2026-09-07 — Slice 4 implemented and independently verified: recent homepage tiles, rich catalog cards, progressive search/filters/URL state, and separate dev draft previews. Parent checks passed 43 tests, zero type diagnostics/privacy findings, layouts for every zero-to-four homepage count, native browser/history/no-script/touch behavior, fallback/reconnection, and draft separation. All temporary build caches are isolated; no real project content or publication was added.
 - 2026-09-07 — Slice 4 concurrent fixture builds exposed shared Astro caches through symlinked dependencies. Extended ownership to isolate caches in the two existing build-fixture tests as well as the new catalog test; production configuration and product behavior are unchanged.
 - 2026-09-07 — User accepted slice 3 and authorized slice 4. Added an owned catalog fixture-build test file. Development draft cards will appear in a separate labeled preview section, excluded from the public search index/counts; this implements the approved local-authoring/publication boundary.

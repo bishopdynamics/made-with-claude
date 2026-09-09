@@ -33,6 +33,7 @@ Every published entry needs its cover image, gallery alt text, title/description
 
 ## Continuum starting evidence
 
+- Active intake and evidence record: [Half-Life: Continuum Edition onboarding](projects/half-life-continuum-edition.md). A [tailored maintainer brief](projects/half-life-continuum-edition-maintainer-brief.md) is ready for capture/story discussion.
 - Public repository: <https://github.com/bishopdynamics/Continuum>.
 - Existing menu tour: [menu documentation](https://github.com/bishopdynamics/Continuum/blob/main/doc/menu.md). The GIF is 640×360; useful as a reference, with higher-resolution captures preferred for enlarged views.
 - Linked gameplay video: <https://youtu.be/DVSHgFvknj0>; not yet reviewed in this planning session.
