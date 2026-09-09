@@ -23,7 +23,7 @@ const taxonomy = [
     options: projectTaxonomy.languages,
   },
   { label: 'Tags', ids: data.tags, options: projectTaxonomy.tags },
-].filter(({ ids }) => ids.length);
+].filter(({ ids }) => ids.length || data.draft);
 const links = [
   ['Source', data.repositoryUrl],
   ['Download', data.releaseUrl],
@@ -39,11 +39,15 @@ const links = [
           <dt>{label}</dt>
           <dd>
             <ul class="project-labels">
-              {ids.map((id) => (
-                <li>
-                  {options.find((option) => option.id === id)?.label ?? id}
-                </li>
-              ))}
+              {ids.length > 0 ? (
+                ids.map((id) => (
+                  <li>
+                    {options.find((option) => option.id === id)?.label ?? id}
+                  </li>
+                ))
+              ) : (
+                <li>{label} pending</li>
+              )}
             </ul>
           </dd>
         </div>
@@ -63,6 +67,12 @@ const links = [
             {formatDevelopmentSpan(data.startedOn, data.completedOn)}{' '}
             <span class="project-calendar-note">(calendar time)</span>
           </dd>
+        </div>
+      )}
+      {data.draft && (!data.startedOn || !data.completedOn) && (
+        <div>
+          <dt>Development span</dt>
+          <dd>Dates pending</dd>
         </div>
       )}
     </dl>

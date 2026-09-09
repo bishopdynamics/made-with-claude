@@ -2,6 +2,36 @@
 title: 'BeamVM'
 description: 'A game about making games for a virtual machine and vector CRT, balancing drawing time against game logic.'
 draft: true
+startedOn: '2026-08-25'
+completedOn: '2026-09-08'
+languages: [rust, beamvm-dsl, wgsl]
+tags: [games, graphics, developer-tools]
+images:
+  - id: rockfield
+    src: '../../assets/projects/beamvm/program_rockfield.png'
+    alt: 'BeamVM showing green vector rocks and a ship beside source code, timing meters, and a cycle-budget strip.'
+    caption: 'Rockfield on the original machine, with its source and cycle-budget tools.'
+  - id: rockfield-dim
+    src: '../../assets/projects/beamvm/program_rockfield_dim.png'
+    alt: 'BeamVM showing the Rockfield repair exercise beside its problem brief and timing meters.'
+    caption: 'A Rockfield repair exercise, with the problem brief and timing tools.'
+  - id: time-travel
+    src: '../../assets/projects/beamvm/debugger_timetravel.png'
+    alt: 'BeamVM showing a past Splitstorm state with Replay and Branch controls, source code, and machine-state inspection.'
+    caption: 'Scrubbing back through execution to inspect an earlier machine state.'
+  - id: shell
+    src: '../../assets/projects/beamvm/program_shell.png'
+    alt: "BeamVM's green CRT shell listing programs in its virtual examples directory beside the shell brief."
+    caption: "The shell listing programs inside BeamVM's virtual filesystem."
+  - id: pro-coprocessor
+    src: '../../assets/projects/beamvm/debugger_avg.png'
+    alt: "BeamVM Pro displaying a vector sign alongside the graphics coprocessor's active display list and separate budget meters."
+    caption: "Inspecting the Pro graphics coprocessor's display list."
+  - id: doom
+    src: '../../assets/projects/beamvm/doom_play.png'
+    alt: "Vector outlines from DOOM's hangar with its HUD, program brief, and separate CPU and graphics budget meters."
+    caption: "DOOM's first shareware map rendered as vectors on the Pro machine."
+coverId: rockfield
 ---
 
 I wanted to make a video game built around a virtual machine, and the idea that appealed to me was a game about making games under specific restrictions.

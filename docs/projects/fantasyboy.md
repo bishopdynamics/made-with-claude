@@ -35,7 +35,7 @@ The original user's CPU association needs a factual correction: the real Game Bo
 
 The README credits Claude with generating the emulator, compiler, games, and docs through iterative prompting. The original prompt names Claude Sonnet 4.5 as the intended model, but the article uses the user's own recollection: mainly Sonnet, possible Opus uncertain. Do not add a precise version or promote uncertain Opus involvement to confirmed fact. Do not retroactively describe Fable/Astra as original implementers.
 
-The draft is at `src/content/projects/fantasyboy.md` with the verified public repository URL and `draft: true`; no development/publication dates, taxonomy, or release URL are set. The three existing screenshots accompany it for review.
+The draft is at `src/content/projects/fantasyboy.md` with the verified public repository URL, `draft: true`, and original-development dates February 3–5, 2026. The article explicitly calls the dates approximate. Draft languages are Python and C; tags are Games, Emulation, and Developer tools. Publication date and release URL remain unset; the three existing screenshots accompany it for review.
 
 ## Existing media
 
@@ -57,13 +57,16 @@ The orchestrator independently compared the local copies against the screenshot 
 
 - The public repository currently has one product commit, `5fc9ad2`, titled `initial, version 1.0.0`, with timestamp **2026-02-17T11:46:43-08:00** (19:46:43 UTC), independently verified by the orchestrator. Repository creation is minutes earlier that day. This is an import/publication point, not proof of a one-day development period.
 - `VERSION` contains `1.0.0`, but the [GitHub releases page](https://github.com/bishopdynamics/FantasyBoy/releases) has no releases according to the independently checked API. Use the source repository as the current way to obtain it; do not invent a release/download URL.
-- Actual ideation/start and completion dates need the user's account or earlier records; an approximate original-date question is pending. The user confirms recent commits reflect later Fable/Astra review and template migration, so do not use those maintenance dates as the original work's endpoint. Do not infer start dates from the copyright year.
-- Dates, taxonomy, and the final endpoint remain unset in the draft until reviewed.
+- User-supplied original-development range: **roughly February 3–5**, interpreted as **2026** from the already discussed February 17, 2026 initial repository commit. Store `startedOn: '2026-02-03'` and `completedOn: '2026-02-05'` while preserving “roughly” in the visible article and this provenance record. The year is contextual, not separately stated in the user's reply.
+- These representative dates yield **2 elapsed calendar days** under the site's existing date convention; this is not a claim of exact effort hours. Later Fable/Astra review and template migration remain outside the original span.
+- Original dates and source-backed draft taxonomy are now supplied. Publication date and final assembled-entry acceptance remain pending.
 
 ## Review record
 
 - 2026-09-08 — User selected FantasyBoy after pausing BeamVM for images. Source and three existing screenshots located and inspected; story question pending.
 - Read-only evidence work completed. Parent independently verified public repository/license/release state and the initial commit timestamp, and visually inspected all three screenshots. No source files, runtime state, dependencies, or Git state were changed in FantasyBoy.
 - 2026-09-08 — User confirmed the first-Claude-project story, 6502-inspired fantasy-console motivation, Sonnet-led original work with uncertain Opus involvement, and much later Fable/Astra review/template migration. Prepared a first article with the existing screenshot gallery; original dates and assembled-content review remain pending.
+- 2026-09-08 — User accepted omitting the incorrect real-Game-Boy CPU claim and supplied the approximate original work period, February 3–5. Recorded 2026 from the repository-date context, added the metadata, and retained approximate wording in the article.
+- 2026-09-08 — User requested metadata in drafts. Added Python/C and Games/Emulation/Developer tools; the detail page and draft card now show the two-day elapsed calendar span, while the article preserves the approximate dates. Shared verification passed 43 tests and desktop/mobile metadata checks; source/publication status and approved story/media are otherwise preserved.
 - Parent `make check` passed 43 tests, zero Astro diagnostics, zero privacy findings across 226 snapshots, and the four-page production build. FantasyBoy and paused BeamVM remain excluded from public routes/links; Continuum remains present. Browser review confirmed the draft, three images, full 1424×968 originals with contain fitting, navigation through all three images, final Next disabled, and no desktop/mobile overflow. Logs/screenshots: `.agent-worktrees/_runs/fantasyboy-onboarding/`.
 - The long-running preview initially missed the new route. A temporary fresh development server synchronized the content, after which the original port 4321 served the draft and gallery correctly. The temporary server/browser were stopped; the pre-existing preview remains running. The recurring stale-preview behavior is recorded as a tooling follow-up rather than an article blocker.

@@ -1,6 +1,6 @@
 # BeamVM portfolio preparation brief
 
-BeamVM onboarding is paused at the user's request as of 2026-09-08. The write-up is approved, and the user is preparing images. This brief remains a reference for that media work; resume portfolio integration when the user returns with the images.
+The user supplied `docs/SCREENSHOTS.md` and its images and confirmed August 25–September 8, 2026 as the development period, resuming metadata/media work on 2026-09-08. The write-up remains approved. This earlier preparation brief is a reference; the new guide supersedes its former assumption that no general capture tooling exists.
 
 Copy this prompt to the BeamVM maintainer session when ready. It requests factual review and a capture plan first; it has not been sent automatically.
 

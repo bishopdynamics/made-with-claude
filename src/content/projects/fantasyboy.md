@@ -2,6 +2,10 @@
 title: 'FantasyBoy'
 description: 'A Python fantasy console with a 6502-inspired CPU, a C-subset compiler, a debugging emulator, and three example games.'
 draft: true
+startedOn: '2026-02-03'
+completedOn: '2026-02-05'
+languages: [python, c]
+tags: [games, emulation, developer-tools]
 repositoryUrl: 'https://github.com/bishopdynamics/FantasyBoy'
 images:
   - id: keen
@@ -20,6 +24,8 @@ coverId: keen
 ---
 
 FantasyBoy was my first project with Claude. I was still trying to work out whether AI coding tools could produce something substantial, and a small CPU emulator seemed like an interesting way to find out.
+
+I did the original work roughly February 3–5, 2026.
 
 I wanted to build an emulator for a simple processor. The 6502 appealed to me, and I liked the idea of an invented console inspired by the Game Boy. That became FantasyBoy: a fictional machine with a 6502-style CPU, its own graphics and instruction set, a debugging emulator, and games to exercise it.
 

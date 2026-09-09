@@ -1,6 +1,6 @@
 # SPEC: BeamVM portfolio onboarding
 
-- **Status:** paused — awaiting user-prepared images
+- **Status:** in-progress (draft metadata and supplied media)
 - **Approval record:** On 2026-09-08 the user accepted Continuum portfolio v1 as release-ready, said BeamVM is the next ready project, and explicitly requested moving on to it. This authorizes onboarding using the existing portfolio design and content contracts; it does not approve invented copy or unreviewed assets.
 
 ## Summary
@@ -26,7 +26,7 @@ Prepare BeamVM as the next portfolio entry before the website launch task. Gathe
 
 | Decision | Choice | Rationale / alternatives considered |
 | --- | --- | --- |
-| Queue order | BeamVM onboarding before ROOT_SPEC's remaining launch slice | User explicitly selected this next project. Continuum v1 is accepted; its extra gallery images are v2. |
+| Queue order | BeamVM resumed for supplied screenshots and shared draft metadata; FantasyBoy remains in review | User supplied the images that the pause was waiting for and requested metadata in both drafts. Changes are serialized through one code worker. |
 | Design and contracts | Reuse ROOT_SPEC's Astro/Markdown project schema, taxonomy, cards, gallery, and prose | The user approved the site design and article presentation. |
 | Starting source | Read-only local `beamvm` checkout plus verified public sources | Local README covers early M0/M1; inspect current source/history to avoid stale claims. |
 | Authorship and motivation | Gather BeamVM-specific input from the user | Do not infer a personal story or model attribution from another project. |
@@ -47,7 +47,7 @@ The final story should explain what visitors can do, why the user wanted it, the
    - **Orchestrator-owned files:** `docs/projects/beamvm.md`, optional `docs/projects/beamvm-maintainer-brief.md`, this spec, queue/handoff/memory, and reusable onboarding notes.
    - **Verification:** cite actual source paths/revisions and public URLs; distinguish observed implementation from historical plans and confirm the user's account.
 2. **Article and media draft — (M), [serial].** Integrate factual copy and selected assets using the existing contracts.
-   - **Worker-owned files:** `src/content/projects/beamvm.md`, `src/assets/projects/beamvm/**`, `src/data/project-taxonomy.ts` (identifiers justified by reviewed content only).
+   - **Worker-owned files:** `src/content/projects/beamvm.md`, `src/assets/projects/beamvm/**`, `src/data/project-taxonomy.ts` (source-backed draft identifiers), `src/components/ProjectMeta.astro`, `src/components/ProjectCard.astro` (draft-only pending metadata labels), `src/content/projects/fantasyboy.md` (source-backed language/tag fields only, preserving the user's dates and prose).
    - **Orchestrator-owned files:** evidence/provenance and shared documentation above.
    - **Verification:** worker formatting and source-asset verification; parent `make check`, link checks, desktop/mobile article/cover/gallery review, draft exclusion, and animation checks where relevant.
 3. **Content acceptance — (L), [serial].** Resolve remaining reviewed metadata/media and obtain the user's assessment, then mark the entry eligible for public builds.
@@ -65,6 +65,8 @@ No new site architecture decisions are required. BeamVM's story, exact public li
 
 ## Change Log
 
+- 2026-09-08 — Metadata/gallery integration independently verified: 43 tests, zero diagnostics/privacy findings, draft card/detail metadata, pending fallbacks, responsive six-image gallery/full originals, and production/public-search exclusion. Approved prose remains unchanged; final entry review is pending.
+- 2026-09-08 — User supplied `docs/SCREENSHOTS.md`, requested metadata in drafts, and confirmed BeamVM dates August 25–September 8 (including planning earlier on August 25). Resumed the media step, selected six source captures, and populated known draft labels/dates. Shared component/FantasyBoy metadata edits are explicitly owned in this serial slice. Approved prose remains unchanged; no publication is implied.
 - 2026-09-08 — User approved the write-up and explicitly paused BeamVM onboarding while preparing images. Resume when those images are ready; FantasyBoy is now the active onboarding task. The existing site draft remains unchanged.
 - 2026-09-08 — User supplied the BeamVM story: constrained game-making on a vector CRT, repair exercises, launcher/shell growth, and fictional Pro graphics hardware enabling a compromised DOOM-derived game. Draft keeps tested scope limited to the first two shareware maps; full-campaign conversion remains theoretical. Site domain corrected to `whatclaudemade.com`.
 - 2026-09-08 — User selected BeamVM as the next ready project and authorized onboarding before website launch. Reused the approved content/design workflow with serial file ownership.

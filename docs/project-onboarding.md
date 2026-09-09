@@ -1,6 +1,6 @@
 # Project Onboarding
 
-Authoring guide for the approved `docs/spec/ROOT_SPEC.md` and its onboarding addenda. Add projects one at a time with the user. Half-Life: Continuum Edition v1 is accepted as release-ready. [BeamVM](projects/beamvm.md) has an approved write-up and is paused awaiting the user's images; [FantasyBoy](projects/fantasyboy.md) is now active.
+Authoring guide for the approved `docs/spec/ROOT_SPEC.md` and its onboarding addenda. Add projects individually with the user. Half-Life: Continuum Edition v1 is accepted as release-ready. [BeamVM](projects/beamvm.md) has resumed media/metadata work with its supplied screenshot guide; [FantasyBoy](projects/fantasyboy.md) is in article/gallery review. Known draft metadata is shown before publication; missing values are labeled pending.
 
 ## Maintainer prompt
 

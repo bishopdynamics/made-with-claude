@@ -63,6 +63,7 @@ No new site architecture decisions are required. Exact story/attribution, dates,
 
 ## Change Log
 
+- 2026-09-08 — User supplied the approximate original work period, February 3–5, and accepted omitting the incorrect real-Game-Boy CPU claim. Added development metadata using 2026 from context, retaining “roughly” in the article; later reviews/migration remain outside the span.
 - 2026-09-08 — First article/gallery draft prepared; copied screenshots match the pinned source exactly. Parent `make check` passed 43 tests and zero diagnostics/privacy findings, with responsive/full-image gallery review and production draft exclusion. Original date and content review remain pending.
 - 2026-09-08 — User supplied FantasyBoy's first-Claude-project history and motivation, uncertain original model mix, and later Fable/Astra review/migration. First draft uses the three existing screenshots for review, retains model uncertainty, and describes a 6502-inspired fictional console without the mistaken real-Game-Boy CPU lineage. Original date question remains pending.
 - 2026-09-08 — User paused the approved BeamVM write-up for images and selected FantasyBoy next. Located the source and existing screenshots; started read-only evidence and story intake.

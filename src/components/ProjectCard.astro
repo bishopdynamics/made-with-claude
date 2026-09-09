@@ -61,14 +61,19 @@ const title = data.title ?? project.id;
       )
     }
     {
-      data.languages.length > 0 && (
+      (data.languages.length > 0 || data.draft) && (
         <ul class="project-card-languages" aria-label="Languages">
-          {data.languages.map((id) => (
-            <li>
-              {projectTaxonomy.languages.find((language) => language.id === id)
-                ?.label ?? id}
-            </li>
-          ))}
+          {data.languages.length > 0 ? (
+            data.languages.map((id) => (
+              <li>
+                {projectTaxonomy.languages.find(
+                  (language) => language.id === id,
+                )?.label ?? id}
+              </li>
+            ))
+          ) : (
+            <li>Languages pending</li>
+          )}
         </ul>
       )
     }
@@ -81,13 +86,24 @@ const title = data.title ?? project.id;
       )
     }
     {
-      data.tags.length > 0 && (
+      data.draft && (!data.startedOn || !data.completedOn) && (
+        <p class="project-card-development">
+          Development: <span>Dates pending</span>
+        </p>
+      )
+    }
+    {
+      (data.tags.length > 0 || data.draft) && (
         <ul class="project-card-tags" aria-label="Tags">
-          {data.tags.map((id) => (
-            <li>
-              {projectTaxonomy.tags.find((tag) => tag.id === id)?.label ?? id}
-            </li>
-          ))}
+          {data.tags.length > 0 ? (
+            data.tags.map((id) => (
+              <li>
+                {projectTaxonomy.tags.find((tag) => tag.id === id)?.label ?? id}
+              </li>
+            ))
+          ) : (
+            <li>Tags pending</li>
+          )}
         </ul>
       )
     }

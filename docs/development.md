@@ -47,7 +47,7 @@ The wrappers also select the runtime mode explicitly: dev uses `NODE_ENV=develop
 
 ## Project content and authoring contracts
 
-The approved content model is in `docs/spec/ROOT_SPEC.md`; the onboarding process and copy/paste maintainer prompt are in `docs/project-onboarding.md`. Project entries live in `src/content/projects/<slug>.md`, with image assets under `src/assets/projects/<slug>/`. Continuum portfolio v1 is selected for public builds; BeamVM remains a draft paused for the user's images, while FantasyBoy onboarding is active.
+The approved content model is in `docs/spec/ROOT_SPEC.md`; the onboarding process and copy/paste maintainer prompt are in `docs/project-onboarding.md`. Project entries live in `src/content/projects/<slug>.md`, with image assets under `src/assets/projects/<slug>/`. Continuum portfolio v1 is selected for public builds; BeamVM and FantasyBoy remain drafts while their assembled entries are reviewed.
 
 Content defaults to a draft. Incomplete draft metadata is allowed, but publication requires a title, description, article, valid publication/development dates, repository URL, known language/tag values, at least one gallery image with alt text, and a cover pointing to that gallery. Filenames are canonical lowercase kebab-case slugs. Dates are date-only `YYYY-MM-DD` strings, and development duration is elapsed calendar time calculated in UTC.
 
@@ -95,7 +95,7 @@ Slice 2 parent browser review used an isolated temporary Markdown fixture, cover
 
 ## Project pages and gallery
 
-`src/pages/projects/[slug].astro` builds paths from the public query in production and explicitly includes drafts in development. It renders the collection Markdown through `Project.astro`, which accepts `{ project: ProjectEntry }` and article content through its default slot. Incomplete drafts omit unavailable metadata/images, retain a visible Draft preview label, and use noindex. New and edited draft routes were verified in a running dev server; they remain absent from production output.
+`src/pages/projects/[slug].astro` builds paths from the public query in production and explicitly includes drafts in development. It renders the collection Markdown through `Project.astro`, which accepts `{ project: ProjectEntry }` and article content through its default slot. Drafts show populated language/tag/date metadata, with `Languages pending`, `Tags pending`, and `Dates pending` for missing fields; unavailable images remain omitted on detail pages. Draft preview labels and noindex remain. Pending labels are draft-only and never appear on validated public entries.
 
 `ProjectMeta.astro` accepts `{ project: ProjectEntry<unknown> }` and renders semantic language/tag/date metadata plus available Source, Download, and Video links. Metadata groups wrap compactly; date values and the calendar-duration distinction remain visible. `ProjectGallery.astro` accepts `{ images, id, coverId?, coverPosition? }`; its ID must be unique on the page. The article uses `.project-article.prose`, while the gallery uses the wider shared container.
 
