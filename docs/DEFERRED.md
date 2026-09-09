@@ -19,3 +19,4 @@ One line per item: `- <what> — from docs/spec/<file>.md (YYYY-MM-DD)`
 - Investigate long-running development previews missing new project routes after edits/checks; a fresh dev-server content sync restored the current preview, but root cause remains unconfirmed — from docs/spec/ROOT_SPEC.md (2026-09-08).
 - Supply cover/product screenshots for Wallflower, Vintage, Simpler Camera Card, Slowframe, and Mezuril; see `docs/projects/batch-draft-review.md` for capture suggestions — from docs/spec/FEATURE_SPEC_batch_project_drafts.md (2026-09-08).
 - Review date candidates, public source/download links, and any personal/model attribution for the six new drafts before publication — from docs/spec/FEATURE_SPEC_batch_project_drafts.md (2026-09-08).
+- Reassess the Node-bound image transform when upgrading Astro, retaining the restart and actual-image-response regression — from docs/spec/FEATURE_SPEC_local_image_serving.md (2026-09-09).

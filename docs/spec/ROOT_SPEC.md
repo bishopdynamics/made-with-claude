@@ -1,7 +1,7 @@
 # SPEC: whatclaudemade.com portfolio launch
 
 - **Status:** in-progress
-- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md)
+- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md), [Local image serving](FEATURE_SPEC_local_image_serving.md)
 - **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. Slice 6 launch remains pending after the BeamVM addendum.
 
 ## Summary

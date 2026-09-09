@@ -8,20 +8,23 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 ## Queue
 
-1. [in-review] FEATURE_SPEC_batch_project_drafts.md — six drafts ready
+1. [in-review] FEATURE_SPEC_local_image_serving.md
+   - User reported broken Vintage Vault images and reiterated repository-local copies. Copies are present and valid; reproduced stale image-service failure after a Vite restart. Native-transform fix and real image-response regression passed worker and parent `make check` (44 tests). Existing preview thumbnails and all full-size originals load successfully; all 14 tracked project media files are regular files in this repo.
+
+2. [in-review] FEATURE_SPEC_batch_project_drafts.md — six drafts ready
    - User authorized wallflower, vintage, vintage-vault, simpler-camera-card, slowframe, and mezuril drafts using parallel Astra agents, with existing images selected at agent discretion and missing media reported.
    - All six drafts integrated from two Astra/high workers reused in parallel waves; the thread limit prevented a third. Parent checks passed 43 tests plus desktop/mobile draft/card/gallery review and production exclusion. Existing entries remain unchanged; all worktrees/branches cleaned up.
    - Vintage Vault has three selected screenshots. Wallflower, Vintage, Simpler Camera Card, Slowframe, and Mezuril need usable cover/product images. Capture suggestions and metadata gaps are in `docs/projects/batch-draft-review.md`. User assessment/publication remain pending.
 
-2. [in-review] FEATURE_SPEC_beamvm_onboarding.md — metadata/media ready
+3. [in-review] FEATURE_SPEC_beamvm_onboarding.md — metadata/media ready
    - User supplied `docs/SCREENSHOTS.md` and its image set, requested languages/development/tags in drafts, and confirmed BeamVM dates August 25–September 8, 2026 (2 calendar weeks).
    - Approved article is preserved. Six source screenshots are integrated with Rockfield as cover; both drafts show source-backed language/tag metadata and development spans. Parent verification passed 43 tests, desktop/mobile card/detail review, full-image gallery checks, and public exclusion. Unknown future draft fields use pending labels. Public source/download URL, specific attribution, and final assembled-entry acceptance remain pending.
 
-3. [in-review] FEATURE_SPEC_fantasyboy_onboarding.md
+4. [in-review] FEATURE_SPEC_fantasyboy_onboarding.md
    - 2026-09-08: user selected FantasyBoy next, describing it as their oldest project and directing source discovery under `/mnt/Fast/projects/`.
    - Source/public-link evidence completed. User confirmed this was their first Claude project, mainly Sonnet with possible Opus uncertain, followed much later by Fable/Astra review/template migration. Article and Keen/Tetris/Breakout gallery are prepared; original dates are roughly February 3–5, 2026, with approximate wording preserved. Python/C and Games/Emulation/Developer tools now appear in previews. Final assembled-content acceptance remains pending; keep `draft: true`.
 
-4. [pending] ROOT_SPEC.md — remaining launch slice, after selected onboarding work
+5. [pending] ROOT_SPEC.md — remaining launch slice, after selected onboarding work
    - 2026-09-07: user approved the full specification and authorized slice 1. Initial Planning is accepted and removed from the active queue.
    - Slice 1 — content contracts and tooling: accepted by the user; implemented and independently verified in `b1d60c4`.
    - Slice 2 — shared design and typography: accepted after the user reviewed preview images; committed as `9d195cd`.

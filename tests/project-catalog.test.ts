@@ -63,6 +63,7 @@ test(
       'src',
       'public',
       'scripts/markdown-code.mjs',
+      'scripts/image-service.mjs',
     ]) {
       mkdirSync(dirname(join(root, file)), { recursive: true });
       cpSync(join(project, file), join(root, file), { recursive: true });

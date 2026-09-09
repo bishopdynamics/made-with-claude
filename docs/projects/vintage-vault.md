@@ -12,7 +12,7 @@ Status: draft and three screenshots prepared in the parallel Astra batch; final 
 
 ## Selected media
 
-All are unchanged 1920×1106 repository JPEG screenshots, inspected by worker and parent:
+All are unchanged 1920×1106 JPEG screenshots copied and committed under `src/assets/projects/vintage-vault/`, inspected by worker and parent. These are regular files, with no runtime dependency on the source checkout:
 
 | Local asset | Source | SHA-256 |
 | --- | --- | --- |
@@ -25,3 +25,9 @@ The screenshots contain game artwork as part of the product UI; no separate medi
 ## Verification
 
 Astra/high worker committed `7356331`; format/whitespace, source hashes, and privacy checks passed. Parent reviewed all three images and the article, integrated the commit, and reran format/privacy checks (256 snapshots, zero findings). Worktree/branch safely removed. Final batch browser/build review passed; see [the batch review](batch-draft-review.md).
+
+### Image-serving correction — 2026-09-09
+
+The user reported broken screenshots. All three committed copies and direct original URLs were valid; optimized thumbnail requests instead returned HTTP 500 with Astro’s `MissingSharp` error. The cached image service retained a disposed Vite module runner after a Vite-only restart. The local service wrapper now binds only the unchanged upstream transform to Node’s module loader.
+
+Worker and parent `make check` passed with 44 tests and zero diagnostics/privacy findings. A regression serves a separate copy of this repo, triggers the restart, and checks three byte-identical originals plus nine decoded WebP derivatives without using a sibling checkout. The existing preview on port 4321 also returned HTTP 200 for all three thumbnails and full-size 1920×1106 images; navigation through 3 / 3 passed. See [the image-serving spec](../spec/FEATURE_SPEC_local_image_serving.md).
