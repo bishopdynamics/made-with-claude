@@ -1,6 +1,6 @@
 # BeamVM onboarding
 
-Status: **write-up approved; metadata/media integration resumed**, 2026-09-08. The user supplied `docs/SCREENSHOTS.md` and its images, requested metadata in drafts, and confirmed the development period. Preserve the approved article while adding source information and images. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
+Status: **content accepted as ready to publish**, 2026-09-09. The user approved the assembled article, metadata, and six local screenshots. Public-build selection awaits the required public repository URL, requested from the user. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
 
 ## Starting context
 
@@ -8,7 +8,7 @@ Status: **write-up approved; metadata/media integration resumed**, 2026-09-08. T
 - Its `PROJECT.md` describes a programming game where a Python-flavored DSL steers a simulated vector CRT, played inside a time-travel debugger.
 - The local README describes Rust core/app crates and early M0/M1 work. It has not kept pace with later source/specs, so it is an orientation aid rather than the basis for current-feature claims.
 - Evidence worker inspected commit `3927dda` (2026-09-08, acceptance of cheats). During the orchestrator's follow-up the independently active source checkout advanced to `c48ddab`, a keyboard-capture implementation commit. Treat this as an advancing development checkout, not an immutable release snapshot; choose the capture/release revision with the maintainer. This onboarding session made no changes there.
-- The article is at `src/content/projects/beamvm.md`, still `draft: true`, with source-backed languages/tags, confirmed dates, and six images ready for review. Public source/download links and specific attribution remain unresolved.
+- The article is at `src/content/projects/beamvm.md`, still `draft: true`, with approved languages/tags, confirmed dates, and six images. Its public repository URL remains unresolved; the user accepted the existing prose without additional model attribution.
 
 ## Source and release readiness
 
@@ -41,7 +41,7 @@ Confirmed firsthand account from the user on 2026-09-08:
 
 The first-person draft follows that progression, from constrained game-making to the Pro hardware challenge, with the verified editor/time-travel debugger providing context. It avoids asserting that modern displays have no possible analogue; the user's interest in vector CRTs can be expressed without an absolute technical claim.
 
-BeamVM-specific model attribution and the detailed human/agent division of work remain unconfirmed. Do not reuse Continuum's Fable/Opus attribution or sole-research/implementation statement as BeamVM facts. Dates are now confirmed; public URLs and final assembled-media acceptance remain separate review inputs.
+BeamVM-specific model attribution and the detailed human/agent division of work remain unconfirmed. Do not reuse Continuum's Fable/Opus attribution or sole-research/implementation statement as BeamVM facts. Dates and the assembled entry are now accepted; only the required public repository URL remains unresolved for public-build selection.
 
 ## Media and metadata
 
@@ -69,6 +69,8 @@ SHA-256 provenance for the supplied files: `program_rockfield.png` = `9bf41d3916
 An optional [maintainer brief](beamvm-maintainer-brief.md) captures these source/media questions for the BeamVM project without sending a message externally.
 
 ## Review record
+
+- 2026-09-09 — User accepted BeamVM and FantasyBoy as ready to publish. BeamVM content acceptance is complete; its required public repository URL remains missing. An anonymous lookup for `bishopdynamics/beamvm` returned HTTP 404, so no guessed link was added. Requested the correct public URL.
 
 - 2026-09-08 — User explicitly selected BeamVM next and described it as ready.
 - Read-only source/evidence research completed; no files changed in BeamVM. Public source/download question remains pending.

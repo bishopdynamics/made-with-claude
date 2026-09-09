@@ -1,6 +1,6 @@
 # SPEC: BeamVM portfolio onboarding
 
-- **Status:** in-progress (draft metadata and supplied media)
+- **Status:** content accepted; public repository URL pending
 - **Approval record:** On 2026-09-08 the user accepted Continuum portfolio v1 as release-ready, said BeamVM is the next ready project, and explicitly requested moving on to it. This authorizes onboarding using the existing portfolio design and content contracts; it does not approve invented copy or unreviewed assets.
 
 ## Summary
@@ -64,6 +64,8 @@ No new site architecture decisions are required. BeamVM's story, exact public li
 - None yet. Record only deliberate follow-ups arising from BeamVM onboarding.
 
 ## Change Log
+
+- 2026-09-09 — User accepted the assembled article and six local screenshots as ready to publish. Public repository URL is still missing and required by the existing publication schema; requested the URL without reopening content review.
 
 - 2026-09-08 — Metadata/gallery integration independently verified: 43 tests, zero diagnostics/privacy findings, draft card/detail metadata, pending fallbacks, responsive six-image gallery/full originals, and production/public-search exclusion. Approved prose remains unchanged; final entry review is pending.
 - 2026-09-08 — User supplied `docs/SCREENSHOTS.md`, requested metadata in drafts, and confirmed BeamVM dates August 25–September 8 (including planning earlier on August 25). Resumed the media step, selected six source captures, and populated known draft labels/dates. Shared component/FantasyBoy metadata edits are explicitly owned in this serial slice. Approved prose remains unchanged; no publication is implied.

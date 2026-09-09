@@ -1,7 +1,8 @@
 ---
 title: 'FantasyBoy'
 description: 'A Python fantasy console with a 6502-inspired CPU, a C-subset compiler, a debugging emulator, and three example games.'
-draft: true
+draft: false
+publishedOn: '2026-09-09'
 startedOn: '2026-02-03'
 completedOn: '2026-02-05'
 languages: [python, c]

@@ -1,6 +1,6 @@
 # SPEC: FantasyBoy portfolio onboarding
 
-- **Status:** in-progress (draft article and media)
+- **Status:** accepted (ready for website launch)
 - **Approval record:** On 2026-09-08 the user selected FantasyBoy as the next project, described it as their oldest, and directed discovery under `/mnt/Fast/projects/`. BeamVM is paused awaiting the user's images. Continue the established onboarding workflow; do not reopen the approved site design.
 
 ## Summary
@@ -55,13 +55,17 @@ The existing screenshots show game output beside registers, memory/buffer views,
 
 ## Open Questions
 
-No new site architecture decisions are required. Exact story/attribution, dates, public links, and selected images are intake outputs to be reviewed before publication.
+None for the accepted entry. Preserve the user’s approximate dates and uncertainty about original Opus involvement. Reconcile the prepared publication date at website launch if needed.
 
 ## Deferred / Follow-ups
 
 - None yet.
 
 ## Change Log
+
+- 2026-09-09 — Public selection verified: `make check` passed 44 tests, zero diagnostics/privacy findings; production contains five pages with FantasyBoy and Continuum as the two public projects. Browser confirmed public title/canonical, three loaded images, public catalog/search metadata, and the normal preview’s updated state. Seven remaining drafts are excluded.
+
+- 2026-09-09 — User accepted the assembled article and three local screenshots as ready to publish. Selected the entry for public builds with prepared `publishedOn: 2026-09-09`; public repository independently rechecked. Website deployment remains the separate launch task.
 
 - 2026-09-08 — User supplied the approximate original work period, February 3–5, and accepted omitting the incorrect real-Game-Boy CPU claim. Added development metadata using 2026 from context, retaining “roughly” in the article; later reviews/migration remain outside the span.
 - 2026-09-08 — First article/gallery draft prepared; copied screenshots match the pinned source exactly. Parent `make check` passed 43 tests and zero diagnostics/privacy findings, with responsive/full-image gallery review and production draft exclusion. Original date and content review remain pending.

@@ -1,6 +1,6 @@
 # FantasyBoy onboarding
 
-Status: first story/media draft prepared and locally verified, 2026-09-08. The user confirmed FantasyBoy was their first project with Claude and supplied its motivation, original model uncertainty, and later review/migration history. Workflow: [FantasyBoy onboarding spec](../spec/FEATURE_SPEC_fantasyboy_onboarding.md).
+Status: **accepted as ready to publish**, 2026-09-09. The approved article, metadata, and three local screenshots are selected for public builds. Prepared publication date: September 9, 2026; website launch remains separate. Workflow: [FantasyBoy onboarding spec](../spec/FEATURE_SPEC_fantasyboy_onboarding.md).
 
 ## Source context
 
@@ -59,9 +59,13 @@ The orchestrator independently compared the local copies against the screenshot 
 - `VERSION` contains `1.0.0`, but the [GitHub releases page](https://github.com/bishopdynamics/FantasyBoy/releases) has no releases according to the independently checked API. Use the source repository as the current way to obtain it; do not invent a release/download URL.
 - User-supplied original-development range: **roughly February 3–5**, interpreted as **2026** from the already discussed February 17, 2026 initial repository commit. Store `startedOn: '2026-02-03'` and `completedOn: '2026-02-05'` while preserving “roughly” in the visible article and this provenance record. The year is contextual, not separately stated in the user's reply.
 - These representative dates yield **2 elapsed calendar days** under the site's existing date convention; this is not a claim of exact effort hours. Later Fable/Astra review and template migration remain outside the original span.
-- Original dates and source-backed draft taxonomy are now supplied. Publication date and final assembled-entry acceptance remain pending.
+- Original dates and source-backed draft taxonomy are now supplied. The user accepted the assembled entry on September 9, 2026; its prepared publication date is September 9.
 
 ## Review record
+
+- 2026-09-09 — Acceptance verification passed: 44 tests, zero Astro diagnostics/privacy findings (288 snapshots at that run), and five production pages. Explicit built-output validation requires FantasyBoy/Continuum and excludes all seven drafts. Browser confirmed FantasyBoy’s public title/canonical, three loaded gallery thumbnails, and public catalog/search data; the normal preview on 4321 now reflects acceptance. Temporary review server/browser stopped. Log: `.agent-worktrees/_runs/project-acceptance/make-check.log`.
+
+- 2026-09-09 — User accepted FantasyBoy and BeamVM as ready to publish. FantasyBoy now has `draft: false` and `publishedOn: 2026-09-09`; its public repository returned HTTP 200 anonymously. Approved body, metadata, and copied media are unchanged.
 
 - 2026-09-08 — User selected FantasyBoy after pausing BeamVM for images. Source and three existing screenshots located and inspected; story question pending.
 - Read-only evidence work completed. Parent independently verified public repository/license/release state and the initial commit timestamp, and visually inspected all three screenshots. No source files, runtime state, dependencies, or Git state were changed in FantasyBoy.
