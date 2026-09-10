@@ -20,8 +20,11 @@ import { checkSite } from '../scripts/check-site.mjs';
 import { isolateFixtureCaches } from './fixtures/projects/build-cache.ts';
 import {
   draftMedia,
+  draftVideoId,
   literalCaption,
   literalTitle,
+  publicVideoId,
+  publicVideoUrl,
   writePageFixtures,
 } from './fixtures/projects/page-fixtures.ts';
 
@@ -100,6 +103,13 @@ test(
     const warm = build();
     assert.equal(warm.error, undefined);
     assert.equal(warm.status, 0, warm.stdout + warm.stderr);
+    assert.ok(
+      readFileSync(
+        join(root, 'dist/projects/draft-sentinel/index.html'),
+        'utf8',
+      ).includes(`data-video-id="${draftVideoId}"`),
+      'Draft video must be present before withdrawal',
+    );
     const warmAssets = readdirSync(join(root, 'dist/_astro')).map((name) =>
       readFileSync(join(root, 'dist/_astro', name)),
     );
@@ -122,7 +132,11 @@ test(
     const options = {
       directory,
       requiredRoutes: ['/', '/projects/', '/404.html'],
-      publicProjectSlugs: ['gallery-multiple', 'gallery-single'],
+      publicProjectSlugs: [
+        'gallery-multiple',
+        'gallery-single',
+        'gallery-no-video',
+      ],
       draftProjectSlugs: ['draft-empty', 'draft-sentinel'],
       requireProjectMedia: true,
       requireIndexability: true,
@@ -140,13 +154,14 @@ test(
         'https://whatclaudemade.com/',
         'https://whatclaudemade.com/projects/',
         'https://whatclaudemade.com/projects/gallery-multiple/',
+        'https://whatclaudemade.com/projects/gallery-no-video/',
         'https://whatclaudemade.com/projects/gallery-single/',
       ],
       'Both source availability kinds are indexable; both draft kinds are excluded',
     );
     assert.deepEqual(
       sitemapNodes.filter((node) => node.tagName === 'lastmod').map(text),
-      ['2026-09-08', '2026-09-08'],
+      ['2026-09-08', '2026-09-08', '2026-09-08'],
       'Updated dates describe article modifications',
     );
     for (const entry of readdirSync(directory, {
@@ -168,6 +183,10 @@ test(
       assert.ok(
         !bytes.includes(Buffer.from('Private draft sentinel')),
         `Draft content leaked: ${entry.name}`,
+      );
+      assert.ok(
+        !bytes.includes(Buffer.from(draftVideoId)),
+        `Draft video ID leaked: ${entry.name}`,
       );
     }
 
@@ -217,6 +236,7 @@ test(
     for (const [slug, count] of [
       ['gallery-multiple', 2],
       ['gallery-single', 1],
+      ['gallery-no-video', 1],
     ] as const) {
       const html = readFileSync(
         join(directory, `projects/${slug}/index.html`),
@@ -228,7 +248,11 @@ test(
       const heading = nodes.find((node) => node.tagName === 'h1')!;
       assert.equal(
         text(heading),
-        slug === 'gallery-multiple' ? literalTitle : 'Single-image fixture',
+        slug === 'gallery-multiple'
+          ? literalTitle
+          : slug === 'gallery-single'
+            ? 'Single-image fixture'
+            : 'No-video fixture',
       );
       assert.ok(
         nodes
@@ -269,7 +293,6 @@ test(
       );
       for (const href of [
         'https://example.invalid/release?q=one&next=two',
-        'https://example.invalid/video',
         '/projects/',
       ])
         assert.ok(
@@ -300,6 +323,93 @@ test(
       assert.ok(nodes.indexOf(heading) < nodes.indexOf(metadata));
       assert.ok(nodes.indexOf(metadata) < nodes.indexOf(links[0]!));
       assert.ok(nodes.indexOf(links[0]!) < nodes.indexOf(article));
+      const videoLinks = nodes.filter(
+        (node) => node.tagName === 'a' && /^Video\b/.test(text(node).trim()),
+      );
+      const videos = marked('data-project-video');
+      const frames = nodes.filter((node) => node.tagName === 'iframe');
+      if (slug === 'gallery-multiple') {
+        assert.equal(videoLinks.length, 1);
+        assert.equal(attr(videoLinks[0]!, 'href'), publicVideoUrl);
+        assert.equal(videos.length, 1);
+        const video = videos[0]!;
+        assert.equal(video.tagName, 'section');
+        assert.equal(attr(video, 'class'), 'project-video');
+        assert.equal(attr(video, 'data-project-video'), 'youtube');
+        assert.equal(attr(video, 'data-video-id'), publicVideoId);
+        assert.ok(nodes.indexOf(links.at(-1)!) < nodes.indexOf(video));
+        assert.ok(nodes.indexOf(video) < nodes.indexOf(article));
+        const videoNodes = elements(video);
+        const videoHeading = videoNodes.find((node) => node.tagName === 'h2')!;
+        assert.equal(text(videoHeading), 'Video');
+        assert.equal(attr(videoHeading, 'id'), `video-heading-${slug}`);
+        assert.equal(attr(video, 'aria-labelledby'), attr(videoHeading, 'id'));
+        assert.equal(frames.length, 1);
+        const frame = frames[0]!;
+        assert.ok(videoNodes.includes(frame));
+        const src = attr(frame, 'src')!;
+        assert.notEqual(src, publicVideoUrl);
+        const url = new URL(src);
+        assert.equal(url.origin, 'https://www.youtube-nocookie.com');
+        assert.equal(url.pathname, `/embed/${publicVideoId}`);
+        assert.deepEqual([...url.searchParams].sort(), [
+          ['autoplay', '0'],
+          ['color', 'white'],
+          ['controls', '1'],
+          ['disablekb', '0'],
+          ['fs', '1'],
+          ['iv_load_policy', '3'],
+          ['playsinline', '1'],
+          ['rel', '0'],
+        ]);
+        for (const name of [
+          'modestbranding',
+          'showinfo',
+          'autohide',
+          'theme',
+          'origin',
+          'enablejsapi',
+        ])
+          assert.equal(url.searchParams.has(name), false);
+        assert.equal(attr(frame, 'title'), `${literalTitle} video`);
+        assert.equal(attr(frame, 'loading'), 'lazy');
+        assert.equal(
+          attr(frame, 'referrerpolicy'),
+          'strict-origin-when-cross-origin',
+        );
+        assert.notEqual(attr(frame, 'allowfullscreen'), undefined);
+        assert.equal(
+          attr(frame, 'allow'),
+          'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen',
+        );
+        assert.equal(attr(frame, 'width'), '560');
+        assert.equal(attr(frame, 'height'), '315');
+        const fallback = videoNodes.filter(
+          (node) =>
+            node.tagName === 'a' &&
+            /^Watch on YouTube\b/.test(text(node).trim()),
+        );
+        assert.equal(fallback.length, 1);
+        assert.equal(
+          attr(fallback[0]!, 'href'),
+          `https://www.youtube.com/watch?v=${publicVideoId}`,
+        );
+        assert.equal(attr(fallback[0]!, 'class'), 'button-link');
+        assert.equal(attr(fallback[0]!, 'rel'), 'noopener');
+        assert.equal(attr(fallback[0]!, 'target'), undefined);
+      } else {
+        assert.equal(videos.length, 0);
+        assert.equal(frames.length, 0);
+        if (slug === 'gallery-single') {
+          assert.equal(videoLinks.length, 1);
+          assert.equal(
+            attr(videoLinks[0]!, 'href'),
+            'https://example.invalid/video',
+          );
+        } else {
+          assert.equal(videoLinks.length, 0);
+        }
+      }
       const dialog = marked('data-gallery-dialog')[0]!;
       assert.equal(
         elements(dialog).filter((node) => node.tagName === 'img').length,

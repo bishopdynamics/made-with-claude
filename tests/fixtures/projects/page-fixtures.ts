@@ -7,6 +7,9 @@ export const literalCaption =
   'A literal </script><script>caption</script> & "quoted" view.';
 export const literalTitle =
   'Café </script><script>literal project title</script>';
+export const publicVideoId = 'AbCdEfGhIjK';
+export const publicVideoUrl = `https://www.youtube.com/watch?v=${publicVideoId}&t=42s&si=fixture`;
+export const draftVideoId = 'ZzYyXxWwVvU';
 export const draftMedia = {
   'draft-gallery.svg':
     '<svg xmlns="http://www.w3.org/2000/svg" width="37" height="23"><rect width="37" height="23" fill="#b53161"/><!-- Draft gallery asset sentinel --></svg>',
@@ -24,18 +27,25 @@ export function writePageFixtures(root: string) {
     'src/data/project-taxonomy.ts',
     `export const projectTaxonomy = ${JSON.stringify(fixtureTaxonomy)};`,
   );
-  for (const id of ['gallery-multiple', 'gallery-single']) {
+  for (const id of ['gallery-multiple', 'gallery-single', 'gallery-no-video']) {
     const fixture = publishedFixture(
       id,
       id === 'gallery-single' ? 'private' : 'public',
     );
     fixture.data.title =
-      id === 'gallery-multiple' ? literalTitle : 'Single-image fixture';
+      id === 'gallery-multiple'
+        ? literalTitle
+        : id === 'gallery-single'
+          ? 'Single-image fixture'
+          : 'No-video fixture';
     fixture.data.description =
       'A synthetic project for isolated gallery route verification.';
     fixture.data.updatedOn = '2026-09-08';
     fixture.data.releaseUrl = 'https://example.invalid/release?q=one&next=two';
-    fixture.data.videoUrl = 'https://example.invalid/video';
+    if (id === 'gallery-multiple') fixture.data.videoUrl = publicVideoUrl;
+    else if (id === 'gallery-single')
+      fixture.data.videoUrl = 'https://example.invalid/video';
+    else delete fixture.data.videoUrl;
     fixture.data.images = [
       {
         id: 'overview',
@@ -67,6 +77,6 @@ export function writePageFixtures(root: string) {
     put(`src/assets/projects/draft-sentinel/${name}`, svg);
   put(
     'src/content/projects/draft-sentinel.md',
-    '---\ntitle: Private draft sentinel\ntags: [private]\nimages:\n  - id: overview\n    src: ../../assets/projects/draft-sentinel/draft-gallery.svg\n    alt: Purple rectangle in the draft gallery fixture\n---\nUnfinished author preview.\n\n![Purple draft inline fixture](../../assets/projects/draft-sentinel/draft-inline.svg)',
+    `---\ntitle: Private draft sentinel\ntags: [private]\nvideoUrl: https://youtu.be/${draftVideoId}\nimages:\n  - id: overview\n    src: ../../assets/projects/draft-sentinel/draft-gallery.svg\n    alt: Purple rectangle in the draft gallery fixture\n---\nUnfinished author preview.\n\n![Purple draft inline fixture](../../assets/projects/draft-sentinel/draft-inline.svg)`,
   );
 }

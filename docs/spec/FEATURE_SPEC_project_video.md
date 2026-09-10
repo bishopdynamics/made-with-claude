@@ -89,6 +89,7 @@ None. Actual embedded playback remains an implementation verification requiremen
 
 ## Change Log
 
+- 2026-09-10 — Implemented the serial slice with one Codex `gpt-6-astra`/high worker in the main checkout. Parent re-ran `make check` (52 tests, zero privacy findings, production build valid) and verified the production preview in a browser: player renders between gallery and article at 16:9 on desktop and 400px viewports with no overflow, does not autoplay, plays after a click, exposes mute/settings/seek/fullscreen controls, keeps the Watch on YouTube fallback and header Video link, and preserves the GIF, gallery, and dates with Updated shown. Committed locally; publication awaits the user's review of the rendered update.
 - 2026-09-10 — User approved the complete spec with the minimal-player refinement and requested session wrap. Implementation is queued for the next session.
 - 2026-09-10 — User requested minimal player presentation. Added supported clutter-reduction parameters, retained usable playback controls, and documented current YouTube limitations. This refines the draft; implementation/publication are not yet started.
 - 2026-09-10 — Prepared the first post-launch update spec from the user's TODO. Reviewed existing URL/date/layout contracts and public video metadata; implementation and publication await review.

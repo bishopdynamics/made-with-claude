@@ -8,11 +8,12 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 ## Queue
 
-1. [approved] FEATURE_SPEC_project_video.md — Continuum YouTube player
+1. [in-progress] FEATURE_SPEC_project_video.md — Continuum YouTube player
    - 2026-09-10: user accepted the launched site and selected the TODO feature to test the project-update cycle. Root launch is accepted and removed from the active queue.
    - Approved scope: responsive YouTube player between gallery and story, retained GIF/prose, original publication/development dates preserved, and `updatedOn` for the revision.
    - User requested minimal player presentation: spec now uses supported options for a white progress bar, hidden annotations where supported, and same-channel recommendations, while retaining playback controls. Deprecated branding flags are excluded.
-   - Video oEmbed returned HTTP 200 with the expected Continuum title. Actual playback will be verified in the page during implementation. User approved the full refined spec on 2026-09-10 and requested session wrap. Next session: dispatch the serial Astra/high implementation slice, verify and present the preview. No runtime/content changes or publication yet.
+   - Video oEmbed returned HTTP 200 with the expected Continuum title. Actual playback will be verified in the page during implementation. User approved the full refined spec on 2026-09-10 and requested session wrap.
+   - 2026-09-10 (later session): implemented by one Codex Astra/high worker via hanuman in the main checkout. Parent `make check` passed (52 tests, 0 privacy findings) and browser review of the production preview passed on desktop and 400px: no autoplay, real playback after click, fullscreen/mute/seek controls, fallback link, GIF/gallery/dates preserved, `updatedOn: 2026-09-10`. Committed locally, **not pushed**. Next: user reviews the rendered update (`make run` or `npm run preview`, then `/projects/half-life-continuum-edition/`); on approval push `main` to `github`, follow Actions, verify the live page, and mark the TODO done.
 
 2. [in-review] FEATURE_SPEC_local_image_serving.md
    - User reported broken Vintage Vault images and reiterated repository-local copies. Copies are present and valid; reproduced stale image-service failure after a Vite restart. Native-transform fix and real image-response regression passed worker and parent `make check` (44 tests). Existing preview thumbnails and all full-size originals load successfully; all 14 tracked project media files are regular files in this repo.

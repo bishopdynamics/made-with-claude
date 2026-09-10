@@ -40,6 +40,6 @@ Use `updatedOn` for later revisions, whether the code is public or private. Pres
 - Active intake and evidence record: [Half-Life: Continuum Edition onboarding](projects/half-life-continuum-edition.md). A [tailored maintainer brief](projects/half-life-continuum-edition-maintainer-brief.md) is ready for capture/story discussion.
 - Public repository: <https://github.com/bishopdynamics/Continuum>.
 - Existing menu tour: [menu documentation](https://github.com/bishopdynamics/Continuum/blob/main/doc/menu.md). The GIF is 640×360; useful as a reference, with higher-resolution captures preferred for enlarged views.
-- Linked gameplay video: <https://youtu.be/DVSHgFvknj0>; not yet reviewed in this planning session.
+- Linked gameplay video: <https://youtu.be/DVSHgFvknj0>; embedded on the project page via `videoUrl` on 2026-09-10 (see `docs/spec/FEATURE_SPEC_project_video.md`).
 - Release [v1.0.0.0](https://github.com/bishopdynamics/Continuum/releases/tag/v1.0.0.0) was published 2026-06-22. This is a candidate completion reference; the start date and exact development endpoint still need review.
 - The engine, menu, and game SDK live in related forks. Account for those when collecting history and language evidence.

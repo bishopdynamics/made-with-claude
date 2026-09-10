@@ -2,6 +2,7 @@
 import Page from './Page.astro';
 import ProjectMeta from '../components/ProjectMeta.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
+import ProjectVideo from '../components/ProjectVideo.astro';
 import { projectCover, projectHref } from '../lib/project-metadata.ts';
 import type { ProjectEntry } from '../types/projects.ts';
 import '../styles/project.css';
@@ -43,6 +44,7 @@ const cover = projectCover(project);
         />
       )
     }
+    <ProjectVideo project={project} />
     <article class="project-article prose" aria-label="Project story">
       <slot />
     </article>

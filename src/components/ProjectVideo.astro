@@ -1,0 +1,47 @@
+---
+import type { ProjectEntry } from '../types/projects.ts';
+import {
+  youtubeEmbedUrl,
+  youtubeVideoId,
+  youtubeWatchUrl,
+} from '../lib/project-video.ts';
+
+interface Props {
+  project: ProjectEntry<unknown>;
+}
+const { project } = Astro.props;
+const { data } = project;
+const id = youtubeVideoId(data.videoUrl);
+const projectTitle = data.title ?? project.id;
+const headingId = `video-heading-${project.id}`;
+---
+
+{
+  id !== undefined && (
+    <section
+      class="project-video"
+      aria-labelledby={headingId}
+      data-project-video="youtube"
+      data-video-id={id}
+    >
+      <div class="gallery-heading">
+        <h2 id={headingId}>Video</h2>
+        <a class="button-link" href={youtubeWatchUrl(id)} rel="noopener">
+          Watch on YouTube <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="project-video-frame">
+        <iframe
+          src={youtubeEmbedUrl(id)}
+          title={`${projectTitle} video`}
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+          allowfullscreen
+          width="560"
+          height="315"
+        />
+      </div>
+    </section>
+  )
+}
