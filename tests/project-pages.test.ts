@@ -7,6 +7,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   rmSync,
   symlinkSync,
   writeFileSync,
@@ -18,6 +19,7 @@ import { parse, type DefaultTreeAdapterMap } from 'parse5';
 import { checkSite } from '../scripts/check-site.mjs';
 import { isolateFixtureCaches } from './fixtures/projects/build-cache.ts';
 import {
+  draftMedia,
   literalCaption,
   literalTitle,
   writePageFixtures,
@@ -69,20 +71,45 @@ test(
     const content = join(root, 'src/content/projects');
     if (existsSync(content)) rmSync(content, { recursive: true });
     writePageFixtures(root);
-    const result = spawnSync(
-      process.execPath,
-      [join(project, 'scripts/astro.mjs'), 'build'],
-      {
-        cwd: root,
-        encoding: 'utf8',
-        env: {
-          ...process.env,
-          NODE_ENV: 'development',
-          ASTRO_TELEMETRY_DISABLED: '1',
+    const build = () =>
+      spawnSync(
+        process.execPath,
+        [join(project, 'scripts/astro.mjs'), 'build'],
+        {
+          cwd: root,
+          encoding: 'utf8',
+          env: {
+            ...process.env,
+            NODE_ENV: 'development',
+            ASTRO_TELEMETRY_DISABLED: '1',
+          },
+          timeout: 60_000,
         },
-        timeout: 60_000,
-      },
+      );
+    // Populate the same cache/output with a previously published article, then
+    // withdraw it. A warm production rebuild must remove its stored imports too.
+    const draftPath = join(content, 'draft-sentinel.md');
+    const draft = readFileSync(draftPath, 'utf8');
+    writeFileSync(
+      draftPath,
+      draft.replace(
+        '---\n',
+        `---\ndraft: false\ndescription: Synthetic article for cached asset withdrawal verification\npublishedOn: '2026-09-07'\nstartedOn: '2026-09-01'\ncompletedOn: '2026-09-02'\nlanguages: [ts]\ncoverId: overview\n`,
+      ),
     );
+    const warm = build();
+    assert.equal(warm.error, undefined);
+    assert.equal(warm.status, 0, warm.stdout + warm.stderr);
+    const warmAssets = readdirSync(join(root, 'dist/_astro')).map((name) =>
+      readFileSync(join(root, 'dist/_astro', name)),
+    );
+    for (const [name, svg] of Object.entries(draftMedia))
+      assert.ok(
+        warmAssets.some((bytes) => bytes.equals(Buffer.from(svg))),
+        `${name} must exist before withdrawal`,
+      );
+    writeFileSync(draftPath, draft);
+    const result = build();
     assert.equal(result.error, undefined);
     assert.equal(result.status, 0, result.stdout + result.stderr);
     t.diagnostic(
@@ -98,8 +125,94 @@ test(
       publicProjectSlugs: ['gallery-multiple', 'gallery-single'],
       draftProjectSlugs: ['draft-empty', 'draft-sentinel'],
       requireProjectMedia: true,
+      requireIndexability: true,
     };
     await checkSite(options);
+    const sitemapPath = join(directory, 'sitemap.xml');
+    const sitemap = readFileSync(sitemapPath, 'utf8');
+    const sitemapNodes = elements(parse(sitemap));
+    assert.deepEqual(
+      sitemapNodes
+        .filter((node) => node.tagName === 'loc')
+        .map(text)
+        .sort(),
+      [
+        'https://whatclaudemade.com/',
+        'https://whatclaudemade.com/projects/',
+        'https://whatclaudemade.com/projects/gallery-multiple/',
+        'https://whatclaudemade.com/projects/gallery-single/',
+      ],
+      'Both source availability kinds are indexable; both draft kinds are excluded',
+    );
+    assert.deepEqual(
+      sitemapNodes.filter((node) => node.tagName === 'lastmod').map(text),
+      ['2026-09-08', '2026-09-08'],
+      'Updated dates describe article modifications',
+    );
+    for (const entry of readdirSync(directory, {
+      recursive: true,
+      withFileTypes: true,
+    })) {
+      if (!entry.isFile()) continue;
+      const bytes = readFileSync(join(entry.parentPath, entry.name));
+      for (const [name, svg] of Object.entries(draftMedia)) {
+        assert.ok(
+          !entry.name.includes(name.replace('.svg', '')),
+          `Draft media filename leaked: ${entry.name}`,
+        );
+        assert.ok(
+          !bytes.includes(Buffer.from(svg)),
+          `Draft media bytes leaked: ${entry.name}`,
+        );
+      }
+      assert.ok(
+        !bytes.includes(Buffer.from('Private draft sentinel')),
+        `Draft content leaked: ${entry.name}`,
+      );
+    }
+
+    await t.test(
+      'built-output validation rejects missing or incorrect launch assets',
+      async () => {
+        for (const invalid of [
+          sitemap.replace(
+            '</urlset>',
+            '<url><loc>https://whatclaudemade.com/projects/draft-sentinel/</loc></url></urlset>',
+          ),
+          sitemap.replace(
+            '</urlset>',
+            '<url><loc>https://whatclaudemade.com/404.html</loc></url></urlset>',
+          ),
+          sitemap.replace(
+            'https://whatclaudemade.com/projects/gallery-single/',
+            'https://whatclaudemade.com/projects/?tag=private',
+          ),
+          sitemap.replace(
+            'https://whatclaudemade.com/projects/gallery-single/',
+            'https://example.invalid/projects/gallery-single/',
+          ),
+          sitemap.replace(
+            '<lastmod>2026-09-08</lastmod>',
+            '<lastmod>2026-09-07</lastmod>',
+          ),
+          sitemap.replace('</urlset>', ''),
+          sitemap.replace('</loc>', '&broken;</loc>'),
+        ]) {
+          writeFileSync(sitemapPath, invalid);
+          await assert.rejects(checkSite(options), /sitemap/i);
+        }
+        rmSync(sitemapPath);
+        await assert.rejects(checkSite(options), /sitemap\.xml/);
+        writeFileSync(sitemapPath, sitemap);
+        const robotsPath = join(directory, 'robots.txt');
+        const robots = readFileSync(robotsPath, 'utf8');
+        writeFileSync(robotsPath, robots.replace('Allow: /', 'Disallow: /'));
+        await assert.rejects(checkSite(options), /Robots/);
+        rmSync(robotsPath);
+        await assert.rejects(checkSite(options), /robots\.txt/);
+        writeFileSync(robotsPath, robots);
+      },
+    );
 
     for (const [slug, count] of [
       ['gallery-multiple', 2],

@@ -7,6 +7,12 @@ export const literalCaption =
   'A literal </script><script>caption</script> & "quoted" view.';
 export const literalTitle =
   'Café </script><script>literal project title</script>';
+export const draftMedia = {
+  'draft-gallery.svg':
+    '<svg xmlns="http://www.w3.org/2000/svg" width="37" height="23"><rect width="37" height="23" fill="#b53161"/><!-- Draft gallery asset sentinel --></svg>',
+  'draft-inline.svg':
+    '<svg xmlns="http://www.w3.org/2000/svg" width="29" height="41"><rect width="29" height="41" fill="#512ba7"/><!-- Draft inline asset sentinel --></svg>',
+};
 
 /** Test-only content, reusable in a separate browser-review checkout. */
 export function writePageFixtures(root: string) {
@@ -57,8 +63,10 @@ export function writePageFixtures(root: string) {
     );
   }
   put('src/content/projects/draft-empty.md', '---\ntags: [public]\n---\n');
+  for (const [name, svg] of Object.entries(draftMedia))
+    put(`src/assets/projects/draft-sentinel/${name}`, svg);
   put(
     'src/content/projects/draft-sentinel.md',
-    '---\ntitle: Private draft sentinel\ntags: [private]\n---\nUnfinished author preview.',
+    '---\ntitle: Private draft sentinel\ntags: [private]\nimages:\n  - id: overview\n    src: ../../assets/projects/draft-sentinel/draft-gallery.svg\n    alt: Purple rectangle in the draft gallery fixture\n---\nUnfinished author preview.\n\n![Purple draft inline fixture](../../assets/projects/draft-sentinel/draft-inline.svg)',
   );
 }

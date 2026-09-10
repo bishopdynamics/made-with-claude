@@ -1,6 +1,6 @@
 # SPEC: Public and private source availability
 
-- **Status:** in-review (implemented and independently verified)
+- **Status:** accepted
 - **Approval record:** On 2026-09-09 the user requested publishable articles about projects whose code is not publicly available, preserving ordinary project requirements except the public code link, and reserved the `public` and `private` tags. They also paused BeamVM until its code release is ready. This directly authorizes the schema, taxonomy, and content migration below.
 
 ## Summary
@@ -58,3 +58,5 @@ None for this implementation. Future projects receive availability classificatio
 - 2026-09-09 — Created from the user's source-availability requirement and BeamVM pause; reserved mutually exclusive public/private tags while retaining the existing publication contract.
 
 - 2026-09-09 — Worker and parent `make check` passed: 46 tests, zero Astro diagnostics, zero privacy findings (290 snapshots), five production pages. Browser checks of separate synthetic output confirmed private/public homepage cards, availability URL/filter behavior, Updated metadata, private Source omission, public Source retention, full-image gallery, and desktop/mobile layouts. Real content changes add only `public` to Continuum and FantasyBoy; BeamVM stays paused with no content changes.
+
+- 2026-09-10 — User accepted this feature and moved to website launch.

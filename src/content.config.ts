@@ -84,6 +84,10 @@ function projectLoader(): Loader {
                 );
               }
             }
+            // LoaderContext supplies a watcher only during development. Validate
+            // drafts above in every mode, but never register their gallery or
+            // Markdown asset imports in a production content store.
+            if (raw.draft && !watcher) continue;
             const data = await parseData({ id, data: frontmatter, filePath });
             const rendered = await renderMarkdown(body, {
               fileURL: pathToFileURL(filePath),

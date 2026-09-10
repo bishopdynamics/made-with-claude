@@ -101,6 +101,7 @@ test(
           publicProjectSlugs: expectedOrder,
           draftProjectSlugs: draftSlugs,
           requireProjectMedia: true,
+          requireIndexability: true,
         });
         const home = elements(
           parse(readFileSync(join(directory, 'index.html'), 'utf8')),

@@ -2,7 +2,7 @@
 title: 'Half-Life: Continuum Edition'
 description: 'Half-Life on Xash3D, with seamless level transitions, entity contact shadows, and a controller-first menu.'
 draft: false
-publishedOn: '2026-09-08'
+publishedOn: '2026-09-10'
 startedOn: '2026-06-09'
 completedOn: '2026-06-22'
 languages: [c, cpp, python, shell]

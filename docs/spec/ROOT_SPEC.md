@@ -2,7 +2,7 @@
 
 - **Status:** in-progress
 - **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md), [Local image serving](FEATURE_SPEC_local_image_serving.md), [Source availability](FEATURE_SPEC_source_availability.md)
-- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. Slice 6 launch remains pending after the BeamVM addendum.
+- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. On 2026-09-10 the user requested launching the site today with the currently accepted entries; BeamVM remains paused.
 
 ## Summary
 
@@ -212,7 +212,7 @@ All slices are **[serial]**. Each gets a self-contained worker brief from `TASK_
    - **Verification:** `make check`; parent image/copy/source review, development-date evidence, link checks, thumbnail crops and enlarged image quality; user's final content review.
 
 6. **Launch workflow and final review — (L), [serial].** Add publication workflow, sitemap/robots, update authoring/launch instructions, run final site acceptance, then carry out the reviewed publication/domain steps when authorized.
-   - **Worker-owned files:** `.github/workflows/check.yml`, `src/pages/sitemap.xml.ts`, `public/robots.txt`, `src/components/Seo.astro`, `scripts/check-site.mjs`, `scripts/format.mjs`, `astro.config.mjs`, `package.json`, `package-lock.json` (only if needed for final checks).
+   - **Worker-owned files:** `.github/workflows/check.yml`, `src/pages/sitemap.xml.ts`, `public/robots.txt`, `src/components/Seo.astro`, `scripts/check-site.mjs`, `scripts/format.mjs`, `astro.config.mjs`, `package.json`, `package-lock.json` (only if needed for final checks), focused launch/build assertions in `tests/project-{schema,pages,catalog}.test.ts` and optional `tests/site-launch.test.ts`, `src/content.config.ts` and related project fixtures for excluding draft media from production registration while preserving validation, and `publishedOn` only in the two accepted project entries to match the actual first website launch.
    - **Orchestrator-owned files:** `docs/development.md`, `docs/launch.md`, `PROJECT.md`, `docs/project-onboarding.md`, this spec, `docs/DEFERRED.md`, queue/handoff/memory records; GitHub Pages and Route 53 operations after the concrete launch review.
    - **Verification:** `make check`; parent full acceptance/browser review; inspect the exact artifact/workflow; after authorized publication, verify GitHub Actions, HTTPS/domain routing, and live site. No dummy content or unreviewed draft is published.
 
@@ -231,6 +231,10 @@ None. The user approved portfolio-publication recency, completion-year filtering
 - A light theme or theme switcher if requested later.
 
 ## Change Log
+
+- 2026-09-10 — Launch artifact audit found originals from draft galleries in `dist/_astro` despite correct route exclusion. Extend slice 6 to keep draft entries out of production asset registration after raw schema/path/image validation, with gallery/inline-media exclusion coverage and preserved development previews. This enforces the existing draft-exclusion requirement before deployment.
+
+- 2026-09-10 — User accepted source-availability support and requested launching the site today using GitHub Actions and Route 53 with the currently published articles. Start slice 6; preserve BeamVM’s pause and all draft exclusions. Expanded worker ownership for meaningful sitemap/workflow regressions and prepared publication dates; first public site date is September 10.
 
 - 2026-09-08 — User authorized six additional drafts through parallel Astra agents, including discretionary reuse of existing images and a media-gap report. The batch addendum governs isolation and scheduling; existing entries remain unchanged.
 - 2026-09-08 — User requested languages, development time, and tags in draft previews and supplied BeamVM's screenshot guide. Populate source-backed draft metadata and pending labels for genuinely unknown fields; resume BeamVM media integration using the supplied captures. User confirmed August 25–September 8 as BeamVM's development dates.

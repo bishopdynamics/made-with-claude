@@ -490,6 +490,19 @@ test(
       rejects(/image|SVG/i);
       put(root, imagePath, fixtureSvg);
     });
+    await t.test(
+      'production drafts still validate schema and gallery assets before exclusion',
+      () => {
+        entry({ ...valid(), draft: true, tags: ['public', 'private'] });
+        rejects(/mutually exclusive/);
+        entry({ ...valid(), draft: true });
+        rmSync(join(root, imagePath));
+        rejects(/images\.0\.src:.*does not exist/);
+        put(root, imagePath, 'not an image');
+        rejects(/images\.0\.src:.*not a valid local image/);
+        put(root, imagePath, fixtureSvg);
+      },
+    );
     await t.test('malformed and duplicate raw slugs fail', () => {
       entry(valid());
       put(root, 'src/content/projects/Bad_Name.md', '---\n{}\n---');

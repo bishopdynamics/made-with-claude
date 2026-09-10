@@ -8,8 +8,14 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 ## Queue
 
-1. [in-review] FEATURE_SPEC_source_availability.md
-   - User requested publishable articles about projects with private code, reserving `public` / `private` tags for source availability. Preserve all other requirements and existing update metadata; keep article publication separate from code availability. One serial Astra/high worker implemented schema/types/taxonomy/tests and added `public` to the two accepted entries. Worker and parent checks passed 46 tests; browser review verified private/public output, source-link omission/retention, availability filters, Updated metadata, and gallery/mobile behavior.
+1. [in-progress] ROOT_SPEC.md — launch workflow and domain setup
+   - 2026-09-07: user approved the full specification and authorized slice 1. Initial Planning is accepted and removed from the active queue.
+   - Slice 1 — content contracts and tooling: accepted by the user; implemented and independently verified in `b1d60c4`.
+   - Slice 2 — shared design and typography: accepted after the user reviewed preview images; committed as `9d195cd`.
+   - Slice 3 — project page and image gallery: accepted by the user; committed as `215cd57`.
+   - Slice 4 — landing page and searchable catalog: accepted by the user on 2026-09-08; implemented and independently verified (43 tests, layout/search/history/browser checks, draft separation), committed as `577e1ed`.
+   - Slice 5 — Half-Life: Continuum Edition onboarding: accepted as portfolio v1 ready for release by the user on 2026-09-08. Approved prose/cover/GIF preserved; source-backed metadata completed and entry selected for public builds. More gallery images are deferred to portfolio v2.
+   - Slice 6 — launch workflow and final review: user requested going live today, 2026-09-10. Prepare and verify Actions deployment, sitemap/robots and exact Route 53 settings; user is enabling Pages using GitHub Actions. Current approved public entries: Continuum and FantasyBoy. BeamVM stays paused.
 
 2. [in-review] FEATURE_SPEC_local_image_serving.md
    - User reported broken Vintage Vault images and reiterated repository-local copies. Copies are present and valid; reproduced stale image-service failure after a Vite restart. Native-transform fix and real image-response regression passed worker and parent `make check` (44 tests). Existing preview thumbnails and all full-size originals load successfully; all 14 tracked project media files are regular files in this repo.
@@ -22,12 +28,3 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 4. [paused] FEATURE_SPEC_beamvm_onboarding.md — accepted content; code release in progress
    - 2026-09-09: user accepted BeamVM and FantasyBoy as ready to publish. BeamVM’s approved article, dates, metadata, and six local screenshots are complete. The user subsequently paused BeamVM while preparing its code release. Resume public source-link verification and build selection when they return to it; do not use the new private category to bypass the pause.
    - FantasyBoy is accepted and removed from the queue; its public-build selection passed 44 tests, five-page production validation, and browser checks with `publishedOn: 2026-09-09`.
-
-5. [pending] ROOT_SPEC.md — remaining launch slice, after selected onboarding work
-   - 2026-09-07: user approved the full specification and authorized slice 1. Initial Planning is accepted and removed from the active queue.
-   - Slice 1 — content contracts and tooling: accepted by the user; implemented and independently verified in `b1d60c4`.
-   - Slice 2 — shared design and typography: accepted after the user reviewed preview images; committed as `9d195cd`.
-   - Slice 3 — project page and image gallery: accepted by the user; committed as `215cd57`.
-   - Slice 4 — landing page and searchable catalog: accepted by the user on 2026-09-08; implemented and independently verified (43 tests, layout/search/history/browser checks, draft separation), committed as `577e1ed`.
-   - Slice 5 — Half-Life: Continuum Edition onboarding: accepted as portfolio v1 ready for release by the user on 2026-09-08. Approved prose/cover/GIF preserved; source-backed metadata completed and entry selected for public builds. More gallery images are deferred to portfolio v2.
-   - Slice 6 — launch workflow and final review: pending after the selected onboarding work. No website deployment has occurred.

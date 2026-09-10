@@ -230,9 +230,101 @@ function srcsetUrls(value) {
   return urls;
 }
 
+async function checkIndexability(root, builtSlugs) {
+  const xml = await readFile(resolve(root, 'sitemap.xml'), 'utf8');
+  // Validate the deliberately small XML schema emitted by our endpoint. Reject
+  // unrecognized markup/entities instead of letting an HTML parser repair XML.
+  const body = xml.match(
+    /^<\?xml version="1\.0" encoding="UTF-8"\?>\s*<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">([\s\S]*)<\/urlset>\s*$/,
+  )?.[1];
+  assert.notEqual(body, undefined, 'Invalid sitemap XML root');
+  const entryPattern =
+    /<url>\s*<loc>([^<>]+)<\/loc>\s*(?:<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>\s*)?<\/url>/g;
+  const entries = [...body.matchAll(entryPattern)];
+  assert.equal(
+    body.replace(entryPattern, '').trim(),
+    '',
+    'Invalid sitemap XML entry',
+  );
+  const entities = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
+  const urls = entries.map(([, location]) => {
+    assert.ok(
+      !/&(?!amp;|lt;|gt;|quot;|apos;)/.test(location),
+      'Invalid sitemap XML entity',
+    );
+    return location.replace(
+      /&(amp|lt|gt|quot|apos);/g,
+      (_, name) => entities[name],
+    );
+  });
+  const expectedUrls = [
+    '/',
+    '/projects/',
+    ...builtSlugs.map((slug) => `/projects/${slug}/`),
+  ].map((path) => new URL(path, site).href);
+  assert.deepEqual(
+    [...urls].sort(),
+    expectedUrls.sort(),
+    'Sitemap URLs must match canonical public routes exactly',
+  );
+  for (const [index, url] of urls.entries()) {
+    const path = new URL(url).pathname;
+    const nodes = [
+      ...elements(
+        parse(await readFile(resolve(root, `.${path}index.html`), 'utf8')),
+      ),
+    ];
+    assert.ok(
+      nodes.some(
+        (node) =>
+          attribute(node, 'rel') === 'canonical' &&
+          attribute(node, 'href') === url,
+      ),
+      `${path}: sitemap and page canonical differ`,
+    );
+    assert.ok(
+      !nodes.some(
+        (node) =>
+          attribute(node, 'name') === 'robots' &&
+          /noindex/i.test(attribute(node, 'content') ?? ''),
+      ),
+      `${path}: sitemap includes a noindex page`,
+    );
+    const dates = new Map(
+      nodes
+        .filter((node) => node.tagName === 'div')
+        .flatMap((node) => {
+          const children = [...elements(node)];
+          const label = children.find((child) => child.tagName === 'dt');
+          const time = children.find((child) => child.tagName === 'time');
+          return label && time
+            ? [[nodeText(label).trim(), attribute(time, 'datetime')]]
+            : [];
+        }),
+    );
+    assert.equal(
+      entries[index][2],
+      path === '/' || path === '/projects/'
+        ? undefined
+        : (dates.get('Updated') ?? dates.get('Published')),
+      `${path}: sitemap lastmod must match article publication/update metadata`,
+    );
+  }
+  const robots = await readFile(resolve(root, 'robots.txt'), 'utf8');
+  assert.deepEqual(
+    robots
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean),
+    ['User-agent: *', 'Allow: /', `Sitemap: ${site}/sitemap.xml`],
+    'Robots must allow crawling and advertise the canonical sitemap',
+  );
+}
+
 /**
- * Later slices extend requiredRoutes and pass project slugs/media expectations.
- * @param {{ directory?: string, requiredRoutes?: string[], publicProjectSlugs?: string[], draftProjectSlugs?: string[], requireProjectMedia?: boolean }} [options]
+ * Small route/schema fixtures can omit the launch endpoints explicitly; the
+ * production CLI and complete site fixtures require them.
+ * @param {{ directory?: string, requiredRoutes?: string[], publicProjectSlugs?: string[], draftProjectSlugs?: string[], requireProjectMedia?: boolean, requireIndexability?: boolean }} [options]
  */
 export async function checkSite({
   directory = fileURLToPath(new URL('../dist/', import.meta.url)),
@@ -240,6 +332,7 @@ export async function checkSite({
   publicProjectSlugs,
   draftProjectSlugs = [],
   requireProjectMedia = false,
+  requireIndexability = false,
 } = {}) {
   const root = resolve(directory);
   const files = await readdir(root, { recursive: true });
@@ -339,6 +432,7 @@ export async function checkSite({
         );
     }
   }
+  if (requireIndexability) await checkIndexability(root, builtSlugs);
   console.log(
     `Built-site checks passed (${htmlFiles.length} HTML page${htmlFiles.length === 1 ? '' : 's'}; ${requiredRoutes.length} required route${requiredRoutes.length === 1 ? '' : 's'}).`,
   );
@@ -348,4 +442,7 @@ if (
   process.argv[1] &&
   import.meta.url === pathToFileURL(resolve(process.argv[1])).href
 )
-  await checkSite({ requiredRoutes: ['/', '/projects/', '/404.html'] });
+  await checkSite({
+    requiredRoutes: ['/', '/projects/', '/404.html'],
+    requireIndexability: true,
+  });
