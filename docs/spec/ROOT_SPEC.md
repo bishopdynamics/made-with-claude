@@ -1,6 +1,6 @@
 # SPEC: whatclaudemade.com portfolio launch
 
-- **Status:** in-progress
+- **Status:** in-review
 - **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md), [Local image serving](FEATURE_SPEC_local_image_serving.md), [Source availability](FEATURE_SPEC_source_availability.md)
 - **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. On 2026-09-10 the user requested launching the site today with the currently accepted entries; BeamVM remains paused.
 
@@ -232,6 +232,8 @@ None. The user approved portfolio-publication recency, completion-year filtering
 - A light theme or theme switcher if requested later.
 
 ## Change Log
+
+- 2026-09-10 — Website launch verified: hosted checks/deployment pass; all 49 live files match the reviewed build, seven draft URLs remain absent, and apex/www TLS plus canonical HTTPS redirects work. Both accepted articles, sitemap/robots, fonts and images load successfully. GitHub issued the certificate after the user removed/re-added the same custom domain. Final user assessment remains; domain ownership TXT verification is separately unconfirmed.
 
 - 2026-09-10 — Launch artifact audit found originals from draft galleries in `dist/_astro` despite correct route exclusion. Extend slice 6 to keep draft entries out of production asset registration after raw schema/path/image validation, with gallery/inline-media exclusion coverage and preserved development previews. This enforces the existing draft-exclusion requirement before deployment.
 
