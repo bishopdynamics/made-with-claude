@@ -1,8 +1,8 @@
 # SPEC: whatclaudemade.com portfolio launch
 
-- **Status:** in-review
-- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md), [Local image serving](FEATURE_SPEC_local_image_serving.md), [Source availability](FEATURE_SPEC_source_availability.md)
-- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. On 2026-09-10 the user requested launching the site today with the currently accepted entries; BeamVM remains paused.
+- **Status:** done
+- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md), [Local image serving](FEATURE_SPEC_local_image_serving.md), [Source availability](FEATURE_SPEC_source_availability.md), [Project video embeds](FEATURE_SPEC_project_video.md)
+- **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. On 2026-09-10 the user requested launching the site today with the currently accepted entries; BeamVM remains paused. The user accepted the live HTTPS result on 2026-09-10 and moved on to the project-update cycle.
 
 ## Summary
 
@@ -227,7 +227,7 @@ None. The user approved portfolio-publication recency, completion-year filtering
 - Onboard matrix-screensaver and capture-view individually when selected; no readiness or publication is assumed. Vintage and Vintage Vault now have drafts in the six-project batch addendum; BeamVM and FantasyBoy have their own onboarding addenda.
 - Add more gallery images to the Half-Life: Continuum Edition portfolio entry in v2; the user accepted its current cover/GIF presentation as v1 ready for release on 2026-09-08.
 - Independent blog posts/index and an RSS feed, if writing expands beyond project stories.
-- Embedded video or richer comparison media after the still-image gallery and external video link are established.
+- Richer comparison media after the initial YouTube embed covered by `FEATURE_SPEC_project_video.md`.
 - Full-article/fuzzy search, multiple selections per filter, extra filters, and pagination if the catalog grows enough to need them.
 - A light theme or theme switcher if requested later.
 
