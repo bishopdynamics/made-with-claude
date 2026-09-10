@@ -19,7 +19,10 @@ export function writePageFixtures(root: string) {
     `export const projectTaxonomy = ${JSON.stringify(fixtureTaxonomy)};`,
   );
   for (const id of ['gallery-multiple', 'gallery-single']) {
-    const fixture = publishedFixture(id);
+    const fixture = publishedFixture(
+      id,
+      id === 'gallery-single' ? 'private' : 'public',
+    );
     fixture.data.title =
       id === 'gallery-multiple' ? literalTitle : 'Single-image fixture';
     fixture.data.description =
@@ -53,9 +56,9 @@ export function writePageFixtures(root: string) {
       `---\n${JSON.stringify(fixture.data)}\n---\n## The fixture story\n\n${fixture.body}\n\n\`\`\`ts title="fixture.ts"\nconst literal = "<tag> & value";\n\`\`\`\n`,
     );
   }
-  put('src/content/projects/draft-empty.md', '---\n{}\n---\n');
+  put('src/content/projects/draft-empty.md', '---\ntags: [public]\n---\n');
   put(
     'src/content/projects/draft-sentinel.md',
-    '---\ntitle: Private draft sentinel\n---\nUnfinished author preview.',
+    '---\ntitle: Private draft sentinel\ntags: [private]\n---\nUnfinished author preview.',
   );
 }

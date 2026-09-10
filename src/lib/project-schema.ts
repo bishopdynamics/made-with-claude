@@ -124,6 +124,30 @@ export function createProjectSchema<TImage extends z.ZodType>(
     .superRefine((data, ctx) => {
       const issue = (path: (string | number)[], message: string) =>
         ctx.addIssue({ code: 'custom', path, message });
+      const publicSource = data.tags.includes('public');
+      const privateSource = data.tags.includes('private');
+      if (publicSource && privateSource)
+        issue(
+          ['tags'],
+          'Public and private source tags are mutually exclusive',
+        );
+      if (privateSource && data.repositoryUrl)
+        issue(
+          ['repositoryUrl'],
+          'Private-source projects must omit repositoryUrl',
+        );
+      if (!data.draft) {
+        if (!publicSource && !privateSource)
+          issue(
+            ['tags'],
+            'Publication requires one source availability tag: public or private',
+          );
+        if (publicSource && !data.repositoryUrl)
+          issue(
+            ['repositoryUrl'],
+            'Required for publication with public source',
+          );
+      }
       if (
         data.startedOn &&
         data.completedOn &&
@@ -146,7 +170,6 @@ export function createProjectSchema<TImage extends z.ZodType>(
           'publishedOn',
           'startedOn',
           'completedOn',
-          'repositoryUrl',
           'coverId',
         ] as const) {
           if (!data[field]) issue([field], 'Required for publication');

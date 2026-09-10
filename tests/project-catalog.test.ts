@@ -23,6 +23,7 @@ import {
   writeCatalogFixtures,
 } from './fixtures/projects/catalog-fixtures.ts';
 import type { ProjectSearchRecord } from '../src/types/projects.ts';
+import { filterProjects } from '../src/lib/project-search.ts';
 
 type Element = DefaultTreeAdapterMap['element'];
 type Node = DefaultTreeAdapterMap['node'];
@@ -138,6 +139,15 @@ test(
           cards.map((node) => attr(node, 'data-project-slug')),
           expectedOrder,
         );
+        for (const card of cards) {
+          const entry = entries.find(
+            ({ id }) => id === attr(card, 'data-project-slug'),
+          )!;
+          assert.match(
+            text(card),
+            entry.data.tags.includes('private') ? /Private/ : /Public/,
+          );
+        }
         for (const card of [...tiles, ...cards]) {
           assert.equal(card.tagName, 'a');
           assert.equal(
@@ -206,6 +216,17 @@ test(
           records.map(({ slug }) => slug),
           expectedOrder,
         );
+        for (const tag of ['public', 'private']) {
+          const expected = expectedOrder.filter((slug) =>
+            entries.find(({ id }) => id === slug)!.data.tags.includes(tag),
+          );
+          assert.deepEqual(
+            filterProjects(records, { q: '', tag, language: '', year: '' }).map(
+              ({ slug }) => slug,
+            ),
+            expected,
+          );
+        }
         assert.ok(
           records.every(
             (record) => !('body' in record) && !('images' in record),
@@ -249,6 +270,8 @@ test(
             ['', 'All tags'],
             ['tools', 'Developer tools'],
             ['graphics', 'Graphics'],
+            ['private', 'Private'],
+            ['public', 'Public'],
           ]);
           assert.deepEqual(choices('language'), [
             ['', 'All languages'],

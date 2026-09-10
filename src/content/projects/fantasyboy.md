@@ -6,7 +6,7 @@ publishedOn: '2026-09-09'
 startedOn: '2026-02-03'
 completedOn: '2026-02-05'
 languages: [python, c]
-tags: [games, emulation, developer-tools]
+tags: [games, emulation, developer-tools, public]
 repositoryUrl: 'https://github.com/bishopdynamics/FantasyBoy'
 images:
   - id: keen

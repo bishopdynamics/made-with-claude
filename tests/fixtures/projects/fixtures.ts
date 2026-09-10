@@ -6,6 +6,8 @@ import type {
 /** Synthetic vocabulary lives only in tests, never the production taxonomy. */
 export const fixtureTaxonomy: ProjectTaxonomy = {
   tags: [
+    { id: 'public', label: 'Public' },
+    { id: 'private', label: 'Private' },
     { id: 'graphics', label: 'Graphics' },
     { id: 'tools', label: 'Developer tools' },
   ],
@@ -15,7 +17,10 @@ export const fixtureTaxonomy: ProjectTaxonomy = {
   ],
 };
 
-export function publishedFixture(id = 'fixture-project'): ProjectEntry<string> {
+export function publishedFixture(
+  id = 'fixture-project',
+  availability: 'public' | 'private' = 'public',
+): ProjectEntry<string> {
   return {
     id,
     data: {
@@ -26,8 +31,10 @@ export function publishedFixture(id = 'fixture-project'): ProjectEntry<string> {
       startedOn: '2026-02-20',
       completedOn: '2026-03-07',
       languages: ['cpp'],
-      tags: ['graphics'],
-      repositoryUrl: 'https://example.invalid/source',
+      tags: ['graphics', availability],
+      ...(availability === 'public'
+        ? { repositoryUrl: 'https://example.invalid/source' }
+        : {}),
       images: [
         {
           id: 'overview',

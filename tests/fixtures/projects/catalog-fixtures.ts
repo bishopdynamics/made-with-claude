@@ -55,7 +55,8 @@ export function catalogFixtures(): ProjectEntry<string>[] {
   ];
   return definitions.map(
     ([id, publishedOn, startedOn, completedOn, language, tag], index) => {
-      const fixture = publishedFixture(id!);
+      const availability = index % 2 === 0 ? 'private' : 'public';
+      const fixture = publishedFixture(id!, availability);
       Object.assign(fixture.data, {
         title:
           id === 'catalog-alpha'
@@ -70,7 +71,7 @@ export function catalogFixtures(): ProjectEntry<string>[] {
         startedOn,
         completedOn,
         languages: index === 4 ? ['ts', 'cpp'] : [language!],
-        tags: index === 4 ? ['tools', 'graphics'] : [tag!],
+        tags: [...(index === 4 ? ['tools', 'graphics'] : [tag!]), availability],
         coverPosition: { x: 35, y: 65 },
         images: [
           {
@@ -120,10 +121,13 @@ export function writeCatalogFixtures(
     ? ['catalog-draft-empty', 'catalog-draft-sentinel']
     : [];
   if (drafts) {
-    put('src/content/projects/catalog-draft-empty.md', '---\n{}\n---\n');
+    put(
+      'src/content/projects/catalog-draft-empty.md',
+      '---\ntags: [public]\n---\n',
+    );
     put(
       'src/content/projects/catalog-draft-sentinel.md',
-      '---\ntitle: Draft catalog sentinel\ndescription: Unpublished sample card\n---\nUnfinished story.',
+      '---\ntitle: Draft catalog sentinel\ndescription: Unpublished sample card\ntags: [private]\n---\nUnfinished story.',
     );
   }
   return { entries, draftSlugs };

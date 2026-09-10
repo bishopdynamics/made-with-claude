@@ -142,6 +142,11 @@ test(
       const metadata = nodes.find((node) => node.tagName === 'dl')!;
       assert.match(text(metadata), /C\+\+/);
       assert.match(text(metadata), /Graphics/);
+      assert.match(
+        text(metadata),
+        slug === 'gallery-single' ? /Private/ : /Public/,
+      );
+      assert.match(text(metadata), /Updated/);
       assert.match(text(metadata), /2 weeks, 1 day/);
       assert.deepEqual(
         elements(metadata)
@@ -150,7 +155,6 @@ test(
         ['2026-02-20', '2026-03-07', '2026-09-07', '2026-09-08'],
       );
       for (const href of [
-        'https://example.invalid/source',
         'https://example.invalid/release?q=one&next=two',
         'https://example.invalid/video',
         '/projects/',
@@ -160,6 +164,23 @@ test(
             (node) => node.tagName === 'a' && attr(node, 'href') === href,
           ),
         );
+      const sourceLinks = nodes.filter(
+        (node) => node.tagName === 'a' && /^Source\b/.test(text(node).trim()),
+      );
+      if (slug === 'gallery-single') {
+        assert.equal(
+          sourceLinks.length,
+          0,
+          'Private source has no Source link',
+        );
+        assert.ok(!html.includes('https://example.invalid/source'));
+      } else {
+        assert.equal(sourceLinks.length, 1);
+        assert.equal(
+          attr(sourceLinks[0]!, 'href'),
+          'https://example.invalid/source',
+        );
+      }
       const links = marked('data-gallery-image');
       assert.equal(links.length, count);
       assert.equal(attr(links[0]!, 'data-caption'), literalCaption);

@@ -67,14 +67,17 @@ test('dates and spans are stable across DST and extreme local timezones', () => 
 });
 
 test('canonical public order excludes drafts, ignores updates, and breaks ties by slug without mutating input', () => {
-  const older = publishedFixture('older');
+  const older = publishedFixture('older', 'private');
   older.data.publishedOn = '2026-01-01';
   older.data.updatedOn = '2026-12-31';
   const draft = publishedFixture('draft');
   draft.data.draft = true;
+  const privateDraft = publishedFixture('private-draft', 'private');
+  privateDraft.data.draft = true;
   const entries = [
     publishedFixture('zebra'),
     draft,
+    privateDraft,
     older,
     publishedFixture('alpha'),
   ];
@@ -84,7 +87,7 @@ test('canonical public order excludes drafts, ignores updates, and breaks ties b
   );
   assert.deepEqual(
     entries.map(({ id }) => id),
-    ['zebra', 'draft', 'older', 'alpha'],
+    ['zebra', 'draft', 'private-draft', 'older', 'alpha'],
   );
   assert.equal(projectCover(older)?.id, 'overview');
 });

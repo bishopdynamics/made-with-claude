@@ -53,13 +53,106 @@ test('publication is explicit; incomplete drafts have safe defaults', () => {
         'publishedOn',
         'startedOn',
         'completedOn',
-        'repositoryUrl',
         'coverId',
         'languages',
         'tags',
         'images',
       ]),
     );
+});
+
+test('source availability is explicit at publication and cannot contradict its source link', () => {
+  const privateProject = {
+    ...publishedFixture('private-project', 'private').data,
+    description: valid().description,
+  };
+  assert.equal(schema.parse(privateProject).repositoryUrl, undefined);
+  assert.equal(schema.parse({ tags: ['public'] }).draft, true);
+  assert.equal(schema.parse({ tags: ['private'] }).draft, true);
+  const rejectsAt = (data: object, field: string, message: RegExp) => {
+    const result = schema.safeParse(data);
+    assert.equal(result.success, false);
+    if (!result.success)
+      assert.ok(
+        result.error.issues.some(
+          (issue) => issue.path[0] === field && message.test(issue.message),
+        ),
+        result.error.message,
+      );
+  };
+  rejectsAt({ ...valid(), tags: ['graphics'] }, 'tags', /source availability/);
+  rejectsAt(
+    { ...valid(), repositoryUrl: undefined },
+    'repositoryUrl',
+    /public source/,
+  );
+  for (const draft of [true, false]) {
+    rejectsAt(
+      { ...valid(), draft, tags: ['public', 'private'] },
+      'tags',
+      /mutually exclusive/,
+    );
+    rejectsAt(
+      {
+        ...privateProject,
+        draft,
+        repositoryUrl: 'https://example.invalid/source',
+      },
+      'repositoryUrl',
+      /must omit/,
+    );
+  }
+  // Private source relaxes only the repository requirement.
+  for (const field of [
+    'title',
+    'description',
+    'publishedOn',
+    'startedOn',
+    'completedOn',
+    'coverId',
+  ] as const)
+    rejectsAt(
+      { ...privateProject, [field]: undefined },
+      field,
+      /Required for publication/,
+    );
+  for (const field of ['languages', 'images'] as const)
+    rejectsAt({ ...privateProject, [field]: [] }, field, /At least one/);
+  rejectsAt(
+    { ...privateProject, publishedOn: '2026-02-29' },
+    'publishedOn',
+    /real calendar date/,
+  );
+  rejectsAt(
+    { ...privateProject, tags: ['private', 'unknown'] },
+    'tags',
+    /Unknown taxonomy/,
+  );
+  rejectsAt(
+    {
+      ...privateProject,
+      images: [
+        {
+          ...privateProject.images[0],
+          src: 'https://example.invalid/image.png',
+        },
+      ],
+    },
+    'images',
+    /relative local image/,
+  );
+  assert.throws(
+    () => validateProjectBody(false, '', 'private-project.md'),
+    /nonempty Markdown article/,
+  );
+  assert.equal(
+    schema.parse({
+      ...privateProject,
+      releaseUrl: 'https://example.invalid/release',
+      videoUrl: 'https://example.invalid/video',
+    }).draft,
+    false,
+  );
 });
 
 test('published fields, real dates, reviewed taxonomy and unique IDs are enforced', () => {

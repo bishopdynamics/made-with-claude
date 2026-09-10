@@ -44,7 +44,6 @@ export type PublishedProjectData<TImage = ImageMetadata> =
     publishedOn: string;
     startedOn: string;
     completedOn: string;
-    repositoryUrl: string;
     coverId: string;
   };
 

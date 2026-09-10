@@ -6,7 +6,7 @@ publishedOn: '2026-09-08'
 startedOn: '2026-06-09'
 completedOn: '2026-06-22'
 languages: [c, cpp, python, shell]
-tags: [games, graphics, desktop]
+tags: [games, graphics, desktop, public]
 repositoryUrl: 'https://github.com/bishopdynamics/Continuum'
 releaseUrl: 'https://github.com/bishopdynamics/Continuum/releases/tag/v1.0.0.0'
 images:

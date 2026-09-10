@@ -16,17 +16,22 @@ import {
 const all = { q: '', tag: '', language: '', year: '' };
 function catalog() {
   const alpha = publishedFixture('alpha');
-  const beta = publishedFixture('beta');
+  const beta = publishedFixture('beta', 'private');
   beta.data.title = 'Tool [a-z].*';
   beta.data.description = 'A small developer utility';
-  beta.data.tags = ['tools'];
+  beta.data.tags = ['tools', 'private'];
   beta.data.languages = ['ts'];
   beta.data.completedOn = '2025-12-31';
   beta.data.startedOn = '2025-11-01';
-  const draft = publishedFixture('private-draft');
+  const draft = publishedFixture('private-draft', 'private');
   draft.data.draft = true;
   draft.data.title = 'Draft-only title';
-  return createProjectSearchRecords([beta, draft, alpha], fixtureTaxonomy);
+  const publicDraft = publishedFixture('public-draft');
+  publicDraft.data.draft = true;
+  return createProjectSearchRecords(
+    [beta, draft, publicDraft, alpha],
+    fixtureTaxonomy,
+  );
 }
 
 test('public metadata excludes draft records and article/image payloads', () => {
@@ -59,7 +64,7 @@ test('all filters combine with AND and choices stay independent of results', () 
   assert.deepEqual(options.years, ['2026', '2025']);
   assert.deepEqual(
     options.tags.map(({ label }) => label),
-    ['Developer tools', 'Graphics'],
+    ['Developer tools', 'Graphics', 'Private', 'Public'],
   );
   assert.equal(
     filterProjects(records, {
@@ -84,6 +89,29 @@ test('all filters combine with AND and choices stay independent of results', () 
     filterProjects(records, { ...all, year: '2025' })[0]?.slug,
     'beta',
   );
+});
+
+test('reserved availability tags filter published articles independently of draft status', () => {
+  const records = catalog();
+  for (const [tag, expected] of [
+    ['public', 'alpha'],
+    ['private', 'beta'],
+  ]) {
+    assert.deepEqual(
+      filterProjects(records, { ...all, tag: tag! }).map(({ slug }) => slug),
+      [expected],
+    );
+    assert.deepEqual(
+      filterProjects(records, { ...all, q: tag! }).map(({ slug }) => slug),
+      [expected],
+    );
+    const options = projectFilterOptions(records);
+    const state = { ...all, tag: tag! };
+    assert.deepEqual(
+      parseProjectSearch(serializeProjectSearch(state, options), options),
+      state,
+    );
+  }
 });
 
 test('URL state safely roundtrips Unicode and literal special characters and discards invalid choices', () => {

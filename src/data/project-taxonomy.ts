@@ -3,6 +3,8 @@ import type { ProjectTaxonomy } from '../types/projects.ts';
 // Reviewed identifiers used by portfolio project metadata.
 export const projectTaxonomy: ProjectTaxonomy = {
   tags: [
+    { id: 'public', label: 'Public' },
+    { id: 'private', label: 'Private' },
     { id: 'games', label: 'Games' },
     { id: 'graphics', label: 'Graphics' },
     { id: 'desktop', label: 'Desktop' },

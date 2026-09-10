@@ -1,6 +1,6 @@
 # SPEC: BeamVM portfolio onboarding
 
-- **Status:** content accepted; public repository URL pending
+- **Status:** paused (accepted content; user preparing code release)
 - **Approval record:** On 2026-09-08 the user accepted Continuum portfolio v1 as release-ready, said BeamVM is the next ready project, and explicitly requested moving on to it. This authorizes onboarding using the existing portfolio design and content contracts; it does not approve invented copy or unreviewed assets.
 
 ## Summary
@@ -57,13 +57,15 @@ The final story should explain what visitors can do, why the user wanted it, the
 
 ## Open Questions
 
-No new site architecture decisions are required. BeamVM's story, exact public links/dates, and selected media are explicitly gathered and reviewed during intake; the entry remains a draft while those inputs are unresolved.
+BeamVM’s story, dates, and selected media are accepted. The user is preparing its code release and has paused this onboarding task; verify the public repository URL when they return to it.
 
 ## Deferred / Follow-ups
 
 - None yet. Record only deliberate follow-ups arising from BeamVM onboarding.
 
 ## Change Log
+
+- 2026-09-09 — User explicitly paused BeamVM while working on its code release. Preserve content acceptance and resume when they return with the public source. The separately requested private-source category does not authorize publishing BeamVM now.
 
 - 2026-09-09 — User accepted the assembled article and six local screenshots as ready to publish. Public repository URL is still missing and required by the existing publication schema; requested the URL without reopening content review.
 

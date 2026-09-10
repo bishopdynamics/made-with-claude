@@ -1,6 +1,6 @@
 # BeamVM onboarding
 
-Status: **content accepted as ready to publish**, 2026-09-09. The user approved the assembled article, metadata, and six local screenshots. Public-build selection awaits the required public repository URL, requested from the user. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
+Status: **content accepted as ready to publish**, 2026-09-09. The user approved the assembled article, metadata, and six local screenshots. The user has explicitly paused public-build selection while preparing the code release; resume when they return to it. Do not reclassify BeamVM as private to bypass that pause. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
 
 ## Starting context
 
@@ -69,6 +69,8 @@ SHA-256 provenance for the supplied files: `program_rockfield.png` = `9bf41d3916
 An optional [maintainer brief](beamvm-maintainer-brief.md) captures these source/media questions for the BeamVM project without sending a message externally.
 
 ## Review record
+
+- 2026-09-09 — User confirmed the code release is still in progress and requested returning to BeamVM later. Its content remains accepted and the draft stays unpublished. Public source-link verification resumes with that release.
 
 - 2026-09-09 — User accepted BeamVM and FantasyBoy as ready to publish. BeamVM content acceptance is complete; its required public repository URL remains missing. An anonymous lookup for `bishopdynamics/beamvm` returned HTTP 404, so no guessed link was added. Requested the correct public URL.
 

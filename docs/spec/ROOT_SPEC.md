@@ -1,7 +1,7 @@
 # SPEC: whatclaudemade.com portfolio launch
 
 - **Status:** in-progress
-- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md), [Local image serving](FEATURE_SPEC_local_image_serving.md)
+- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md), [Local image serving](FEATURE_SPEC_local_image_serving.md), [Source availability](FEATURE_SPEC_source_availability.md)
 - **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. Slice 6 launch remains pending after the BeamVM addendum.
 
 ## Summary
@@ -92,8 +92,8 @@ Use an Astro build-time `projects` collection under `src/content/projects/*.md` 
 | `updatedOn`                | Optional valid date; never changes homepage recency                                                                                           |
 | `startedOn`, `completedOn` | Valid dates, required for publication; completion cannot precede start                                                                        |
 | `languages`                | Nonempty unique list of language identifiers for a published entry                                                                            |
-| `tags`                     | Nonempty unique list of tag identifiers for a published entry                                                                                 |
-| `repositoryUrl`            | Required HTTPS source-repository URL for publication                                                                                          |
+| `tags`                     | Nonempty unique tags; exactly one reserved availability tag, `public` or `private`, for publication                                                                                 |
+| `repositoryUrl`            | Required HTTPS public source URL for published `public` entries; omitted for `private`                                                                                          |
 | `releaseUrl`               | Optional HTTPS release/download-page URL                                                                                                      |
 | `videoUrl`                 | Optional HTTPS video link, displayed as an external link in this sprint                                                                       |
 | `images`                   | Ordered list of `{ id, src, alt, caption? }`; unique IDs, local resolvable images, meaningful alt text; at least one required for publication |
@@ -102,6 +102,8 @@ Use an Astro build-time `projects` collection under `src/content/projects/*.md` 
 | Markdown body              | Long-form project explanation; must be nonempty for publication                                                                               |
 
 Keep canonical tag/language identifiers and display labels in `src/data/project-taxonomy.ts`. Start with only those actually needed by reviewed content. Example tag vocabulary includes `games`, `graphics`, `desktop`, and `developer-tools`; these are examples, not assigned metadata for Continuum. New identifiers are a small authoring change. Validate unknown identifiers and duplicates. Do not infer a project's languages solely from an umbrella repository's GitHub language bar.
+
+The reserved `public` and `private` tags describe source availability, independently of `draft`. Both types can have published articles and appear in the same homepage, catalog, and search. Drafts may omit source availability, but never combine both tags. Private projects omit `repositoryUrl`; every other publication requirement remains the same. Frequent revisions use the existing optional `updatedOn` date and do not change homepage recency.
 
 Schema validation allows an incomplete draft, but published entries missing any required material fail the build with a useful filename/field error. Validate real calendar dates rather than only their string shape. A shared query helper provides one canonical public list to all production routes and metadata outputs. Draft project routes and cards are available through `make run` for author review, clearly marked as drafts locally. Show populated language/tag/development metadata in drafts; missing values use draft-only pending labels instead of disappearing, as requested by the user on 2026-09-08. Drafts remain absent from production routes, search data, sitemap, and metadata. Draft authoring is not a confidentiality mechanism for files committed to the public source repository.
 

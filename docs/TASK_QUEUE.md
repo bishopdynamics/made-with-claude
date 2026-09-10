@@ -8,19 +8,22 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 ## Queue
 
-1. [in-review] FEATURE_SPEC_local_image_serving.md
+1. [in-review] FEATURE_SPEC_source_availability.md
+   - User requested publishable articles about projects with private code, reserving `public` / `private` tags for source availability. Preserve all other requirements and existing update metadata; keep article publication separate from code availability. One serial Astra/high worker implemented schema/types/taxonomy/tests and added `public` to the two accepted entries. Worker and parent checks passed 46 tests; browser review verified private/public output, source-link omission/retention, availability filters, Updated metadata, and gallery/mobile behavior.
+
+2. [in-review] FEATURE_SPEC_local_image_serving.md
    - User reported broken Vintage Vault images and reiterated repository-local copies. Copies are present and valid; reproduced stale image-service failure after a Vite restart. Native-transform fix and real image-response regression passed worker and parent `make check` (44 tests). Existing preview thumbnails and all full-size originals load successfully; all 14 tracked project media files are regular files in this repo.
 
-2. [in-review] FEATURE_SPEC_batch_project_drafts.md — six drafts ready
+3. [in-review] FEATURE_SPEC_batch_project_drafts.md — six drafts ready
    - User authorized wallflower, vintage, vintage-vault, simpler-camera-card, slowframe, and mezuril drafts using parallel Astra agents, with existing images selected at agent discretion and missing media reported.
    - All six drafts integrated from two Astra/high workers reused in parallel waves; the thread limit prevented a third. Parent checks passed 43 tests plus desktop/mobile draft/card/gallery review and production exclusion. Existing entries remain unchanged; all worktrees/branches cleaned up.
    - Vintage Vault has three selected screenshots. Wallflower, Vintage, Simpler Camera Card, Slowframe, and Mezuril need usable cover/product images. Capture suggestions and metadata gaps are in `docs/projects/batch-draft-review.md`. User assessment/publication remain pending.
 
-3. [in-progress] FEATURE_SPEC_beamvm_onboarding.md — content accepted; public URL needed
-   - 2026-09-09: user accepted BeamVM and FantasyBoy as ready to publish. BeamVM’s approved article, dates, metadata, and six local screenshots are complete. Its required public repository URL is still missing; requested it from the user. Keep the internal address private and preserve content acceptance while resolving this field.
+4. [paused] FEATURE_SPEC_beamvm_onboarding.md — accepted content; code release in progress
+   - 2026-09-09: user accepted BeamVM and FantasyBoy as ready to publish. BeamVM’s approved article, dates, metadata, and six local screenshots are complete. The user subsequently paused BeamVM while preparing its code release. Resume public source-link verification and build selection when they return to it; do not use the new private category to bypass the pause.
    - FantasyBoy is accepted and removed from the queue; its public-build selection passed 44 tests, five-page production validation, and browser checks with `publishedOn: 2026-09-09`.
 
-4. [pending] ROOT_SPEC.md — remaining launch slice, after selected onboarding work
+5. [pending] ROOT_SPEC.md — remaining launch slice, after selected onboarding work
    - 2026-09-07: user approved the full specification and authorized slice 1. Initial Planning is accepted and removed from the active queue.
    - Slice 1 — content contracts and tooling: accepted by the user; implemented and independently verified in `b1d60c4`.
    - Slice 2 — shared design and typography: accepted after the user reviewed preview images; committed as `9d195cd`.
