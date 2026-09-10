@@ -7,6 +7,7 @@
 - Implementation summary (see `archive_13.md` for the pre-implementation wrap): one Codex `gpt-6-astra`/high worker via hanuman in the main checkout produced `src/lib/project-video.ts`, `src/components/ProjectVideo.astro`, layout/style changes, tests, and the Continuum `videoUrl`/`updatedOn` frontmatter. Parent `make check` passed (52 tests, 0 privacy findings) and desktop/400px browser review passed before commit.
 - Bookkeeping: TODO item marked done (user prunes); the video task is removed from the queue, so the queue now leads with the local-image-serving and batch-drafts reviews, then paused BeamVM. Spec status is done. Dev guide documents the video helper/component contract.
 - **Next:** nothing in flight. Remaining queue items are user-assessment reviews (`FEATURE_SPEC_local_image_serving.md`, `FEATURE_SPEC_batch_project_drafts.md`) and paused BeamVM. Wait for the user's direction; do not resume BeamVM unprompted.
+- Codex budget: hanuman `status` showed the Codex plan at 91% of its weekly window on 2026-09-10 (resets 2026-09-17 06:12 UTC). Check `status` before dispatching; fall back to Claude Opus/Sonnet workers if it is exhausted, reporting the fallback.
 - Worktree/worker audit: only the main worktree exists; hanuman run `project-video-142c7f` is finished with no worktree/branch. No preview server or browser session is left running. Elefant captures were written this session.
 
 ## Archives
