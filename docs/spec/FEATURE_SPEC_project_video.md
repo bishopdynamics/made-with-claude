@@ -1,6 +1,6 @@
 # SPEC: Project video embeds and the first published-article update
 
-- **Status:** approved
+- **Status:** done
 - **Request:** On 2026-09-10 the user accepted the website launch and asked to test the project-update cycle using `docs/TODO.md`: embed their public Continuum video at https://www.youtube.com/watch?v=DVSHgFvknj0.
 - **Presentation preference:** The user requested the cleanest, most minimal player achievable with YouTube's supported parameters.
 - **Approval:** On 2026-09-10 the user approved this spec, including the minimal-player refinement, and requested wrapping the session. Implementation is ready for the next session; publication follows review of the rendered update.
@@ -89,6 +89,7 @@ None. Actual embedded playback remains an implementation verification requiremen
 
 ## Change Log
 
+- 2026-09-10 — User reviewed the rendered update and approved publication. Pushed `b16843f` to `github/main`; Actions run 34538588773 succeeded. Live page verified: privacy-enhanced iframe with the fixed options, Updated Sep 10, sitemap `lastmod` 2026-09-10, drafts still excluded, and real playback from the live origin. The user asked about forcing subtitles off; YouTube offers no embed parameter for that, so they removed the automatic captions on the video itself and the live player now reports no captions available. TODO marked done; task removed from the queue.
 - 2026-09-10 — Implemented the serial slice with one Codex `gpt-6-astra`/high worker in the main checkout. Parent re-ran `make check` (52 tests, zero privacy findings, production build valid) and verified the production preview in a browser: player renders between gallery and article at 16:9 on desktop and 400px viewports with no overflow, does not autoplay, plays after a click, exposes mute/settings/seek/fullscreen controls, keeps the Watch on YouTube fallback and header Video link, and preserves the GIF, gallery, and dates with Updated shown. Committed locally; publication awaits the user's review of the rendered update.
 - 2026-09-10 — User approved the complete spec with the minimal-player refinement and requested session wrap. Implementation is queued for the next session.
 - 2026-09-10 — User requested minimal player presentation. Added supported clutter-reduction parameters, retained usable playback controls, and documented current YouTube limitations. This refines the draft; implementation/publication are not yet started.

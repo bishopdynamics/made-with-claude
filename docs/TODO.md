@@ -15,6 +15,6 @@ If something here is actually bigger than it looks and really should be spec'd f
 
 A feature must first be planned (user idea → research and discuss → improved idea → full feature spec), producing a spec file `docs/spec/FEATURE_SPEC_<thing>.md`. Then it can be implemented, following the spec.
 
-- I have a youtube video, publicly available for "half-life: continuum edition"
+- [done 2026-09-10] I have a youtube video, publicly available for "half-life: continuum edition"
   - https://www.youtube.com/watch?v=DVSHgFvknj0
   - add an embedded player to that project's page
