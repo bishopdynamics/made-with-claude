@@ -145,11 +145,13 @@ The scanner accepts files up to 10 MiB each and blocks larger inputs for review.
 
 Checks include tracked `.bishop` files. Ignore rules are not a reason to skip an already tracked file. Generated build/dependency files and ignored local scratch files are excluded from normal working-file discovery.
 
+Safeguard test fixtures reuse installed dependencies through a symlink. Their ignore rule must match `node_modules` itself: a trailing slash matches directories but misses the symlink. Keep the fixture's ignored/unstaged assertions so developer and hosted-runner source paths produce the same clean snapshots. Repository-local `tmp/` is ignored for diagnostic output and other scratch files.
+
 Automated checks cannot prove that a screenshot or paragraph is safe to publish. Review images for names, account details, private windows, notifications, and metadata; use prepared demo data where possible. Review prose and the complete Git history before making the source repository public. Do not commit an actual credential to test the scanner.
 
 ## Publishing
 
-The remote is named `github`. Initial repository synchronization uses `git push -u github main`; subsequent pushes use that upstream. The bootstrap Actions workflow performs checks only, so the initial repository push does not launch a website.
+The remote is named `github`; `main` tracks `github/main`. A push to `main` now checks and publishes the site through GitHub Actions.
 
 The launch workflow checks pull requests and deploys the checked `dist/` artifact after successful main-branch checks. Only the deployment job has Pages write/OIDC permissions. Production collection sync validates draft metadata and gallery files, then skips draft asset registration so unpublished gallery/inline images do not enter the artifact. The sitemap contains only home, catalog, and published projects. See [the launch guide](launch.md) for GitHub settings, exact Route 53 records, HTTPS, and launch status. The user made the source repository public on 2026-09-07, resolving the private-repository Pages plan requirement. See [GitHub's Pages prerequisites](https://docs.github.com/en/pages/getting-started-with-github-pages) and [Astro's Pages deployment guide](https://docs.astro.build/en/guides/deploy/github/).
 

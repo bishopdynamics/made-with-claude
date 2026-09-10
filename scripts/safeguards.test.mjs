@@ -62,7 +62,8 @@ function fixture(t, { dependencies = true } = {}) {
     mkdirSync(dirname(join(root, path)), { recursive: true });
     cpSync(join(project, path), join(root, path));
   }
-  put(root, '.gitignore', 'node_modules/\n');
+  // A trailing slash ignores directories, but not this dependency symlink.
+  put(root, '.gitignore', '/node_modules\n');
   if (dependencies)
     symlinkSync(
       join(project, 'node_modules'),
@@ -70,6 +71,19 @@ function fixture(t, { dependencies = true } = {}) {
       'dir',
     );
   git(root, 'add', '--', '.');
+  if (dependencies) {
+    assert.equal(
+      run(root, 'git', ['check-ignore', '--quiet', '--', 'node_modules'])
+        .status,
+      0,
+      'Fixture dependency symlink must remain ignored',
+    );
+    assert.equal(
+      git(root, 'ls-files', '--cached', '--', 'node_modules').output,
+      '',
+      'Fixture dependency symlink must never enter the index',
+    );
+  }
   return root;
 }
 
@@ -174,7 +188,7 @@ test('full mode includes untracked files and ignored-but-tracked content', (t) =
   const root = fixture(t);
   put(root, 'tracked.md', 'safe\n');
   git(root, 'add', '--', 'tracked.md');
-  put(root, '.gitignore', 'node_modules/\ntracked.md\nignored.md\n');
+  put(root, '.gitignore', '/node_modules\ntracked.md\nignored.md\n');
   const token = inertToken();
   put(root, 'ignored.md', token);
   assert.equal(scan(root, '--all').status, 0);
