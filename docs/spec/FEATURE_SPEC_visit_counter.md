@@ -112,7 +112,7 @@ For every HTML page in `dist/`: exactly one `script[data-goatcounter]` whose `sr
 
 ## Change Log
 
-- 2026-09-11 (UTC) — User approved publication after reviewing the footer. Pushed `b39d6ab`; Actions run 34563697928 succeeded. Live: every route carries one same-origin counter script (byte-identical to the vendored file) and a noscript pixel with its canonical path; the beacon to the count endpoint returned 200 from the live origin, and the headless review browser was flagged as automated (`b=153`) by `count.js`. TODO marked done; task removed from the queue. The user confirms the first dashboard pageview.
+- 2026-09-11 (UTC) — User approved publication after reviewing the footer. Pushed `b39d6ab`; Actions run 34563697928 succeeded. Live: every route carries one same-origin counter script (byte-identical to the vendored file) and a noscript pixel with its canonical path; the beacon to the count endpoint returned 200 from the live origin, and the headless review browser was flagged as automated (`b=153`) by `count.js`. TODO marked done; task removed from the queue. The user confirmed the first dashboard pageview from a phone on a mobile hotspot, appearing immediately. Accepted.
 - 2026-09-10 — User approved the script-based design ("let's do it") after briefly considering image-only; the image-only revision is superseded. Implementation starts.
 - 2026-09-10 — Interim revision to image-only at the user's request (superseded the same day).
 - 2026-09-10 — created after the user chose GoatCounter and supplied the account snippet.
