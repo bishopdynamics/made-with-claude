@@ -21,4 +21,4 @@ One line per item: `- <what> — from docs/spec/<file>.md (YYYY-MM-DD)`
 - Review date candidates, public source/download links, and any personal/model attribution for the six new drafts before publication — from docs/spec/FEATURE_SPEC_batch_project_drafts.md (2026-09-08).
 - Reassess the Node-bound image transform when upgrading Astro, retaining the restart and actual-image-response regression — from docs/spec/FEATURE_SPEC_local_image_serving.md (2026-09-09).
 - Resume BeamVM public-build selection when the user finishes its code release and supplies the public repository URL — from docs/spec/FEATURE_SPEC_source_availability.md (2026-09-09).
-- Visible on-page visit counter via GoatCounter's counter endpoints, manual refresh of the vendored `count.js`, and a meta CSP if ever wanted — from docs/spec/FEATURE_SPEC_visit_counter.md (2026-09-10).
+- Visible on-page visit counter via GoatCounter's counter endpoints, and referrer data if the script is ever wanted — from docs/spec/FEATURE_SPEC_visit_counter.md (2026-09-10).

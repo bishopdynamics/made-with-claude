@@ -11,7 +11,7 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 1. [spec-drafted] FEATURE_SPEC_visit_counter.md — GoatCounter pageview counter
    - 2026-09-10: user chose hosted privacy-friendly analytics, picked GoatCounter after a second research round, created the account (site code `bishopdynamics`), and added the TODO entry. Spec drafted; awaiting the user's approval. One visible change to confirm: a one-sentence footer disclosure.
-   - Plan: orchestrator vendors `count.v5.js` with a verified hash, then one serial worker adds the production-only component, the no-JS pixel, the shared canonical helper, built-site checks, and tests.
+   - User then chose the image-only mechanism (no `count.js`). Spec revised: one serial worker adds the image component gated on `SITE_VISIT_COUNTER=goatcounter`, which only the main-branch deploy build sets, plus the shared canonical helper, workflow env, built-site checks, and tests.
 
 2. [in-review] FEATURE_SPEC_local_image_serving.md
    - User reported broken Vintage Vault images and reiterated repository-local copies. Copies are present and valid; reproduced stale image-service failure after a Vite restart. Native-transform fix and real image-response regression passed worker and parent `make check` (44 tests). Existing preview thumbnails and all full-size originals load successfully; all 14 tracked project media files are regular files in this repo.
