@@ -1,7 +1,7 @@
 # SPEC: whatclaudemade.com portfolio launch
 
 - **Status:** done
-- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md), [Local image serving](FEATURE_SPEC_local_image_serving.md), [Source availability](FEATURE_SPEC_source_availability.md), [Project video embeds](FEATURE_SPEC_project_video.md)
+- **Addenda:** [BeamVM onboarding](FEATURE_SPEC_beamvm_onboarding.md), [FantasyBoy onboarding](FEATURE_SPEC_fantasyboy_onboarding.md), [Six-project draft batch](FEATURE_SPEC_batch_project_drafts.md), [Local image serving](FEATURE_SPEC_local_image_serving.md), [Source availability](FEATURE_SPEC_source_availability.md), [Project video embeds](FEATURE_SPEC_project_video.md), [Site visit counter](FEATURE_SPEC_visit_counter.md)
 - **Approval record:** The user approved the foundation, visual direction, and full specification on 2026-09-07. Slices 1–5 are accepted; on 2026-09-08 the user accepted Continuum portfolio v1 as release-ready and selected BeamVM onboarding next. On 2026-09-10 the user requested launching the site today with the currently accepted entries; BeamVM remains paused. The user accepted the live HTTPS result on 2026-09-10 and moved on to the project-update cycle.
 
 ## Summary
