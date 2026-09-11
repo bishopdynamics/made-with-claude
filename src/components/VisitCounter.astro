@@ -1,0 +1,35 @@
+---
+import {
+  visitCounterEndpoint,
+  visitCounterImageUrl,
+  visitCounterScript,
+} from '../lib/site-url.ts';
+
+interface Props {
+  canonical: URL;
+}
+
+const { canonical } = Astro.props;
+---
+
+{
+  !import.meta.env.DEV && (
+    <>
+      <script
+        is:inline
+        data-goatcounter={visitCounterEndpoint}
+        async
+        src={visitCounterScript}
+      />
+      <noscript>
+        <img
+          src={visitCounterImageUrl(canonical)}
+          alt=""
+          width="1"
+          height="1"
+          data-visit-counter="goatcounter"
+        />
+      </noscript>
+    </>
+  )
+}

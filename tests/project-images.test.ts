@@ -146,7 +146,12 @@ export default { ...base, vite: { ...base.vite, plugins: [{
     }
     assert.ok(page, `Development server did not start:\n${output}`);
     assert.equal(page.status, 200, await page.clone().text());
-    const links = elements(parse(await page.text())).filter(
+    const html = await page.text();
+    assert.doesNotMatch(
+      html,
+      /data-goatcounter|data-visit-counter|\/goatcounter\/count|bishopdynamics\.goatcounter\.com/i,
+    );
+    const links = elements(parse(html)).filter(
       (node) => attr(node, 'data-gallery-image') !== undefined,
     );
     assert.equal(links.length, originals.size);

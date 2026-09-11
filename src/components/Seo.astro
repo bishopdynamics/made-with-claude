@@ -1,4 +1,6 @@
 ---
+import { resolveCanonical, siteOrigin } from '../lib/site-url.ts';
+
 interface Props {
   title?: string;
   description?: string;
@@ -15,10 +17,8 @@ const {
   noindex = false,
   image,
 } = Astro.props;
-const site = Astro.site ?? new URL('https://whatclaudemade.com');
-const canonicalUrl = new URL(canonical, site);
-canonicalUrl.search = '';
-canonicalUrl.hash = '';
+const site = Astro.site ?? siteOrigin;
+const canonicalUrl = resolveCanonical(canonical, site, Astro.url.pathname);
 const pageTitle = title === siteName ? title : `${title} · ${siteName}`;
 const imageUrl = image ? new URL(image.src, site) : undefined;
 ---

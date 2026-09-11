@@ -2,6 +2,8 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Seo from '../components/Seo.astro';
+import VisitCounter from '../components/VisitCounter.astro';
+import { resolveCanonical, siteOrigin } from '../lib/site-url.ts';
 import '../styles/global.css';
 import '../styles/prose.css';
 import '../styles/code.css';
@@ -22,6 +24,11 @@ interface Props extends PageOptions {
 
 // Markdown supplies frontmatter; direct Astro props take precedence.
 const options = { ...Astro.props.frontmatter, ...Astro.props };
+const canonical = resolveCanonical(
+  options.canonical,
+  Astro.site ?? siteOrigin,
+  Astro.url.pathname,
+);
 const { prose = Boolean(Astro.props.frontmatter), variant = 'standard' } =
   options;
 ---
@@ -32,7 +39,7 @@ const { prose = Boolean(Astro.props.frontmatter), variant = 'standard' } =
     <Seo
       title={options.title}
       description={options.description}
-      canonical={options.canonical}
+      canonical={canonical}
       noindex={options.noindex}
       image={options.image}
     />
@@ -59,5 +66,6 @@ const { prose = Boolean(Astro.props.frontmatter), variant = 'standard' } =
       <div class:list={['page-content', { prose }]}><slot /></div>
     </main>
     <SiteFooter />
+    <VisitCounter canonical={canonical} />
   </body>
 </html>

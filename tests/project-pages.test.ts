@@ -17,6 +17,10 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse, type DefaultTreeAdapterMap } from 'parse5';
 import { checkSite } from '../scripts/check-site.mjs';
+import {
+  visitCounterEndpoint,
+  visitCounterScript,
+} from '../src/lib/site-url.ts';
 import { isolateFixtureCaches } from './fixtures/projects/build-cache.ts';
 import {
   draftMedia,
@@ -142,6 +146,11 @@ test(
       requireIndexability: true,
     };
     await checkSite(options);
+    assert.deepEqual(
+      readFileSync(join(directory, visitCounterScript)),
+      readFileSync(join(root, 'public', visitCounterScript)),
+      'The built counter script must be byte-identical to the vendored source',
+    );
     const sitemapPath = join(directory, 'sitemap.xml');
     const sitemap = readFileSync(sitemapPath, 'utf8');
     const sitemapNodes = elements(parse(sitemap));
@@ -170,6 +179,49 @@ test(
     })) {
       if (!entry.isFile()) continue;
       const bytes = readFileSync(join(entry.parentPath, entry.name));
+      if (entry.name.endsWith('.html')) {
+        const html = bytes.toString('utf8');
+        const nodes = elements(parse(html, { scriptingEnabled: false }));
+        const scripts = nodes.filter(
+          (node) =>
+            node.tagName === 'script' &&
+            attr(node, 'data-goatcounter') !== undefined,
+        );
+        assert.equal(scripts.length, 1, entry.name);
+        const script = scripts[0]!;
+        assert.equal(attr(script, 'data-goatcounter'), visitCounterEndpoint);
+        assert.equal(attr(script, 'src'), visitCounterScript);
+        assert.notEqual(attr(script, 'async'), undefined);
+        const footer = nodes.find((node) => node.tagName === 'footer');
+        assert.ok(footer);
+        assert.ok(nodes.indexOf(script) > nodes.indexOf(footer));
+        assert.match(
+          text(footer),
+          /Visits are counted with GoatCounter, without cookies or personal data\./,
+        );
+        const noscripts = nodes.filter((node) => node.tagName === 'noscript');
+        assert.equal(noscripts.length, 1);
+        const images = elements(noscripts[0]!).filter(
+          (node) => node.tagName === 'img',
+        );
+        assert.equal(images.length, 1);
+        const image = images[0]!;
+        assert.equal(attr(image, 'data-visit-counter'), 'goatcounter');
+        assert.equal(attr(image, 'alt'), '');
+        assert.equal(attr(image, 'width'), '1');
+        assert.equal(attr(image, 'height'), '1');
+        const imageUrl = new URL(attr(image, 'src')!);
+        assert.equal(imageUrl.origin + imageUrl.pathname, visitCounterEndpoint);
+        const canonical = nodes.find(
+          (node) =>
+            node.tagName === 'link' && attr(node, 'rel') === 'canonical',
+        );
+        assert.ok(canonical);
+        assert.equal(
+          imageUrl.searchParams.get('p'),
+          new URL(attr(canonical, 'href')!).pathname,
+        );
+      }
       for (const [name, svg] of Object.entries(draftMedia)) {
         assert.ok(
           !entry.name.includes(name.replace('.svg', '')),
@@ -230,6 +282,58 @@ test(
         rmSync(robotsPath);
         await assert.rejects(checkSite(options), /robots\.txt/);
         writeFileSync(robotsPath, robots);
+        const pagePath = join(directory, 'projects/gallery-single/index.html');
+        const original = readFileSync(pagePath, 'utf8');
+        const counterScript = original.match(
+          /<script\b[^>]*data-goatcounter[^>]*><\/script>/,
+        )?.[0];
+        assert.ok(counterScript);
+        const imageSrc = `${visitCounterEndpoint}?p=%2Fprojects%2Fgallery-single%2F`;
+        assert.ok(original.includes(imageSrc));
+        for (const [invalid, reason] of [
+          [
+            original.replace(counterScript, ''),
+            /expected one visit counter script/,
+          ],
+          [
+            original.replace(counterScript, counterScript + counterScript),
+            /expected one visit counter script/,
+          ],
+          [
+            original.replace(imageSrc, `${visitCounterEndpoint}?p=%2Fwrong%2F`),
+            /visit counter image path differs from canonical/,
+          ],
+          [
+            original.replace(
+              '</body>',
+              '<script src="https://example.invalid/x.js"></script></body>',
+            ),
+            /external or non-root-relative script source/,
+          ],
+          [
+            original.replace(visitCounterScript, '/goatcounter/missing.js'),
+            /missing local visit counter script/,
+          ],
+          [
+            original.replace(/<noscript>[\s\S]*?<\/noscript>/, ''),
+            /expected one visit counter noscript/,
+          ],
+        ] as const) {
+          try {
+            writeFileSync(pagePath, invalid);
+            await assert.rejects(checkSite(options), (error: unknown) => {
+              assert.ok(error instanceof Error);
+              assert.match(
+                error.message,
+                /projects[\\/]gallery-single[\\/]index\.html/,
+              );
+              assert.match(error.message, reason);
+              return true;
+            });
+          } finally {
+            writeFileSync(pagePath, original);
+          }
+        }
       },
     );
 

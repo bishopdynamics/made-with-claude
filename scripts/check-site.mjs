@@ -5,6 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'parse5';
 
 const site = 'https://whatclaudemade.com';
+const visitCounterEndpoint = 'https://bishopdynamics.goatcounter.com/count';
 function* elements(node) {
   if (node.tagName) yield node;
   for (const child of node.childNodes ?? []) yield* elements(child);
@@ -214,6 +215,89 @@ function checkProjectPage(nodes, file) {
     );
 }
 
+async function checkVisitCounter(html, file, root, hasFile) {
+  // With scripting enabled, HTML parsers treat noscript contents as raw text.
+  const nodes = [...elements(parse(html, { scriptingEnabled: false }))];
+  const scripts = nodes.filter((node) => node.tagName === 'script');
+  const counters = scripts.filter(
+    (node) => attribute(node, 'data-goatcounter') !== undefined,
+  );
+  assert.equal(
+    counters.length,
+    1,
+    `${file}: expected one visit counter script`,
+  );
+  assert.equal(
+    attribute(counters[0], 'data-goatcounter'),
+    visitCounterEndpoint,
+    `${file}: incorrect visit counter endpoint`,
+  );
+  const src = attribute(counters[0], 'src') ?? '';
+  assert.ok(
+    /^\/(?![\/\\])/.test(src) && URL.canParse(src, site),
+    `${file}: visit counter script must use a root-relative path`,
+  );
+  const scriptUrl = new URL(src, site);
+  assert.equal(
+    scriptUrl.origin,
+    site,
+    `${file}: external visit counter script`,
+  );
+  const scriptPath = resolve(
+    root,
+    `.${decodeURIComponent(scriptUrl.pathname)}`,
+  );
+  assert.ok(
+    !relative(root, scriptPath).startsWith('..') && (await hasFile(scriptPath)),
+    `${file}: missing local visit counter script: ${src}`,
+  );
+
+  const canonicals = nodes.filter(
+    (node) => node.tagName === 'link' && attribute(node, 'rel') === 'canonical',
+  );
+  assert.equal(canonicals.length, 1, `${file}: expected one canonical link`);
+  const canonical = attribute(canonicals[0], 'href') ?? '';
+  assert.ok(URL.canParse(canonical), `${file}: invalid canonical URL`);
+  const fallbacks = nodes.filter((node) => node.tagName === 'noscript');
+  assert.equal(
+    fallbacks.length,
+    1,
+    `${file}: expected one visit counter noscript`,
+  );
+  const images = [...elements(fallbacks[0])].filter(
+    (node) => node.tagName === 'img',
+  );
+  assert.equal(images.length, 1, `${file}: expected one visit counter image`);
+  assert.equal(
+    attribute(images[0], 'data-visit-counter'),
+    'goatcounter',
+    `${file}: missing visit counter image marker`,
+  );
+  const imageSrc = attribute(images[0], 'src') ?? '';
+  assert.ok(URL.canParse(imageSrc), `${file}: invalid visit counter image URL`);
+  const imageUrl = new URL(imageSrc);
+  assert.equal(
+    imageUrl.origin + imageUrl.pathname,
+    visitCounterEndpoint,
+    `${file}: incorrect visit counter image endpoint`,
+  );
+  assert.deepEqual(
+    imageUrl.searchParams.getAll('p'),
+    [new URL(canonical).pathname],
+    `${file}: visit counter image path differs from canonical`,
+  );
+  for (const script of scripts) {
+    const source = attribute(script, 'src');
+    if (source === undefined) continue;
+    assert.ok(
+      URL.canParse(source, site) &&
+        new URL(source, site).origin === site &&
+        (/^\/(?![\/\\])/.test(source) || URL.canParse(source)),
+      `${file}: external or non-root-relative script source: ${source}`,
+    );
+  }
+}
+
 // URL tokens end at whitespace; a comma inside a data URL is part of its URL.
 function srcsetUrls(value) {
   const urls = [];
@@ -324,7 +408,7 @@ async function checkIndexability(root, builtSlugs) {
 /**
  * Small route/schema fixtures can omit the launch endpoints explicitly; the
  * production CLI and complete site fixtures require them.
- * @param {{ directory?: string, requiredRoutes?: string[], publicProjectSlugs?: string[], draftProjectSlugs?: string[], requireProjectMedia?: boolean, requireIndexability?: boolean }} [options]
+ * @param {{ directory?: string, requiredRoutes?: string[], publicProjectSlugs?: string[], draftProjectSlugs?: string[], requireProjectMedia?: boolean, requireIndexability?: boolean, visitCounter?: boolean }} [options]
  */
 export async function checkSite({
   directory = fileURLToPath(new URL('../dist/', import.meta.url)),
@@ -333,6 +417,7 @@ export async function checkSite({
   draftProjectSlugs = [],
   requireProjectMedia = false,
   requireIndexability = false,
+  visitCounter = true,
 } = {}) {
   const root = resolve(directory);
   const files = await readdir(root, { recursive: true });
@@ -384,6 +469,7 @@ export async function checkSite({
       site,
     );
     const nodes = [...elements(parse(html))];
+    if (visitCounter) await checkVisitCounter(html, file, root, hasFile);
     if (
       nodes.some(
         (node) => attribute(node, 'data-project-catalog') !== undefined,

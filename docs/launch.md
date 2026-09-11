@@ -60,6 +60,10 @@ dig +short www.whatclaudemade.com CNAME
 dig +short _github-pages-challenge-bishopdynamics.whatclaudemade.com TXT
 ```
 
+## Visit counter
+
+Pageviews are counted by GoatCounter (site `bishopdynamics`, dashboard owned by the user). The site self-hosts `count.v5.js`; the only outbound analytics request is the beacon to `https://bishopdynamics.goatcounter.com/count`. After a deployment, confirm the live page loads `/goatcounter/count.v5.js` and the beacon returns a success status; the user confirms the pageview in the dashboard. Headless review browsers identify as `HeadlessChrome` and should be filtered as bots; if they appear in the dashboard, add the reviewing IP to Settings → Tracking. See `docs/spec/FEATURE_SPEC_visit_counter.md`.
+
 ## Launch record
 
 - September 10: public repo verified; Pages initially disabled. Domain delegated to Route 53 with no website records. Old remote Check runs failed in `npm run check`; install/Node setup passed. Full old logs require repository-admin API access unavailable to this session. Local safeguards and the full check suite passed with GitHub Actions environment flags; hosted verification and its fixture correction are recorded below.

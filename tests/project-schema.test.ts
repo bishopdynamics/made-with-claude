@@ -367,10 +367,10 @@ test('built-output checker reads HTML elements, ignores code/script examples, an
     'index.html',
     `<html><body>${example}<img src="/image.svg" srcset="/image.svg 160w, /image.svg 320w"></body></html>`,
   );
-  await checkSite({ directory: root });
+  await checkSite({ directory: root, visitCounter: false });
   put(root, 'index.html', '<a href="/missing/">Broken route</a>');
   await assert.rejects(
-    checkSite({ directory: root }),
+    checkSite({ directory: root, visitCounter: false }),
     /broken local link: \/missing\//,
   );
   mkdirSync(join(root, 'directory-without-index'));
@@ -379,16 +379,19 @@ test('built-output checker reads HTML elements, ignores code/script examples, an
     'index.html',
     '<a href="/directory-without-index">Broken directory route</a>',
   );
-  await assert.rejects(checkSite({ directory: root }), /broken local link/);
+  await assert.rejects(
+    checkSite({ directory: root, visitCounter: false }),
+    /broken local link/,
+  );
   put(root, 'directory-without-index/index.html', '<h1>Now a valid route</h1>');
-  await checkSite({ directory: root });
+  await checkSite({ directory: root, visitCounter: false });
   put(
     root,
     'index.html',
     '<img src="/image.svg" srcset="/image.svg 160w, /missing.svg 320w">',
   );
   await assert.rejects(
-    checkSite({ directory: root }),
+    checkSite({ directory: root, visitCounter: false }),
     /broken local link: \/missing.svg/,
   );
 });
