@@ -1,6 +1,6 @@
 # SPEC: BeamVM portfolio onboarding
 
-- **Status:** in-progress (public source verified 2026-09-11; awaiting publication approval)
+- **Status:** done
 - **Approval record:** On 2026-09-08 the user accepted Continuum portfolio v1 as release-ready, said BeamVM is the next ready project, and explicitly requested moving on to it. This authorizes onboarding using the existing portfolio design and content contracts; it does not approve invented copy or unreviewed assets.
 
 ## Summary
@@ -65,6 +65,7 @@ BeamVM’s story, dates, and selected media are accepted. The user is preparing 
 
 ## Change Log
 
+- 2026-09-11 — User approved publication. Pushed `15b066b`; Actions run 34626339425 succeeded. Live: `/projects/beamvm/` is indexable and non-draft with the Source link, six gallery thumbnails, Published Sep 11, 2026, and the visit counter; the sitemap lists it; BeamVM leads the homepage. Task removed from the queue.
 - 2026-09-11 — User released the code publicly at https://github.com/bishopdynamics/BeamVM (MIT; README describes Linux/Vulkan and macOS/Metal, the Home and Pro boards, the display-list coprocessor, and the first two shareware DOOM maps, all consistent with the accepted article; no GitHub release yet, so no Download link). Entry selected for public builds with `publishedOn: 2026-09-11`; `make check` and production preview passed. Publication awaits the user's approval.
 - 2026-09-09 — User explicitly paused BeamVM while working on its code release. Preserve content acceptance and resume when they return with the public source. The separately requested private-source category does not authorize publishing BeamVM now.
 

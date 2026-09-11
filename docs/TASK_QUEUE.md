@@ -4,6 +4,7 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
 
 ## Setup
 
+- BeamVM (FEATURE_SPEC_beamvm_onboarding.md) was published 2026-09-11 with its public MIT repository and removed from the queue. The site now has Continuum, FantasyBoy, and BeamVM.
 - GoatCounter visit counter (FEATURE_SPEC_visit_counter.md) was published 2026-09-11 UTC and removed from the queue; the user confirms pageviews in their dashboard.
 - Continuum YouTube player update (FEATURE_SPEC_project_video.md) was published 2026-09-10 and removed from the queue; the project-update cycle is proven end to end.
 - First-run setup completed 2026-09-07. Astro/Markdown/TypeScript scaffold, local commands, and pre-commit checks verified; initial push to the private `github` remote succeeded. `main` tracks `github/main`.
@@ -17,8 +18,3 @@ Agent-worked, ordered queue that drives session-by-session work. Processing rule
    - User authorized wallflower, vintage, vintage-vault, simpler-camera-card, slowframe, and mezuril drafts using parallel Astra agents, with existing images selected at agent discretion and missing media reported.
    - All six drafts integrated from two Astra/high workers reused in parallel waves; the thread limit prevented a third. Parent checks passed 43 tests plus desktop/mobile draft/card/gallery review and production exclusion. Existing entries remain unchanged; all worktrees/branches cleaned up.
    - Vintage Vault has three selected screenshots. Wallflower, Vintage, Simpler Camera Card, Slowframe, and Mezuril need usable cover/product images. Capture suggestions and metadata gaps are in `docs/projects/batch-draft-review.md`. User assessment/publication remain pending.
-
-3. [in-progress] FEATURE_SPEC_beamvm_onboarding.md — public source verified; awaiting publication approval
-   - 2026-09-11: user announced the code release at https://github.com/bishopdynamics/BeamVM (verified public, MIT, no releases/tags yet). Entry set to `draft: false`, `publishedOn: 2026-09-11`, `public` tag, `repositoryUrl`; no `releaseUrl`. `make check` passed (55 tests, 6 pages). Preview reviewed: BeamVM leads the homepage, page shows Source link, six thumbnails, Published Sep 11. Committed locally, not pushed. Next: user approves, then push, follow Actions, verify live.
-   - 2026-09-09: user accepted BeamVM and FantasyBoy as ready to publish. BeamVM’s approved article, dates, metadata, and six local screenshots are complete. The user subsequently paused BeamVM while preparing its code release. Resume public source-link verification and build selection when they return to it; do not use the new private category to bypass the pause.
-   - FantasyBoy is accepted and removed from the queue; its public-build selection passed 44 tests, five-page production validation, and browser checks with `publishedOn: 2026-09-09`.

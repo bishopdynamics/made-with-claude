@@ -1,6 +1,6 @@
 # BeamVM onboarding
 
-Status: **selected for publication**, 2026-09-11: public repository https://github.com/bishopdynamics/BeamVM verified (MIT, no releases yet); entry is `draft: false` with `publishedOn: 2026-09-11`, awaiting the user's publication approval. Earlier: **content accepted as ready to publish**, 2026-09-09. The user approved the assembled article, metadata, and six local screenshots. The user has explicitly paused public-build selection while preparing the code release; resume when they return to it. Do not reclassify BeamVM as private to bypass that pause. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
+Status: **published**, 2026-09-11, with public repository https://github.com/bishopdynamics/BeamVM (MIT, no GitHub release yet, so no Download link). Live page verified after Actions run 34626339425. Earlier: **content accepted as ready to publish**, 2026-09-09. The user approved the assembled article, metadata, and six local screenshots. The user has explicitly paused public-build selection while preparing the code release; resume when they return to it. Do not reclassify BeamVM as private to bypass that pause. Workflow: [BeamVM onboarding spec](../spec/FEATURE_SPEC_beamvm_onboarding.md).
 
 ## Starting context
 
