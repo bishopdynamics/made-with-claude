@@ -1,11 +1,13 @@
 ---
 title: 'BeamVM'
 description: 'A game about making games for a virtual machine and vector CRT, balancing drawing time against game logic.'
-draft: true
+draft: false
+publishedOn: '2026-09-11'
 startedOn: '2026-08-25'
 completedOn: '2026-09-08'
 languages: [rust, beamvm-dsl, wgsl]
-tags: [games, graphics, developer-tools]
+tags: [games, graphics, developer-tools, public]
+repositoryUrl: 'https://github.com/bishopdynamics/BeamVM'
 images:
   - id: rockfield
     src: '../../assets/projects/beamvm/program_rockfield.png'
