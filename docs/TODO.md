@@ -15,7 +15,7 @@ If something here is actually bigger than it looks and really should be spec'd f
 
 A feature must first be planned (user idea → research and discuss → improved idea → full feature spec), producing a spec file `docs/spec/FEATURE_SPEC_<thing>.md`. Then it can be implemented, following the spec.
 
-- site visit counter
+- [done 2026-09-11] site visit counter
   - goatcounter account is set up
   - they gave me: `<script data-goatcounter="https://bishopdynamics.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>`
 

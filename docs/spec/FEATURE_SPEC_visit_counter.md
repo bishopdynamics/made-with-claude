@@ -1,6 +1,6 @@
 # SPEC: Site visit counter with GoatCounter
 
-- **Status:** approved
+- **Status:** done
 - **Request:** On 2026-09-10 the user asked for a "classic site visit counter". Showing the count on the page is not a priority; they want visits tracked somehow. After two research rounds they chose hosted, privacy-friendly analytics and picked GoatCounter, created the account, and recorded the supplied snippet in `docs/TODO.md`. They briefly considered the image-only mechanism, then chose the script version for its benefits (referrer and screen data, localhost skip, bot filtering) and approved this spec on 2026-09-10 with "let's do it".
 - **Account:** GoatCounter site code `bishopdynamics`; count endpoint `https://bishopdynamics.goatcounter.com/count`. The dashboard login belongs to the user.
 
@@ -112,6 +112,7 @@ For every HTML page in `dist/`: exactly one `script[data-goatcounter]` whose `sr
 
 ## Change Log
 
+- 2026-09-11 (UTC) — User approved publication after reviewing the footer. Pushed `b39d6ab`; Actions run 34563697928 succeeded. Live: every route carries one same-origin counter script (byte-identical to the vendored file) and a noscript pixel with its canonical path; the beacon to the count endpoint returned 200 from the live origin, and the headless review browser was flagged as automated (`b=153`) by `count.js`. TODO marked done; task removed from the queue. The user confirms the first dashboard pageview.
 - 2026-09-10 — User approved the script-based design ("let's do it") after briefly considering image-only; the image-only revision is superseded. Implementation starts.
 - 2026-09-10 — Interim revision to image-only at the user's request (superseded the same day).
 - 2026-09-10 — created after the user chose GoatCounter and supplied the account snippet.
